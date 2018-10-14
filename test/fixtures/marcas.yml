@@ -1,0 +1,9 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  marca_descrip: MyString
+  marca_active: false
+
+two:
+  marca_descrip: MyString
+  marca_active: false
