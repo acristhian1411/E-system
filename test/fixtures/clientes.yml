@@ -7,7 +7,7 @@ one:
   cli_telefono: MyString
   limite_credito: 1
   activo: false
-  ciudades: one
+  ciudade: one
   barrio: one
 
 two:
@@ -17,5 +17,5 @@ two:
   cli_telefono: MyString
   limite_credito: 1
   activo: false
-  ciudades: two
+  ciudade: two
   barrio: two

@@ -1,6 +1,6 @@
 ActiveAdmin.register Category do
-	 menu label: "Categoria"
-
+	 #menu label: "Categoria"
+menu parent: "Category"
   #controller do
     # This code is evaluated within the controller class
 

@@ -7,7 +7,7 @@ class CreateClientes < ActiveRecord::Migration[5.2]
       t.string :cli_telefono
       t.integer :limite_credito
       t.boolean :activo
-      t.references :ciudades, foreign_key: true
+      t.references :ciudade, foreign_key: true
       t.references :barrio, foreign_key: true
 
       t.timestamps

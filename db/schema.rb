@@ -10,11 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-<<<<<<< HEAD
-ActiveRecord::Schema.define(version: 2018_10_14_190154) do
-=======
-ActiveRecord::Schema.define(version: 2018_10_14_182303) do
->>>>>>> b01097d6688bfa83bc74e2ccf482ab2edd6b3ff6
+ActiveRecord::Schema.define(version: 2018_10_14_195510) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -73,12 +69,12 @@ ActiveRecord::Schema.define(version: 2018_10_14_182303) do
     t.string "cli_telefono"
     t.integer "limite_credito"
     t.boolean "activo"
-    t.bigint "ciudades_id"
+    t.bigint "ciudade_id"
     t.bigint "barrio_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["barrio_id"], name: "index_clientes_on_barrio_id"
-    t.index ["ciudades_id"], name: "index_clientes_on_ciudades_id"
+    t.index ["ciudade_id"], name: "index_clientes_on_ciudade_id"
   end
 
   create_table "marcas", force: :cascade do |t|
@@ -88,7 +84,6 @@ ActiveRecord::Schema.define(version: 2018_10_14_182303) do
     t.datetime "updated_at", null: false
   end
 
-<<<<<<< HEAD
   create_table "sub_categories", force: :cascade do |t|
     t.string "subcat_descrip"
     t.boolean "subcat_active"
@@ -98,9 +93,7 @@ ActiveRecord::Schema.define(version: 2018_10_14_182303) do
     t.index ["category_id"], name: "index_sub_categories_on_category_id"
   end
 
-  add_foreign_key "sub_categories", "categories"
-=======
   add_foreign_key "clientes", "barrios"
-  add_foreign_key "clientes", "ciudades", column: "ciudades_id"
->>>>>>> b01097d6688bfa83bc74e2ccf482ab2edd6b3ff6
+  add_foreign_key "clientes", "ciudades"
+  add_foreign_key "sub_categories", "categories"
 end
