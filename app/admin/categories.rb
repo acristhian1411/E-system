@@ -1,12 +1,23 @@
 ActiveAdmin.register Category do
 	 menu label: "Categoria"
 
+  #controller do
+    # This code is evaluated within the controller class
+
+    #def destroy
+    #    categoria = Category.find(params[:id])
+    #	categoria.update_attribute(:category_active, false)
+    #	redirect_to active_admin_categories_path
+    #end
+  	#end
+ 
 
 # See permitted parameters documentation:
 # https://github.com/activeadmin/activeadmin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
 
 # Es necesario para poder guardar/editar datos desde el formulario
- permit_params :category_descrip, :category_active, :created_at, :updated_at
+
+permit_params :category_descrip, :category_active, :created_at, :updated_at
 
 
 =begin 
@@ -22,6 +33,7 @@ fin de barra de ayuda
 
 scope :inactivo
 scope :activo
+scope :todos
 
 filter :category_descrip
 filter :category_active

@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  subcat_descrip: MyString
+  subcat_active: false
+  category: one
+
+two:
+  subcat_descrip: MyString
+  subcat_active: false
+  category: two

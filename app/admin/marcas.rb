@@ -6,6 +6,20 @@ ActiveAdmin.register Marca do
  permit_params :marca_descrip, :marca_active, :created_at, :updated_at
 #
 
+scope :inactivo
+scope :activo
+scope :todos
+
+filter :marca_descrip
+filter :marca_active
+
+index do
+	column "Descripcion", :marca_descrip
+	column "Activo", :marca_active
+	column "Creado", :created_at
+	actions
+end
+
 form title: 'Marcas' do |f|
     inputs 'Detalles' do
       input :marca_descrip, label: "Descripcion"
