@@ -1,22 +1,21 @@
 # == Schema Information
 #
-# Table name: ciudades
+# Table name: sucursals
 #
 #  id          :bigint(8)        not null, primary key
-#  activo      :boolean
-#  descripcion :string
+#  suc_active  :boolean
+#  suc_descrip :string
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
 #
 
-class Ciudade < ApplicationRecord
-	has_many :cliente
+class Sucursal < ApplicationRecord
 
 	scope :inactivo, -> {
-  where('activo != ?', true)
+  where('suc_active != ?', true)
 }
 	scope :activo, -> {
-  where(:activo => true)
+  where(:suc_active => true)
 }
 	scope :todos, -> {
   all

@@ -1,16 +1,13 @@
 ActiveAdmin.register Cliente do
 # See permitted parameters documentation:
 # https://github.com/activeadmin/activeadmin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
-#
+menu parent: "Cliente", label: " Cliente"
  permit_params :nombre, :apellido, :n_cedula, :cli_telefono, :limite_credito, :activo, :ciudade_id, :barrio_id
-#
-# or
-#
-# permit_params do
-#   permitted = [:permitted, :attributes]
-#   permitted << :other if params[:action] == 'create' && current_user.admin?
-#   permitted
-# end
+
+ scope :inactivo
+ scope :activo
+ scope :todos
+
 form title: 'Clientes' do |f|
     inputs 'Detalles' do
       f.input :nombre, label: "nombre"

@@ -1,0 +1,32 @@
+# == Schema Information
+#
+# Table name: providers
+#
+#  id             :bigint(8)        not null, primary key
+#  email          :string
+#  prov_active    :boolean
+#  prov_direccion :string
+#  razon_social   :string
+#  ruc            :string
+#  telefono       :string
+#  created_at     :datetime         not null
+#  updated_at     :datetime         not null
+#
+
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  razon_social: MyString
+  ruc: MyString
+  prov_direccion: MyString
+  telefono: MyString
+  email: MyString
+  prov_active: false
+
+two:
+  razon_social: MyString
+  ruc: MyString
+  prov_direccion: MyString
+  telefono: MyString
+  email: MyString
+  prov_active: false

@@ -1,15 +1,11 @@
 ActiveAdmin.register Barrio do
 # See permitted parameters documentation:
 # https://github.com/activeadmin/activeadmin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
-#
+menu parent: "Cliente", label: " Barrio"
  permit_params :descripcion,  :activo  
-#
-# or
-#
-# permit_params do
-#   permitted = [:permitted, :attributes]
-#   permitted << :other if params[:action] == 'create' && current_user.admin?
-#   permitted
-# end
+
+ scope :inactivo
+ scope :activo
+ scope :todos
 
 end

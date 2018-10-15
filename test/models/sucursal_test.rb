@@ -1,17 +1,17 @@
 # == Schema Information
 #
-# Table name: ciudades
+# Table name: sucursals
 #
 #  id          :bigint(8)        not null, primary key
-#  activo      :boolean
-#  descripcion :string
+#  suc_active  :boolean
+#  suc_descrip :string
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
 #
 
 require 'test_helper'
 
-class CiudadeTest < ActiveSupport::TestCase
+class SucursalTest < ActiveSupport::TestCase
   # test "the truth" do
   #   assert true
   # end

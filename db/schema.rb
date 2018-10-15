@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_10_14_195510) do
+ActiveRecord::Schema.define(version: 2018_10_15_015547) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -84,6 +84,17 @@ ActiveRecord::Schema.define(version: 2018_10_14_195510) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "providers", force: :cascade do |t|
+    t.string "razon_social"
+    t.string "ruc"
+    t.string "prov_direccion"
+    t.string "telefono"
+    t.string "email"
+    t.boolean "prov_active"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "sub_categories", force: :cascade do |t|
     t.string "subcat_descrip"
     t.boolean "subcat_active"
@@ -91,6 +102,13 @@ ActiveRecord::Schema.define(version: 2018_10_14_195510) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["category_id"], name: "index_sub_categories_on_category_id"
+  end
+
+  create_table "sucursals", force: :cascade do |t|
+    t.string "suc_descrip"
+    t.boolean "suc_active"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   add_foreign_key "clientes", "barrios"
