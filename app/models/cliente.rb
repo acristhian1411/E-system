@@ -6,6 +6,7 @@
 #  activo         :boolean
 #  apellido       :string
 #  cli_telefono   :string
+#  direccion      :string
 #  limite_credito :integer
 #  n_cedula       :string
 #  nombre         :string
@@ -26,9 +27,24 @@
 #
 
 class Cliente < ApplicationRecord
+
+# relacion con otras tablas
   belongs_to :ciudade
   belongs_to :barrio
 
+# Validaciones
+  validates_associated :ciudade
+  validates_associated :barrio
+  validates :nombre, presence: true
+  validates :apellido, presence: true
+  validates :cli_telefono, presence: true
+  validates :direccion, presence: true
+  validates :limite_credito , presence: true
+  validates :limite_credito, numericality: { only_integer: true }
+  validates :n_cedula, presence: true
+  validates :n_cedula, uniqueness: true
+  validates :n_cedula, numericality: { only_integer: true }
+# Funcion para listar segun este activo o no
   	scope :inactivo, -> {
   where('activo != ?', true)
 }

@@ -10,12 +10,19 @@
 #
 
 class Marca < ApplicationRecord
+# Validaciones
+	validates :marca_descrip, presence: true
+
+# Funcion para listar segun este activo o no
 	scope :inactivo, -> {
+		# Todos los inactivos
   where('marca_active != ?', true)
 }
+# Todos los activos
 	scope :activo, -> {
   where(:marca_active => true)
 }
+# Todos los registros
 	scope :todos, -> {
   all
 }

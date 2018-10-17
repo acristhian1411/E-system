@@ -10,6 +10,12 @@
 #
 
 class Category < ApplicationRecord
+# relacion con otras tablas
+	has_many :sub_category
+#Validaciones
+validates :category_descrip, presence: true
+
+# Funcion para listar segun este activo o no
 	scope :inactivo, -> {
   where('category_active != ?', true)
 }

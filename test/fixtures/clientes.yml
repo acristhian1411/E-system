@@ -6,6 +6,7 @@
 #  activo         :boolean
 #  apellido       :string
 #  cli_telefono   :string
+#  direccion      :string
 #  limite_credito :integer
 #  n_cedula       :string
 #  nombre         :string

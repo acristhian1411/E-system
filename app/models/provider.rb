@@ -14,13 +14,24 @@
 #
 
 class Provider < ApplicationRecord
+# Validaciones
+	validates :razon_social, presence: true
+	validates :ruc, presence: true
+	validates :ruc, uniqueness: true
+	validates :ruc, numericality: { only_integer: true }
 
+	validates :telefono, presence: true
+
+# Funcion para listar segun este activo o no
+# Todos los inactivos
 	scope :inactivo, -> {
   where('prov_active != ?', true)
 }
+# Todos los activos
 	scope :activo, -> {
   where(:prov_active => true)
 }
+# Todos los registros
 	scope :todos, -> {
   all
 }

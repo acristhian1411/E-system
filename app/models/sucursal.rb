@@ -10,13 +10,19 @@
 #
 
 class Sucursal < ApplicationRecord
+# Validaciones
+	validates :suc_descrip, presence: true
 
+# Funcion para listar segun este activo o no
+# Todos los inactivos
 	scope :inactivo, -> {
   where('suc_active != ?', true)
 }
 	scope :activo, -> {
+		# Todos los activos
   where(:suc_active => true)
 }
+# Todos los registros
 	scope :todos, -> {
   all
 }

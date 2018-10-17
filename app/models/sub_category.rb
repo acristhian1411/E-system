@@ -19,13 +19,23 @@
 #
 
 class SubCategory < ApplicationRecord
+# relacion con otras tablas
   belongs_to :category
+
+# Validaciones
+validates :subcat_descrip, presence: true
+validates_associated :category
+
+# Funcion para listar segun este activo o no
+# Todos los inactivos
   	scope :inactivo, -> {
   where('subcat_active != ?', true)
 }
+# Todos los activos
 	scope :activo, -> {
   where(:subcat_active => true)
 }
+# Todos los registros
 	scope :todos, -> {
   all
 }

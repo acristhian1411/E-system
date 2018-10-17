@@ -10,14 +10,22 @@
 #
 
 class Ciudade < ApplicationRecord
+# relacion con otras tablas
 	has_many :cliente
 
+# Validaciones
+	validates :descripcion, presence: true
+
+# Funcion para listar segun este activo o no
+# Todos los inactivos
 	scope :inactivo, -> {
   where('activo != ?', true)
 }
+# Todos los activos
 	scope :activo, -> {
   where(:activo => true)
 }
+# Todos los registros
 	scope :todos, -> {
   all
 }
