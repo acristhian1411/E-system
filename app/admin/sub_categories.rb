@@ -2,8 +2,8 @@ ActiveAdmin.register SubCategory do
 # See permitted parameters documentation:
 # https://github.com/activeadmin/activeadmin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
 menu parent: "Producto", label: " Sub Categorias"
-
-permit_params :subcat_descrip, :subcat_active, :category_id
+permit_params :subcat_descrip, :subcat_active, categories_attributes: [:id, :category_descrip]
+#belongs_to :category
 
 # Link para desactivar registro
 action_item :desactivado, only: :show do
@@ -32,14 +32,21 @@ scope :activo
 scope :todos
 
 # Filtros de busqueda
-filter :subcat_descrip
-filter :category_id
+filter :subcat_descrip, label: "Descripcion"
+filter :category
 
 # Vista de tabla principal
 index title: "Sub Categorias" do
 	column "Descripcion", :subcat_descrip
 	column "Activo", :subcat_active
-	column "Categorias", :category
+  #column "category", :category["category_descrip"]
+  column(:categoria) { |payment| payment.category.category_descrip }
+
+  columns "Categoria" do
+
+  end
+  #column "Categorias", :category_id
+  #puts "#{:category_id} #{"algo"}"
 	column "Creado", :created_at
 	actions
 end

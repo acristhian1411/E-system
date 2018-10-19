@@ -21,7 +21,7 @@
 class SubCategory < ApplicationRecord
 # relacion con otras tablas
   belongs_to :category
-
+  accepts_nested_attributes_for :category
 # Validaciones
 validates :subcat_descrip, presence: true
 validates_associated :category

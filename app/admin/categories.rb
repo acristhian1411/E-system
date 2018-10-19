@@ -1,6 +1,6 @@
 ActiveAdmin.register Category do
 menu parent: "Producto", label: "Categoria"
-
+#has_many :sub_category
 # Es necesario para poder guardar/editar datos desde el formulario
 permit_params :category_descrip, :category_active
 
