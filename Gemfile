@@ -20,7 +20,8 @@ gem 'uglifier', '>= 1.3.0'
 gem 'devise'
 #gema para administracion de contenido
 gem 'activeadmin'
-
+#gema para para temas
+gem 'active_admin_theme'
 
 # Use CoffeeScript for .coffee assets and views
 gem 'coffee-rails', '~> 4.2'
