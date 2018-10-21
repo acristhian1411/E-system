@@ -2,8 +2,8 @@ ActiveAdmin.register SubCategory do
 # See permitted parameters documentation:
 # https://github.com/activeadmin/activeadmin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
 menu parent: "Producto", label: " Sub Categorias"
-permit_params :subcat_descrip, :subcat_active, categories_attributes: [:id, :category_descrip]
-#belongs_to :category
+permit_params :subcat_descrip, :subcat_active, :category_id
+
 
 # Link para desactivar registro
 action_item :desactivado, only: :show do
@@ -41,14 +41,11 @@ index title: "Sub Categorias" do
 	column "Activo", :subcat_active
   #column "category", :category["category_descrip"]
   column(:categoria) { |payment| payment.category.category_descrip }
-
-  columns "Categoria" do
-
-  end
-  #column "Categorias", :category_id
-  #puts "#{:category_id} #{"algo"}"
 	column "Creado", :created_at
-	actions
+  actions
+#  column do
+#  link_to 'Editar', admin_sub_categories_path(sub_categories) , method: :post
+# end
 end
 
 # Formulario personalizado
@@ -66,7 +63,7 @@ form title: 'Sub Categorias' do |f|
      attributes_table do
        row :subcat_descrip
        row :subcat_active
-       row :category
+       row(:categoria) { |payment| payment.category.category_descrip }
        row :created_at
      end
    end
