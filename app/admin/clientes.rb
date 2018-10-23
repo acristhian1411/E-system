@@ -32,8 +32,9 @@ end
  scope :activo, :default => true
  scope :todos
 
-# tabla en index
+ filter :nombre, label: "Nombre"
 
+# tabla en index
  index title: "Clientes" do
   column "Nombre", :nombre, :apellido
  	column "Numero de cedula", :n_cedula
@@ -41,10 +42,10 @@ end
   column :direccion do |cliente|
     truncate cliente.direccion
   end
-  column do |client|
-    link_to("Mostrar", admin_cliente_path(client)) + " | " + \
-    link_to("Editar", edit_admin_cliente_path(client)) + " | " + \
-    link_to("Eliminar", admin_cliente_path(client), :method => :delete, :confirm => "Are you sure?")
+  actions dropdown: true do |client|
+#    item("Mostrar", admin_cliente_path(client))
+#    item("Editar", edit_admin_cliente_path(client))
+#    item("Eliminar", admin_cliente_path(client), :method => :delete, :confirm => "Are you sure?")
   end
 
  end
@@ -58,7 +59,6 @@ form title: 'Clientes' do |f|
       input :direccion, label: "Direccion"
       input :cli_telefono, label: "Num de telefono"
       input :limite_credito, label: "Limite de credito"
-      input :activo, label: "Activo"
       input :ciudade_id,  label: "Ciudad", :as => :select, :collection => Ciudade.all.map{|a|["#{a.descripcion}", a.id]}
       input :barrio_id,  label: "Barrio", :as => :select, :collection => Barrio.all.map{|a|["#{a.descripcion}", a.id]}
     end

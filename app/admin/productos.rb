@@ -16,6 +16,7 @@ menu parent: "Producto", label: "Productos"
  redirect_to admin_producto_path
  end
 
+# Controlador personalizado para
  controller do
    def destroy
      producto = Producto.find(params[:id])
@@ -24,6 +25,7 @@ menu parent: "Producto", label: "Productos"
    end
  end
 
+# Boton atras en vista show
  action_item :view, only: :show do
    link_to 'Atras', admin_productos_path
  end
@@ -47,15 +49,16 @@ menu parent: "Producto", label: "Productos"
  filter :provider_id, collection: -> { Provider.all },
      label: 'Proveedores', :as => :select, :collection => Provider.all.map{|a|["#{a.razon_social}", a.id]}
 
+# Vista de tabla principal
    index title: "Productos" do
    	column "Descripcion", :prod_descrip
    	column "Precio", :precio_venta
     column(:categoria) { |payment| payment.category.category_descrip }
    	column "Creado", :created_at
-    column do |client|
-      link_to("Mostrar", admin_producto_path(client)) + " | " + \
-      link_to("Editar", edit_admin_producto_path(client)) + " | " + \
-      link_to("Eliminar", admin_producto_path(client), :method => :delete, :confirm => "Are you sure?")
+    actions dropdown: true do |client|
+      #link_to("Mostrar", admin_producto_path(client)) + " | " + \
+      #link_to("Editar", edit_admin_producto_path(client)) + " | " + \
+      #link_to("Eliminar", admin_producto_path(client), :method => :delete, :confirm => "Are you sure?")
     end
    end
 
@@ -69,7 +72,6 @@ menu parent: "Producto", label: "Productos"
            input :provider_id,  label: "Proveedor", :as => :select, :collection => Provider.all.map{|a|["#{a.razon_social}", a.id]}
            input :precio_venta, label: "Precio venta"
            input :iva, label: "Iva"
-           input :prod_active, label: "Activo"
          end
          actions
        	end

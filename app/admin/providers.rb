@@ -41,10 +41,10 @@ ActiveAdmin.register Provider do
  	column "Direccion", :prov_direccion
  	column :telefono
  	column :email
-	column do |client|
-		link_to("Mostrar", admin_provider_path(client)) + " | " + \
-		link_to("Editar", edit_admin_provider_path(client)) + " | " + \
-		link_to("Eliminar", admin_provider_path(client), :method => :delete, :confirm => "Are you sure?")
+	actions dropdown: true do |client|
+		#link_to("Mostrar", admin_provider_path(client)) + " | " + \
+		#link_to("Editar", edit_admin_provider_path(client)) + " | " + \
+		#link_to("Eliminar", admin_provider_path(client), :method => :delete, :confirm => "Are you sure?")
 	end
  end
 
@@ -55,7 +55,6 @@ ActiveAdmin.register Provider do
       row :prov_direccion
       row :telefono
       row :email
-			row :prov_active
     end
   end
 

@@ -39,14 +39,17 @@ index title: "Categorias" do
 	column "Descripcion", :category_descrip
 	column "Activo", :category_active
 	column "Creado", :created_at
-	actions
+	actions dropdown: true do |client|
+		#link_to("Mostrar", admin_barrio_path(client)) + " | " + \
+		#link_to("Editar", edit_admin_barrio_path(client)) + " | " + \
+		#link_to("Eliminar", admin_barrio_path(client), :method => :delete, :confirm => "Are you sure?")
+	end
 end
 
 #formulario personalizado
 form title: 'Categorias' do |f|
     inputs 'Detalles' do
       input :category_descrip, label: "Descripcion"
-      input :category_active, label: "Activo"
     end
   	actions
   	end

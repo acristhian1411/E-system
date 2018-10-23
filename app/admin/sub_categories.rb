@@ -43,10 +43,10 @@ index title: "Sub Categorias" do
   #column "category", :category["category_descrip"]
   column(:categoria) { |payment| payment.category.category_descrip }
 	column "Creado", :created_at
-  column do |client|
-    link_to("Mostrar", admin_sub_category_path(client)) + " | " + \
-    link_to("Editar", edit_admin_sub_category_path(client)) + " | " + \
-    link_to("Eliminar", admin_sub_category_path(client), :method => :delete, :confirm => "Are you sure?")
+  actions dropdown: true do |client|
+    #link_to("Mostrar", admin_sub_category_path(client)) + " | " + \
+    #link_to("Editar", edit_admin_sub_category_path(client)) + " | " + \
+    #link_to("Eliminar", admin_sub_category_path(client), :method => :delete, :confirm => "Are you sure?")
   end
 end
 
@@ -55,7 +55,6 @@ form title: 'Sub Categorias' do |f|
     inputs 'Detalles' do
       input :subcat_descrip, label: "Descripcion"
       input :category_id,  label: "Categorias", :as => :select, :collection => Category.all.map{|a|["#{a.category_descrip}", a.id]}
-      input :subcat_active, label: "Activo"
     end
     actions
   	end

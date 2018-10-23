@@ -37,12 +37,19 @@ end
 	index title: "Sucursales" do
 		column "Descripcion", :suc_descrip
 		column "Activo", :suc_active
-    column do |client|
-      link_to("Mostrar", admin_sucursal_path(client)) + " | " + \
-      link_to("Editar", edit_admin_sucursal_path(client)) + " | " + \
-      link_to("Eliminar", admin_sucursal_path(client), :method => :delete, :confirm => "Are you sure?")
+    actions dropdown: true do |client|
+      #link_to("Mostrar", admin_sucursal_path(client)) + " | " + \
+      #link_to("Editar", edit_admin_sucursal_path(client)) + " | " + \
+      #link_to("Eliminar", admin_sucursal_path(client), :method => :delete, :confirm => "Are you sure?")
     end
 	end
+
+  form title: 'Barrios' do |f|
+      inputs 'Detalles' do
+        input :suc_descrip, label: "Descripcion"
+      end
+      actions
+     end
 
   # Vista show
    show :title => :suc_descrip  do

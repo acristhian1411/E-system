@@ -39,10 +39,10 @@ filter :marca_descrip, label: "Descripcion"
 index title: "Marcas" do
 	column "Descripcion", :marca_descrip
 	column "Creado", :created_at
-  column do |client|
-    link_to("Mostrar", admin_marca_path(client)) + " | " + \
-    link_to("Editar", edit_admin_marca_path(client)) + " | " + \
-    link_to("Eliminar", admin_marca_path(client), :method => :delete, :confirm => "Are you sure?")
+  actions dropdown: true do |client|
+    #link_to("Mostrar", admin_marca_path(client)) + " | " + \
+    #link_to("Editar", edit_admin_marca_path(client)) + " | " + \
+    #link_to("Eliminar", admin_marca_path(client), :method => :delete, :confirm => "Are you sure?")
   end
 end
 
@@ -50,7 +50,6 @@ end
 form title: 'Marcas' do |f|
     inputs 'Detalles' do
       input :marca_descrip, label: "Descripcion"
-      input :marca_active, label: "Activo"
     end
     actions
   	end
