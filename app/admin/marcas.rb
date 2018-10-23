@@ -4,20 +4,46 @@ ActiveAdmin.register Marca do
 menu parent: "Producto", label: "Marcas"
  permit_params :marca_descrip, :marca_active, :created_at, :updated_at
 
+ controller do
+   def destroy
+     marca = Marca.find(params[:id])
+     marca.update_attribute(:marca_active, false)
+     redirect_to admin_marcas_path
+   end
+ end
+
+ action_item :view, only: :show do
+   link_to 'Atras', admin_marcas_path
+ end
+
+ # Link para activar registro
+ action_item :activado, only: :show do
+   link_to "Activar", activado_admin_marca_path(marca), method: :put if !marca.marca_active
+ end
+ # Funcion para activar registro
+ member_action :activado, method: :put do
+ marca = Marca.find(params[:id])
+ marca.update(marca_active: true)
+ redirect_to admin_marcas_path
+ end
+
 # lista segun activo o no
 scope :inactivo
-scope :activo
+scope :activo, :default => true
 scope :todos
 
 # Filtros de busqueda
-filter :marca_descrip
+filter :marca_descrip, label: "Descripcion"
 
 # Vista principal de la tabla
 index title: "Marcas" do
 	column "Descripcion", :marca_descrip
-	column "Activo", :marca_active
 	column "Creado", :created_at
-	actions
+  column do |client|
+    link_to("Mostrar", admin_marca_path(client)) + " | " + \
+    link_to("Editar", edit_admin_marca_path(client)) + " | " + \
+    link_to("Eliminar", admin_marca_path(client), :method => :delete, :confirm => "Are you sure?")
+  end
 end
 
 # Formulario personalizado

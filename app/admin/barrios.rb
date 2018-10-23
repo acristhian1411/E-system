@@ -7,7 +7,7 @@ menu parent: "Cliente", label: " Barrios"
 
 # lista segun activo o no
  scope :inactivo
- scope :activo
+ scope :activo, :default => true
  scope :todos
 
 # filtros de busqueda

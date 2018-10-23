@@ -1,12 +1,34 @@
 ActiveAdmin.register Category do
 menu parent: "Producto", label: "Categoria"
-#has_many :sub_category
+
 # Es necesario para poder guardar/editar datos desde el formulario
 permit_params :category_descrip, :category_active
 
+# Link para activar registro
+action_item :activado, only: :show do
+	link_to "Activar", activado_admin_category_path(category), method: :put if !category.category_active
+end
+# Funcion para activar registro
+member_action :activado, method: :put do
+category = Category.find(params[:id])
+category.update(category_active: true)
+redirect_to admin_categories_path
+end
+
+controller do
+	def destroy
+		category = Category.find(params[:id])
+		category.update_attribute(:category_active, false)
+		redirect_to admin_categories_path
+	end
+end
+
+action_item :view, only: :show do
+	link_to 'Atras', admin_categories_path
+end
 
 scope :inactivo
-scope :activo
+scope :activo, :default => true
 scope :todos
 
 # Filtros de busqueda

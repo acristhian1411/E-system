@@ -4,16 +4,16 @@ ActiveAdmin.register SubCategory do
 menu parent: "Producto", label: " Sub Categorias"
 permit_params :subcat_descrip, :subcat_active, :category_id
 
-
-# Link para desactivar registro
-action_item :desactivado, only: :show do
-  link_to "Desactivar", desactivado_admin_sub_category_path(sub_category), method: :put if sub_category.subcat_active
+controller do
+  def destroy
+    cliente = SubCategory.find(params[:id])
+    cliente.update_attribute(:subcat_active, false)
+    redirect_to admin_sub_categories_path
+  end
 end
-# Funcion para desactivar registro
-member_action :desactivado, method: :put do
-sub_category = SubCategory.find(params[:id])
-sub_category.update(subcat_active: false)
-redirect_to admin_sub_category_path(sub_category)
+
+action_item :view, only: :show do
+  link_to 'Atras', admin_sub_categories_path
 end
 
 # Link para activar registro
@@ -24,16 +24,17 @@ end
 member_action :activado, method: :put do
 sub_category = SubCategory.find(params[:id])
 sub_category.update(subcat_active: true)
-redirect_to admin_sub_category_index_path(sub_category)
+redirect_to admin_sub_categories_path
 end
 
 scope :inactivo
-scope :activo
+scope :activo, :default => true
 scope :todos
 
 # Filtros de busqueda
 filter :subcat_descrip, label: "Descripcion"
-filter :category
+filter :category_id, collection: -> { Category.all },
+   label: 'Categorias', :as => :select, :collection => Category.all.map{|a|["#{a.category_descrip}", a.id]}
 
 # Vista de tabla principal
 index title: "Sub Categorias" do
@@ -42,10 +43,11 @@ index title: "Sub Categorias" do
   #column "category", :category["category_descrip"]
   column(:categoria) { |payment| payment.category.category_descrip }
 	column "Creado", :created_at
-  actions
-#  column do
-#  link_to 'Editar', admin_sub_categories_path(sub_categories) , method: :post
-# end
+  column do |client|
+    link_to("Mostrar", admin_sub_category_path(client)) + " | " + \
+    link_to("Editar", edit_admin_sub_category_path(client)) + " | " + \
+    link_to("Eliminar", admin_sub_category_path(client), :method => :delete, :confirm => "Are you sure?")
+  end
 end
 
 # Formulario personalizado
@@ -59,7 +61,7 @@ form title: 'Sub Categorias' do |f|
   	end
 
   # Vista show
-   show title: "Sub Categoria"  do
+   show :title => :subcat_descrip  do
      attributes_table do
        row :subcat_descrip
        row :subcat_active
