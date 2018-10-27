@@ -1,4 +1,5 @@
 ActiveAdmin.register AdminUser do
+  role_changeable
      menu label: "Usuarios"
   permit_params :email, :password, :password_confirmation
 
