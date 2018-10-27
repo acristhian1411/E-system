@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_10_20_022546) do
+ActiveRecord::Schema.define(version: 2018_10_27_021633) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -43,21 +43,21 @@ ActiveRecord::Schema.define(version: 2018_10_20_022546) do
 
   create_table "barrios", force: :cascade do |t|
     t.string "descripcion"
-    t.boolean "activo"
+    t.boolean "activo", default: true
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
   create_table "categories", force: :cascade do |t|
     t.string "category_descrip"
-    t.boolean "category_active"
+    t.boolean "category_active", default: true
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
   create_table "ciudades", force: :cascade do |t|
     t.string "descripcion"
-    t.boolean "activo"
+    t.boolean "activo", default: true
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -68,7 +68,7 @@ ActiveRecord::Schema.define(version: 2018_10_20_022546) do
     t.string "n_cedula"
     t.string "cli_telefono"
     t.integer "limite_credito"
-    t.boolean "activo"
+    t.boolean "activo", default: true
     t.bigint "ciudade_id"
     t.bigint "barrio_id"
     t.datetime "created_at", null: false
@@ -80,7 +80,7 @@ ActiveRecord::Schema.define(version: 2018_10_20_022546) do
 
   create_table "marcas", force: :cascade do |t|
     t.string "marca_descrip"
-    t.boolean "marca_active"
+    t.boolean "marca_active", default: true
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -93,7 +93,7 @@ ActiveRecord::Schema.define(version: 2018_10_20_022546) do
     t.string "prod_descrip"
     t.integer "iva"
     t.float "precio_venta"
-    t.boolean "prod_active"
+    t.boolean "prod_active", default: true
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["category_id"], name: "index_productos_on_category_id"
@@ -108,14 +108,25 @@ ActiveRecord::Schema.define(version: 2018_10_20_022546) do
     t.string "prov_direccion"
     t.string "telefono"
     t.string "email"
-    t.boolean "prov_active"
+    t.boolean "prov_active", default: true
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
+  create_table "stocks", force: :cascade do |t|
+    t.bigint "producto_id"
+    t.bigint "sucursal_id"
+    t.integer "cantidad"
+    t.integer "cant_minima"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["producto_id"], name: "index_stocks_on_producto_id"
+    t.index ["sucursal_id"], name: "index_stocks_on_sucursal_id"
+  end
+
   create_table "sub_categories", force: :cascade do |t|
     t.string "subcat_descrip"
-    t.boolean "subcat_active"
+    t.boolean "subcat_active", default: true
     t.bigint "category_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -124,7 +135,7 @@ ActiveRecord::Schema.define(version: 2018_10_20_022546) do
 
   create_table "sucursals", force: :cascade do |t|
     t.string "suc_descrip"
-    t.boolean "suc_active"
+    t.boolean "suc_active", default: true
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -135,5 +146,7 @@ ActiveRecord::Schema.define(version: 2018_10_20_022546) do
   add_foreign_key "productos", "marcas"
   add_foreign_key "productos", "providers"
   add_foreign_key "productos", "sub_categories"
+  add_foreign_key "stocks", "productos"
+  add_foreign_key "stocks", "sucursals"
   add_foreign_key "sub_categories", "categories"
 end
