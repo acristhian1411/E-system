@@ -14,6 +14,7 @@
 #
 #  index_stocks_on_producto_id  (producto_id)
 #  index_stocks_on_sucursal_id  (sucursal_id)
+#  index_unique                 (producto_id,sucursal_id) UNIQUE
 #
 # Foreign Keys
 #
