@@ -1,4 +1,12 @@
+
 /*
+linea de comando en terminal para sacar backup de base de datos
+pg_dump esystem_dev > backup.sql
+*/
+
+
+/*
+pg_dump dbname > outfile
  Script para poner valores por defecto
 */
 ALTER TABLE public.categories

@@ -51,6 +51,7 @@ menu parent: "Producto", label: "Productos"
 
 # Vista de tabla principal
    index title: "Productos" do
+     selectable_column
    	column "Descripcion", :prod_descrip
    	column "Precio", :precio_venta
     column(:categoria) { |payment| payment.category.category_descrip }
@@ -89,5 +90,13 @@ menu parent: "Producto", label: "Productos"
            row :created_at
          end
        end
+
+
+sidebar "Stock en Sucursales", :only => :show do
+  table_for Stock.where(:producto_id => producto.id).limit(3).all do |t|
+   t.column("Stock") { |stock|  stock.sucursal.suc_descrip }
+   t.column("Cantidad") { |stock|  stock.cantidad }
+  end
+end
 
 end
