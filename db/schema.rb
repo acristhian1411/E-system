@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_10_27_230636) do
+ActiveRecord::Schema.define(version: 2018_11_02_022703) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -93,6 +93,17 @@ ActiveRecord::Schema.define(version: 2018_10_27_230636) do
     t.index ["ciudade_id"], name: "index_clientes_on_ciudade_id"
   end
 
+  create_table "compras", force: :cascade do |t|
+    t.bigint "provider_id"
+    t.bigint "admin_user_id"
+    t.date "fecha_compra"
+    t.string "num_factura"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["admin_user_id"], name: "index_compras_on_admin_user_id"
+    t.index ["provider_id"], name: "index_compras_on_provider_id"
+  end
+
   create_table "marcas", force: :cascade do |t|
     t.string "marca_descrip"
     t.boolean "marca_active", default: true
@@ -154,10 +165,15 @@ ActiveRecord::Schema.define(version: 2018_10_27_230636) do
     t.boolean "suc_active", default: true
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "direccion"
+    t.string "encargado"
+    t.string "telefono"
   end
 
   add_foreign_key "clientes", "barrios"
   add_foreign_key "clientes", "ciudades"
+  add_foreign_key "compras", "admin_users"
+  add_foreign_key "compras", "providers"
   add_foreign_key "productos", "categories"
   add_foreign_key "productos", "marcas"
   add_foreign_key "productos", "providers"

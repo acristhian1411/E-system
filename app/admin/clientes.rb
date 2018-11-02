@@ -36,17 +36,12 @@ end
 
 # tabla en index
  index title: "Clientes" do
-  column "Nombre", :nombre, :apellido
- 	column "Numero de cedula", :n_cedula
- 	#column "Direccion", :direccion
-  column :direccion do |cliente|
-    truncate cliente.direccion
-  end
-  actions dropdown: true do |client|
-#    item("Mostrar", admin_cliente_path(client))
-#    item("Editar", edit_admin_cliente_path(client))
-#    item("Eliminar", admin_cliente_path(client), :method => :delete, :confirm => "Are you sure?")
-  end
+     column :nombre
+     column :apellido
+   column :n_cedula
+  	column :cli_telefono
+     column :direccion
+     actions
 
  end
 

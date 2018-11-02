@@ -40,7 +40,7 @@ menu parent: "Cliente", label: " Barrios"
  index title: "Barrios" do
  	 column "Descripcion", :descripcion
 	 column "Creado", :created_at
-   actions dropdown: true do |client|
+   actions  do |client|
      #link_to("Mostrar", admin_barrio_path(client)) + " | " + \
      #link_to("Editar", edit_admin_barrio_path(client)) + " | " + \
      #link_to("Eliminar", admin_barrio_path(client), :method => :delete, :confirm => "Are you sure?")

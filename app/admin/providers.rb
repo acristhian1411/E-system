@@ -41,7 +41,7 @@ ActiveAdmin.register Provider do
  	column "Direccion", :prov_direccion
  	column :telefono
  	column :email
-	actions dropdown: true do |client|
+	actions  do |client|
 		#link_to("Mostrar", admin_provider_path(client)) + " | " + \
 		#link_to("Editar", edit_admin_provider_path(client)) + " | " + \
 		#link_to("Eliminar", admin_provider_path(client), :method => :delete, :confirm => "Are you sure?")
@@ -52,7 +52,7 @@ ActiveAdmin.register Provider do
     attributes_table do
       row :razon_social
       row :ruc
-      row :prov_direccion
+      row "direccion", :prov_direccion
       row :telefono
       row :email
     end

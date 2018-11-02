@@ -11,8 +11,7 @@ ActiveAdmin.register AdminUser do
     column :email
     column "Roles", :role
     column "Creado", :created_at
-    actions dropdown: true do |client|
-    end
+    actions 
   end
 
   filter :email
