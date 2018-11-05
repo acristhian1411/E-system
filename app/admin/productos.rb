@@ -64,7 +64,8 @@ menu parent: "Producto", label: "Productos"
            input :category_id,  label: "Categoria", :as => :select, :collection => Category.all.map{|a|["#{a.category_descrip}", a.id]}
            input :sub_category_id,  label: "Sub Categoria", :as => :select, :collection => SubCategory.all.map{|a|["#{a.subcat_descrip}", a.id]}
            input :marca_id,  label: "Marca", :as => :select, :collection => Marca.all.map{|a|["#{a.marca_descrip}", a.id]}
-           input :provider_id,  label: "Proveedor", :as => :select, :collection => Provider.all.map{|a|["#{a.razon_social}", a.id]}
+# select con buscador(implementar)
+           input :provider_id,  label: "Proveedor", :as => :select2, :collection => Provider.all.map{|a|["#{a.razon_social}", a.id]}
            input :precio_venta, label: "Precio venta"
            input :iva, :as => :select,      :collection => [5, 10]
          end

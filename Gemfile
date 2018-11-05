@@ -24,6 +24,11 @@ gem 'activeadmin'
 gem 'active_admin_theme'
 #gema para roles
 gem 'active_admin_role'
+#gema para select con buscador
+gem 'select2-rails'
+gem 'activeadmin-select2', github: 'mfairburn/activeadmin-select2'
+gem 'activeadmin_addons'
+gem 'jquery-rails'
 
 # Use CoffeeScript for .coffee assets and views
 gem 'coffee-rails', '~> 4.2'
