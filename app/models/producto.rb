@@ -5,7 +5,7 @@
 #  id              :bigint(8)        not null, primary key
 #  iva             :integer
 #  precio_venta    :float
-#  prod_active     :boolean          default(TRUE)
+#  prod_active     :boolean
 #  prod_descrip    :string
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
