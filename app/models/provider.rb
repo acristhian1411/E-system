@@ -18,7 +18,6 @@ class Provider < ApplicationRecord
 	validates :razon_social, presence: true
 	validates :ruc, presence: true
 	validates :ruc, uniqueness: true
-	validates :ruc, numericality: { only_integer: true }
 
 	validates :telefono, presence: true
 

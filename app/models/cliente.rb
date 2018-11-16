@@ -43,7 +43,7 @@ class Cliente < ApplicationRecord
   validates :limite_credito, numericality: { only_integer: true }
   validates :n_cedula, presence: true
   validates :n_cedula, uniqueness: true
-  validates :n_cedula, numericality: { only_integer: true }
+
 # Funcion para listar segun este activo o no
   	scope :inactivo, -> {
   where('activo != ?', true)

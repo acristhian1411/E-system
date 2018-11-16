@@ -2,7 +2,7 @@ ActiveAdmin.register Sucursal do
 # See permitted parameters documentation:
 # https://github.com/activeadmin/activeadmin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
 menu parent: "Stock", label: "Sucursales"
-permit_params :suc_descrip, :suc_active
+permit_params :suc_descrip, :suc_active, :encargado, :direccion, :telefono
 
 controller do
   def destroy
@@ -35,18 +35,22 @@ end
  filter :suc_descrip, label: "Descripcion"
 
 	index title: "Sucursales" do
-		column "Descripcion", :suc_descrip
-		column "Activo", :suc_active
-    actions dropdown: true do |client|
+    column "Descripcion", :suc_descrip
+    column "Direccion", :direccion
+		column "telefono", :telefono
+    actions  do |client|
       #link_to("Mostrar", admin_sucursal_path(client)) + " | " + \
       #link_to("Editar", edit_admin_sucursal_path(client)) + " | " + \
       #link_to("Eliminar", admin_sucursal_path(client), :method => :delete, :confirm => "Are you sure?")
     end
 	end
 
-  form title: 'Barrios' do |f|
+  form title: 'Sucursal' do |f|
       inputs 'Detalles' do
         input :suc_descrip, label: "Descripcion"
+        input :encargado, label: "Encargado"
+        input :direccion, label: "Direccion"
+        input :telefono, label: "Telefono"
       end
       actions
      end
@@ -54,9 +58,12 @@ end
   # Vista show
    show :title => :suc_descrip  do
      attributes_table do
-       row :suc_descrip
-       row :suc_active
-       row :created_at
+       row :suc_descrip,"Descripcion"
+       row :direccion
+       row :encargado, "Encargado"
+       row :telefono
+       row :suc_active, "Activo"
+       row :created_at, "Creado"
      end
    end
 

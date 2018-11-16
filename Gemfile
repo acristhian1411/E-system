@@ -24,6 +24,7 @@ gem 'activeadmin'
 gem 'active_admin_theme'
 #gema para roles
 gem 'active_admin_role'
+<<<<<<< HEAD
 #gema para descargar en archivos PDF
 gem 'pdfkit'
 #gema para descargar en archivos PDF
@@ -31,6 +32,13 @@ gem 'wkhtmltopdf-binary'
 #gema para descargar en archivos exel
 
 
+=======
+#gema para select con buscador
+gem 'select2-rails'
+gem 'activeadmin-select2', github: 'mfairburn/activeadmin-select2'
+gem 'activeadmin_addons'
+gem 'jquery-rails'
+>>>>>>> 851e55f4722dc881c757d64345547c8094d391fb
 
 # Use CoffeeScript for .coffee assets and views
 gem 'coffee-rails', '~> 4.2'

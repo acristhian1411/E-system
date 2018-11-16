@@ -43,7 +43,7 @@ index title: "Sub Categorias" do
   #column "category", :category["category_descrip"]
   column(:categoria) { |payment| payment.category.category_descrip }
 	column "Creado", :created_at
-  actions dropdown: true do |client|
+  actions do |client|
     #link_to("Mostrar", admin_sub_category_path(client)) + " | " + \
     #link_to("Editar", edit_admin_sub_category_path(client)) + " | " + \
     #link_to("Eliminar", admin_sub_category_path(client), :method => :delete, :confirm => "Are you sure?")

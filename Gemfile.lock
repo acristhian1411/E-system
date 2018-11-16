@@ -1,3 +1,12 @@
+GIT
+  remote: https://github.com/mfairburn/activeadmin-select2.git
+  revision: f35b0367cca61266737c94ca9a94cd142c95b763
+  specs:
+    activeadmin-select2 (0.1.8)
+      activeadmin
+      jquery-rails
+      select2-rails
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -29,6 +38,7 @@ GEM
       cancancan (>= 1.15.0)
       railties (>= 5.0.0)
     active_admin_theme (1.0.3)
+    active_material (1.4.2)
     activeadmin (1.3.1)
       arbre (>= 1.1.1)
       coffee-rails
@@ -41,9 +51,19 @@ GEM
       ransack (>= 1.8.7)
       sass (~> 3.1)
       sprockets (< 4.1)
+<<<<<<< HEAD
     activeadmin-axlsx (2.0.1)
       activeadmin (>= 0.5.0)
       axlsx
+=======
+    activeadmin_addons (1.6.0)
+      active_material
+      railties
+      require_all (~> 1.5)
+      sass-rails
+      select2-rails (~> 4.0)
+      xdan-datetimepicker-rails (~> 2.5.1)
+>>>>>>> 851e55f4722dc881c757d64345547c8094d391fb
     activejob (5.2.1)
       activesupport (= 5.2.1)
       globalid (>= 0.3.6)
@@ -218,7 +238,11 @@ GEM
     rb-fsevent (0.10.3)
     rb-inotify (0.9.10)
       ffi (>= 0.5.0, < 2)
+<<<<<<< HEAD
     regexp_parser (1.3.0)
+=======
+    require_all (1.5.0)
+>>>>>>> 851e55f4722dc881c757d64345547c8094d391fb
     responders (2.4.0)
       actionpack (>= 4.2.0, < 5.3)
       railties (>= 4.2.0, < 5.3)
@@ -235,7 +259,13 @@ GEM
       sprockets (>= 2.8, < 4.0)
       sprockets-rails (>= 2.0, < 4.0)
       tilt (>= 1.1, < 3)
+<<<<<<< HEAD
     selenium-webdriver (3.141.0)
+=======
+    select2-rails (4.0.3)
+      thor (~> 0.14)
+    selenium-webdriver (3.14.1)
+>>>>>>> 851e55f4722dc881c757d64345547c8094d391fb
       childprocess (~> 0.5)
       rubyzip (~> 1.2, >= 1.2.2)
     spring (2.0.2)
@@ -272,8 +302,15 @@ GEM
     websocket-driver (0.7.0)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.3)
+<<<<<<< HEAD
     wkhtmltopdf-binary (0.12.4)
     xpath (3.2.0)
+=======
+    xdan-datetimepicker-rails (2.5.4)
+      jquery-rails
+      rails (>= 3.2.16)
+    xpath (3.1.0)
+>>>>>>> 851e55f4722dc881c757d64345547c8094d391fb
       nokogiri (~> 1.8)
 
 PLATFORMS
@@ -284,7 +321,12 @@ DEPENDENCIES
   active_admin_role
   active_admin_theme
   activeadmin
+<<<<<<< HEAD
   activeadmin-axlsx
+=======
+  activeadmin-select2!
+  activeadmin_addons
+>>>>>>> 851e55f4722dc881c757d64345547c8094d391fb
   annotate
   bootsnap (>= 1.1.0)
   byebug
@@ -293,6 +335,7 @@ DEPENDENCIES
   coffee-rails (~> 4.2)
   devise
   jbuilder (~> 2.5)
+  jquery-rails
   listen (>= 3.0.5, < 3.2)
   pdfkit
   pg (>= 0.18, < 2.0)
@@ -300,6 +343,7 @@ DEPENDENCIES
   rails (~> 5.2.1)
   rake (~> 12.3, >= 12.3.1)
   sass-rails (~> 5.0)
+  select2-rails
   selenium-webdriver
   spring
   spring-watcher-listen (~> 2.0.0)

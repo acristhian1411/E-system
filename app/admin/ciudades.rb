@@ -40,7 +40,7 @@ end
  index title: "Ciudades" do
  	 column "Descripcion", :descripcion
 	 column "Creado", :created_at
-   actions dropdown: true do |client|
+   actions  do |client|
      #link_to("Mostrar", admin_ciudade_path(client)) + " | " + \
      #link_to("Editar", edit_admin_ciudade_path(client)) + " | " + \
      #link_to("Eliminar", admin_ciudade_path(client), :method => :delete, :confirm => "Are you sure?")
