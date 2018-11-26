@@ -14,6 +14,9 @@
 #
 
 class Provider < ApplicationRecord
+# Relaciones con otras tablas
+has_many :compra
+
 # Validaciones
 	validates :razon_social, presence: true
 	validates :ruc, presence: true

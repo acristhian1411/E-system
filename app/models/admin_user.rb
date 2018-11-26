@@ -19,9 +19,11 @@
 #
 
 class AdminUser < ApplicationRecord
+# Relaciones con otras tablas
+has_many :compra
   role_based_authorizable
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
-  devise :database_authenticatable, 
+  devise :database_authenticatable,
          :recoverable, :rememberable, :validatable
 end
