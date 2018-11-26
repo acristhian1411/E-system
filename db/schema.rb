@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
@@ -11,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_10_27_230636) do
+ActiveRecord::Schema.define(version: 2018_11_02_022703) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -66,7 +65,7 @@ ActiveRecord::Schema.define(version: 2018_10_27_230636) do
 
   create_table "categories", force: :cascade do |t|
     t.string "category_descrip"
-    t.boolean "category_active"
+    t.boolean "category_active", default: true
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -94,9 +93,20 @@ ActiveRecord::Schema.define(version: 2018_10_27_230636) do
     t.index ["ciudade_id"], name: "index_clientes_on_ciudade_id"
   end
 
+  create_table "compras", force: :cascade do |t|
+    t.bigint "provider_id"
+    t.bigint "admin_user_id"
+    t.date "fecha_compra"
+    t.string "num_factura"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["admin_user_id"], name: "index_compras_on_admin_user_id"
+    t.index ["provider_id"], name: "index_compras_on_provider_id"
+  end
+
   create_table "marcas", force: :cascade do |t|
     t.string "marca_descrip"
-    t.boolean "marca_active"
+    t.boolean "marca_active", default: true
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -109,7 +119,7 @@ ActiveRecord::Schema.define(version: 2018_10_27_230636) do
     t.string "prod_descrip"
     t.integer "iva"
     t.float "precio_venta"
-    t.boolean "prod_active"
+    t.boolean "prod_active", default: true
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["category_id"], name: "index_productos_on_category_id"
@@ -124,7 +134,7 @@ ActiveRecord::Schema.define(version: 2018_10_27_230636) do
     t.string "prov_direccion"
     t.string "telefono"
     t.string "email"
-    t.boolean "prov_active"
+    t.boolean "prov_active", default: true
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -136,13 +146,14 @@ ActiveRecord::Schema.define(version: 2018_10_27_230636) do
     t.integer "cant_minima"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["producto_id", "sucursal_id"], name: "index_unique", unique: true
     t.index ["producto_id"], name: "index_stocks_on_producto_id"
     t.index ["sucursal_id"], name: "index_stocks_on_sucursal_id"
   end
 
   create_table "sub_categories", force: :cascade do |t|
     t.string "subcat_descrip"
-    t.boolean "subcat_active"
+    t.boolean "subcat_active", default: true
     t.bigint "category_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -151,13 +162,18 @@ ActiveRecord::Schema.define(version: 2018_10_27_230636) do
 
   create_table "sucursals", force: :cascade do |t|
     t.string "suc_descrip"
-    t.boolean "suc_active"
+    t.boolean "suc_active", default: true
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "direccion"
+    t.string "encargado"
+    t.string "telefono"
   end
 
   add_foreign_key "clientes", "barrios"
   add_foreign_key "clientes", "ciudades"
+  add_foreign_key "compras", "admin_users"
+  add_foreign_key "compras", "providers"
   add_foreign_key "productos", "categories"
   add_foreign_key "productos", "marcas"
   add_foreign_key "productos", "providers"
@@ -166,6 +182,8 @@ ActiveRecord::Schema.define(version: 2018_10_27_230636) do
   add_foreign_key "stocks", "sucursals"
   add_foreign_key "sub_categories", "categories"
 end
+<<<<<<< HEAD
+=======
 =======
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
@@ -366,3 +384,4 @@ ActiveRecord::Schema.define(version: 2018_11_11_213749) do
   add_foreign_key "sub_categories", "categories"
 end
 >>>>>>> 851e55f4722dc881c757d64345547c8094d391fb
+>>>>>>> 21f4d0dd24a2708ef3ada7ee4ed61d46453af06d
