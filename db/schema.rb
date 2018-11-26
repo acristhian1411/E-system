@@ -183,6 +183,7 @@ ActiveRecord::Schema.define(version: 2018_11_02_022703) do
   add_foreign_key "sub_categories", "categories"
 end
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 =======
 # This file is auto-generated from the current state of the database. Instead
@@ -385,3 +386,5 @@ ActiveRecord::Schema.define(version: 2018_11_11_213749) do
 end
 >>>>>>> 851e55f4722dc881c757d64345547c8094d391fb
 >>>>>>> 21f4d0dd24a2708ef3ada7ee4ed61d46453af06d
+=======
+>>>>>>> algo
