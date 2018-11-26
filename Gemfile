@@ -15,7 +15,7 @@ gem 'sass-rails', '~> 5.0'
 gem 'uglifier', '>= 1.3.0'
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'mini_racer', platforms: :ruby
-
+gem 'rake', '~> 12.3', '>= 12.3.1'
 #gema para manejo de usuario
 gem 'devise'
 #gema para administracion de contenido
@@ -24,11 +24,21 @@ gem 'activeadmin'
 gem 'active_admin_theme'
 #gema para roles
 gem 'active_admin_role'
+<<<<<<< HEAD
+#gema para descargar en archivos PDF
+gem 'pdfkit'
+#gema para descargar en archivos PDF
+gem 'wkhtmltopdf-binary'
+#gema para descargar en archivos exel
+
+
+=======
 #gema para select con buscador
 gem 'select2-rails'
 gem 'activeadmin-select2', github: 'mfairburn/activeadmin-select2'
 gem 'activeadmin_addons'
 gem 'jquery-rails'
+>>>>>>> 851e55f4722dc881c757d64345547c8094d391fb
 
 # Use CoffeeScript for .coffee assets and views
 gem 'coffee-rails', '~> 4.2'

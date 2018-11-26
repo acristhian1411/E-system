@@ -20,7 +20,7 @@ ALTER TABLE public.providers
 ALTER TABLE public.sub_categories
   ALTER COLUMN subcat_active SET DEFAULT true;
 ALTER TABLE public.sucursals
-  ALTER COLUMN suc_activo SET DEFAULT true;
+ALTER COLUMN suc_activo SET DEFAULT true;
 
 
 
