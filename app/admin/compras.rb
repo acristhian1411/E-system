@@ -2,7 +2,7 @@ ActiveAdmin.register Compra do
 # See permitted parameters documentation:
 # https://github.com/activeadmin/activeadmin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
 #
- permit_params :provider_id, :admin_user_id, :num_factura, :fecha_compra, :compra_detalles_attributes[:id, :producto_id, :descuento, :cantidad, :precio_compra]
+ permit_params :provider_id, :admin_user_id, :num_factura, :fecha_compra, compra_detalles_attributes:[:id, :producto_id, :descuento, :cantidad, :precio_compra]
 
 #controller do
    #define_method :permitted_params do
