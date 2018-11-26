@@ -17,15 +17,12 @@ ActiveAdmin.register Compra do
 # end
 
 index do
-  column :provider_id
-  column :fecha_compra
-  column :num_factura
+  column(:proveedor) { |compra| compra.provider.razon_social }
 
-  column do |invoice|
-    link_to("Details", admin_compra_path(invoice)) + " | " + \
-    link_to("Edit", edit_admin_compra_path(invoice)) + " | " + \
-    link_to("Delete", admin_compra_path(invoice), :method => :delete, :confirm => "Are you sure?")
-  end
+  column(:compra) { |compra| compra.fecha_compra }
+  column :created_at
+
+actions
 end
 
 

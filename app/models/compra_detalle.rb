@@ -29,6 +29,7 @@ class CompraDetalle < ApplicationRecord
   validates :cantidad, :presence => true, :numericality => { :integer => true }
   validates :precio_compra, :presence => true, :numericality => true
   validates :producto_id, :presence => true
+  validates :descuento, :numericality => { :integer => true }
 
 
   attr_accessor :cantidad, :producto_id, :precio_compra, :descuento
