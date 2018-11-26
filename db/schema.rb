@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_02_022703) do
+ActiveRecord::Schema.define(version: 2018_11_11_213749) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -93,6 +93,18 @@ ActiveRecord::Schema.define(version: 2018_11_02_022703) do
     t.index ["ciudade_id"], name: "index_clientes_on_ciudade_id"
   end
 
+  create_table "compra_detalles", force: :cascade do |t|
+    t.bigint "producto_id"
+    t.integer "cantidad"
+    t.float "precio_compra"
+    t.integer "descuento"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "compra_id"
+    t.index ["compra_id"], name: "index_compra_detalles_on_compra_id"
+    t.index ["producto_id"], name: "index_compra_detalles_on_producto_id"
+  end
+
   create_table "compras", force: :cascade do |t|
     t.bigint "provider_id"
     t.bigint "admin_user_id"
@@ -172,6 +184,8 @@ ActiveRecord::Schema.define(version: 2018_11_02_022703) do
 
   add_foreign_key "clientes", "barrios"
   add_foreign_key "clientes", "ciudades"
+  add_foreign_key "compra_detalles", "compras"
+  add_foreign_key "compra_detalles", "productos"
   add_foreign_key "compras", "admin_users"
   add_foreign_key "compras", "providers"
   add_foreign_key "productos", "categories"
