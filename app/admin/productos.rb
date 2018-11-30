@@ -53,7 +53,7 @@ menu parent: "Producto", label: "Productos"
    index title: "Productos" do
    	column "Descripcion", :prod_descrip
    	column "Precio", :precio_venta
-    column(:categoria) { |payment| payment.category.category_descrip }
+    column(:categoria) { |producto| producto.category.category_descrip }
     actions
    end
 
