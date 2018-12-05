@@ -209,7 +209,3 @@ ActiveRecord::Schema.define(version: 2018_11_11_213749) do
   add_foreign_key "stocks", "sucursals"
   add_foreign_key "sub_categories", "categories"
 end
->>>>>>> 21f4d0dd24a2708ef3ada7ee4ed61d46453af06d
->>>>>>> b58bc0aa41873672b184cd5e16f1ccc7b8b184fd
->>>>>>> d21f0aa9ff1e7dd89b60673def0e065729f33dcd
->>>>>>> 2c0adc3bdbcba76bbb8fc58c977dfa75d40700a5

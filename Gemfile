@@ -27,9 +27,6 @@ gem 'pdfkit'
 #gema para descargar en archivos PDF
 gem 'wkhtmltopdf-binary'
 #gema para descargar en archivos exel
->>>>>>> b58bc0aa41873672b184cd5e16f1ccc7b8b184fd
->>>>>>> d21f0aa9ff1e7dd89b60673def0e065729f33dcd
->>>>>>> 2c0adc3bdbcba76bbb8fc58c977dfa75d40700a5
 #gema para select con buscador
 gem 'select2-rails'
 gem 'activeadmin-select2', github: 'mfairburn/activeadmin-select2'

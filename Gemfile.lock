@@ -259,9 +259,6 @@ GEM
     selenium-webdriver (3.141.0)
       childprocess (~> 0.5)
       rubyzip (~> 1.2, >= 1.2.2)
->>>>>>> b58bc0aa41873672b184cd5e16f1ccc7b8b184fd
->>>>>>> d21f0aa9ff1e7dd89b60673def0e065729f33dcd
->>>>>>> 2c0adc3bdbcba76bbb8fc58c977dfa75d40700a5
     spring (2.0.2)
       activesupport (>= 4.2)
     spring-watcher-listen (2.0.1)
