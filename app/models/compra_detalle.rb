@@ -31,8 +31,7 @@ class CompraDetalle < ApplicationRecord
   validates :producto_id, :presence => true
   validates :descuento, :numericality => { :integer => true }
 
-
-  attr_accessor :cantidad, :producto_id, :precio_compra, :descuento
+#  attr_accessor :cantidad, :descuento, :precio_compra, :producto_id, :compra_id
 
   def total
     total = self.cantidad * self.precio_compra
