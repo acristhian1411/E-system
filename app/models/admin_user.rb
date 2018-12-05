@@ -19,6 +19,9 @@
 #
 
 class AdminUser < ApplicationRecord
+
+
+
 # Relaciones con otras tablas
 has_many :compra
   role_based_authorizable
@@ -26,4 +29,5 @@ has_many :compra
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable,
          :recoverable, :rememberable, :validatable
+
 end

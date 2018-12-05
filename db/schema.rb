@@ -182,6 +182,19 @@ ActiveRecord::Schema.define(version: 2018_11_11_213749) do
     t.string "telefono"
   end
 
+  create_table "versions", force: :cascade do |t|
+    t.string "item_type", null: false
+    t.integer "item_id", null: false
+    t.string "event", null: false
+    t.string "whodunnit"
+    t.text "object"
+    t.text "object_changes"
+    t.text "additional_objects"
+    t.text "additional_objects_changes"
+    t.datetime "created_at"
+    t.index ["item_type", "item_id"], name: "index_versions_on_item_type_and_item_id"
+  end
+
   add_foreign_key "clientes", "barrios"
   add_foreign_key "clientes", "ciudades"
   add_foreign_key "compra_detalles", "compras"
@@ -196,3 +209,7 @@ ActiveRecord::Schema.define(version: 2018_11_11_213749) do
   add_foreign_key "stocks", "sucursals"
   add_foreign_key "sub_categories", "categories"
 end
+>>>>>>> 21f4d0dd24a2708ef3ada7ee4ed61d46453af06d
+>>>>>>> b58bc0aa41873672b184cd5e16f1ccc7b8b184fd
+>>>>>>> d21f0aa9ff1e7dd89b60673def0e065729f33dcd
+>>>>>>> 2c0adc3bdbcba76bbb8fc58c977dfa75d40700a5
