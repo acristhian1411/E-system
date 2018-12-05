@@ -11,6 +11,24 @@
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
 #
+#  direccion   :string
+#  encargado   :string
+#  suc_active  :boolean          default(TRUE)
+#  suc_descrip :string
+#  telefono    :string
+#  created_at  :datetime         not null
+#  updated_at  :datetime         not null
+#
+#  suc_active  :boolean
+
+#  direccion   :string
+#  encargado   :string
+#  suc_active  :boolean          default(TRUE)
+#  suc_descrip :string
+#  telefono    :string
+#  created_at  :datetime         not null
+#  updated_at  :datetime         not null
+#
 
 class Sucursal < ApplicationRecord
 # Validaciones
