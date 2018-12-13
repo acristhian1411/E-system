@@ -11,15 +11,12 @@
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
 #
-#  direccion   :string
-#  encargado   :string
-#  suc_active  :boolean          default(TRUE)
-#  suc_descrip :string
-#  telefono    :string
-#  created_at  :datetime         not null
-#  updated_at  :datetime         not null
-#
+
 class Sucursal < ApplicationRecord
+
+# Relaciones con otras tablas
+has_many :traslados
+
 # Validaciones
 	validates :suc_descrip, presence: true
 

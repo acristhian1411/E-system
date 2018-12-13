@@ -35,7 +35,7 @@ class CompraDetalle < ApplicationRecord
   #ttr_accessor :cantidad, :producto_id, :precio_compra, :descuento
 
   def total
-    total = self.cantidad * self.precio_compra
+    total = (self.cantidad * self.precio_compra) - descuento
   end
 
 end

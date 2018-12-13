@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_27_234752) do
+ActiveRecord::Schema.define(version: 2018_12_13_221156) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -112,6 +112,7 @@ ActiveRecord::Schema.define(version: 2018_11_27_234752) do
     t.string "num_factura"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "activo"
     t.index ["admin_user_id"], name: "index_compras_on_admin_user_id"
     t.index ["provider_id"], name: "index_compras_on_provider_id"
   end
@@ -182,6 +183,28 @@ ActiveRecord::Schema.define(version: 2018_11_27_234752) do
     t.string "telefono"
   end
 
+  create_table "traslado_detalles", force: :cascade do |t|
+    t.bigint "producto_id"
+    t.bigint "traslado_id"
+    t.integer "cantidad"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["producto_id"], name: "index_traslado_detalles_on_producto_id"
+    t.index ["traslado_id"], name: "index_traslado_detalles_on_traslado_id"
+  end
+
+  create_table "traslados", force: :cascade do |t|
+    t.integer "sucursal_origen"
+    t.integer "sucursal_destino"
+    t.date "fecha"
+    t.bigint "admin_user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "motivo"
+    t.integer "num_comprobante", null: false
+    t.index ["admin_user_id"], name: "index_traslados_on_admin_user_id"
+  end
+
   create_table "versions", force: :cascade do |t|
     t.string "item_type", null: false
     t.integer "item_id", null: false
@@ -208,4 +231,7 @@ ActiveRecord::Schema.define(version: 2018_11_27_234752) do
   add_foreign_key "stocks", "productos"
   add_foreign_key "stocks", "sucursals"
   add_foreign_key "sub_categories", "categories"
+  add_foreign_key "traslado_detalles", "productos"
+  add_foreign_key "traslado_detalles", "traslados"
+  add_foreign_key "traslados", "admin_users"
 end
