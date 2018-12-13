@@ -34,7 +34,7 @@ class Compra < ApplicationRecord
   validates :fecha_compra, :presence => true
   validates :num_factura, :presence => true
 
-  attr_accessor :provider_id, :admin_user_id, :fecha_compra, :num_factura, :compra_detalles_attributes
+  #attr_accessor :provider_id, :admin_user_id, :fecha_compra, :num_factura, :compra_detalles_attributes
 
   def compra_detalles_total
     compra_detalles_total = 0

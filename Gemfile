@@ -30,21 +30,8 @@ gem 'pdfkit'
 #gema para descargar en archivos PDF
 gem 'wkhtmltopdf-binary'
 #gema para vesiones
-
 gem 'paper_trail'
-
-<<<<<<< HEAD
 gem 'activeadmin-audit'
-
-=======
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-=======
-
->>>>>>> 21f4d0dd24a2708ef3ada7ee4ed61d46453af06d
->>>>>>> b58bc0aa41873672b184cd5e16f1ccc7b8b184fd
->>>>>>> d21f0aa9ff1e7dd89b60673def0e065729f33dcd
 #gema para select con buscador
 gem 'select2-rails'
 gem 'activeadmin-select2', github: 'mfairburn/activeadmin-select2'
