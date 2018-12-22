@@ -23,7 +23,7 @@
 
 class Traslado < ApplicationRecord
   belongs_to :admin_user
-  belongs_to :sucursal
+  has_many :sucursal
   has_many :traslado_detalles
 
   accepts_nested_attributes_for :traslado_detalles

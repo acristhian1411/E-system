@@ -6,8 +6,10 @@ ActiveAdmin.register Traslado do
 # INICIO
 
 index do
+	column("Motivo de traslado") { |traslado| traslado.motivo }
 	column("Fecha de traslado") { |traslado| traslado.fecha }
 	column("Numero de comprobante") { |traslado| traslado.num_comprobante }
+
 	actions
 end
 
@@ -34,7 +36,8 @@ show  do
     panel "Traslado" do
       attributes_table_for traslado do
 				row("Usuario") { |traslado| traslado.admin_user.email }
-				row("Sucursal de origen") { |traslado| traslado.sucursal.suc_descrip }
+				#row("Sucursal de origen") { Sucursal.suc_descrip }
+				#row("Usuario") { |payment| payment.sucursal.suc_descrip }
 				row("Sucursal de destino") { |traslado| traslado.sucursal.suc_descrip }
         row("Numero de comprobante") { traslado.num_comprobante }
         row("Fecha de traslado") { traslado.fecha }
