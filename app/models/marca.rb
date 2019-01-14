@@ -10,6 +10,13 @@
 #
 
 class Marca < ApplicationRecord
+
+	class << self
+		def activo
+			Marca.where('marca_active != ?', true)
+		end
+	end
+
 # Validaciones
 	validates :marca_descrip, presence: true
 

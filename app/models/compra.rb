@@ -3,7 +3,7 @@
 # Table name: compras
 #
 #  id            :bigint(8)        not null, primary key
-#  activo        :boolean
+#  activo        :boolean          default(TRUE)
 #  fecha_compra  :date
 #  num_factura   :string
 #  created_at    :datetime         not null
@@ -35,7 +35,17 @@ class Compra < ApplicationRecord
   validates :fecha_compra, :presence => true
   validates :num_factura, :presence => true
 
-  #attr_accessor :provider_id, :admin_user_id, :fecha_compra, :num_factura, :compra_detalles_attributes
+
+  class << self
+    def usuario(usuario)
+        usuario.id
+    end
+
+    def activo
+			Compra.where('activo != ?', true)
+		end
+
+end
 
   def compra_detalles_total
     compra_detalles_total = 0
@@ -44,7 +54,7 @@ class Compra < ApplicationRecord
     end
     compra_detalles_total
   end
-  
+
   def total
     compra_detalles_total
   end

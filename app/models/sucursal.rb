@@ -15,10 +15,16 @@
 class Sucursal < ApplicationRecord
 
 # Relaciones con otras tablas
-has_many :traslados
+belongs_to :traslados
 
 # Validaciones
 	validates :suc_descrip, presence: true
+
+	class << self
+	  def activo
+	    Sucursal.where('suc_active != ?', true)
+	  end
+	end
 
 # Funcion para listar segun este activo o no
 # Todos los inactivos

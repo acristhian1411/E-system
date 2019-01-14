@@ -28,4 +28,6 @@ class TrasladoDetalle < ApplicationRecord
   validates :producto_id, :presence => true
   
 
+
+
 end

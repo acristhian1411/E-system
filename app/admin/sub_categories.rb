@@ -54,7 +54,7 @@ end
 form title: 'Sub Categorias' do |f|
     inputs 'Detalles' do
       input :subcat_descrip, label: "Descripcion"
-      input :category_id,  label: "Categorias", :as => :select, :collection => Category.all.map{|a|["#{a.category_descrip}", a.id]}
+      input :category_id,  label: "Categorias", :as => :select, :collection => Category.activo.map{|a|["#{a.category_descrip}", a.id]}
     end
     actions
   	end

@@ -38,6 +38,11 @@ class Producto < ApplicationRecord
   has_many :compra_detalles
   has_many :traslado_detalles
 
+  class << self
+		def activo
+			Producto.where('prod_active != ?', true)
+		end
+	end
 
   # Funcion para listar segun este activo o no
   # Todos los inactivos

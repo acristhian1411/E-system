@@ -2,7 +2,7 @@ ActiveAdmin.register Compra do
 # See permitted parameters documentation:
 # https://github.com/activeadmin/activeadmin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
 #
- permit_params :provider_id, :admin_user_id, :num_factura, :fecha_compra, compra_detalles_attributes:[:id, :producto_id, :descuento, :cantidad, :precio_compra]
+ permit_params :provider_id, :admin_user_id, :num_factura, :fecha_compra, compra_detalles_attributes:[:id, :producto_id, :descuento, :porcent_desc, :cantidad, :precio_compra]
 
  action_item :activado, only: :show do
    link_to "Activar", activado_admin_compra_path(compra), method: :put if !compra.activo
@@ -16,11 +16,13 @@ ActiveAdmin.register Compra do
 
 # Controlador personalizado para softDelete
  controller do
+
    def destroy
      compra = Compra.find(params[:id])
      compra.update_attribute(:activo, false)
      redirect_to admin_compras_path
    end
+
  end
 
 # Boton atras en vista show
@@ -46,16 +48,18 @@ end
 
 
 form do |f|
-    f.input :provider_id,  label: "Proveedor", :as => :select, :collection => Provider.all.map{|a|["#{a.razon_social}", a.id]}
-    f.input :admin_user_id, label: "Usuario", :as => :select, :collection => AdminUser.all.map{|a|["#{a.email}", a.id]}
+    f.input :provider_id,  label: "Proveedor", :as => :select, :collection => Provider.activo.map{|a|["#{a.razon_social}", a.id]}
+    f.input :admin_user_id, label: "Usuario", :hint => Compra.usuario(current_admin_user), :as => :select, :collection => AdminUser.all.map{|a|["#{a.email}", a.id]}
+
     f.input :num_factura, label: "Numero de factura"
     f.input :fecha_compra, label: "Fecha de compra"
   f.inputs "Detalles" do
     f.has_many :compra_detalles do |i|
-      i.input :producto_id,  label: "Producto", :as => :select, :collection => Producto.all.map{|a|["#{a.prod_descrip}", a.id]}
+      i.input :producto_id,  label: "Producto", :as => :select, :collection => Producto.activo.map{|a|["#{a.prod_descrip}", a.id]}
       i.input :cantidad
       i.input :precio_compra, label: "Precio de compra"
       i.input :descuento, :hint => "Ingrese el descuento"
+      i.input :porcent_desc, :hint => "Ingrese el % de descuento"
     end
   end
   f.actions
@@ -76,7 +80,7 @@ show  do
         t.column("Cantidad") { |compra_detalles| number_with_delimiter compra_detalles.cantidad }
         t.column("Descripcion") { |compra_detalles| compra_detalles.producto.prod_descrip }
         t.column("Costo unitario") { |compra_detalles| number_to_currency compra_detalles.precio_compra }
-        t.column("Descuento") { |compra_detalles| number_to_currency compra_detalles.descuento}
+        t.column("Descuento") { |compra_detalles| number_to_currency compra_detalles.total_descuento}
 
         tr do
           2.times { td "" }

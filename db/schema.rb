@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_12_13_221156) do
+ActiveRecord::Schema.define(version: 2019_01_13_140129) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -58,7 +58,7 @@ ActiveRecord::Schema.define(version: 2018_12_13_221156) do
 
   create_table "barrios", force: :cascade do |t|
     t.string "descripcion"
-    t.boolean "activo"
+    t.boolean "activo", default: true
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -72,7 +72,7 @@ ActiveRecord::Schema.define(version: 2018_12_13_221156) do
 
   create_table "ciudades", force: :cascade do |t|
     t.string "descripcion"
-    t.boolean "activo"
+    t.boolean "activo", default: true
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -83,7 +83,7 @@ ActiveRecord::Schema.define(version: 2018_12_13_221156) do
     t.string "n_cedula"
     t.string "cli_telefono"
     t.integer "limite_credito"
-    t.boolean "activo"
+    t.boolean "activo", default: true
     t.bigint "ciudade_id"
     t.bigint "barrio_id"
     t.datetime "created_at", null: false
@@ -97,10 +97,11 @@ ActiveRecord::Schema.define(version: 2018_12_13_221156) do
     t.bigint "producto_id"
     t.integer "cantidad"
     t.float "precio_compra"
-    t.integer "descuento"
+    t.integer "descuento", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "compra_id"
+    t.float "porcent_desc"
     t.index ["compra_id"], name: "index_compra_detalles_on_compra_id"
     t.index ["producto_id"], name: "index_compra_detalles_on_producto_id"
   end
@@ -112,7 +113,7 @@ ActiveRecord::Schema.define(version: 2018_12_13_221156) do
     t.string "num_factura"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.boolean "activo"
+    t.boolean "activo", default: true
     t.index ["admin_user_id"], name: "index_compras_on_admin_user_id"
     t.index ["provider_id"], name: "index_compras_on_provider_id"
   end
@@ -201,8 +202,35 @@ ActiveRecord::Schema.define(version: 2018_12_13_221156) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "motivo"
-    t.integer "num_comprobante", null: false
+    t.integer "num_comprobante"
     t.index ["admin_user_id"], name: "index_traslados_on_admin_user_id"
+  end
+
+  create_table "venta", force: :cascade do |t|
+    t.bigint "admin_user_id"
+    t.bigint "sucursal_id"
+    t.bigint "cliente_id"
+    t.date "fecha"
+    t.integer "num_factura"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.boolean "activo"
+    t.index ["admin_user_id"], name: "index_venta_on_admin_user_id"
+    t.index ["cliente_id"], name: "index_venta_on_cliente_id"
+    t.index ["sucursal_id"], name: "index_venta_on_sucursal_id"
+  end
+
+  create_table "venta_detalles", force: :cascade do |t|
+    t.bigint "venta_id"
+    t.bigint "producto_id"
+    t.integer "cantidad"
+    t.float "monto_desc"
+    t.float "porcent_desc"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.float "precio_venta"
+    t.index ["producto_id"], name: "index_venta_detalles_on_producto_id"
+    t.index ["venta_id"], name: "index_venta_detalles_on_venta_id"
   end
 
   create_table "versions", force: :cascade do |t|
@@ -234,4 +262,9 @@ ActiveRecord::Schema.define(version: 2018_12_13_221156) do
   add_foreign_key "traslado_detalles", "productos"
   add_foreign_key "traslado_detalles", "traslados"
   add_foreign_key "traslados", "admin_users"
+  add_foreign_key "venta", "admin_users"
+  add_foreign_key "venta", "clientes"
+  add_foreign_key "venta", "sucursals"
+  add_foreign_key "venta_detalles", "productos"
+  add_foreign_key "venta_detalles", "venta", column: "venta_id"
 end

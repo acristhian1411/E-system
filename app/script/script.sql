@@ -20,10 +20,12 @@ ALTER TABLE public.providers
   ALTER COLUMN prov_active SET DEFAULT true;
 ALTER TABLE public.sub_categories
   ALTER COLUMN subcat_active SET DEFAULT true;
-ALTER TABLE public.sucursals
+ALTER TABLE public.sucursal
 ALTER COLUMN suc_activo SET DEFAULT true;
 ALTER TABLE public.compra_detalles
    ALTER COLUMN descuento SET DEFAULT 0;
+   ALTER TABLE public.compras
+      ALTER COLUMN activo SET DEFAULT true;
 
   CREATE UNIQUE INDEX index_unique
     ON public.stocks
