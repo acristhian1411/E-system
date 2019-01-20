@@ -1,7 +1,7 @@
 ActiveAdmin.register Cliente do
 # See permitted parameters documentation:
 # https://github.com/activeadmin/activeadmin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
-menu parent: "Cliente", label: " Clientes"
+menu parent: "Ventas", label: "Clientes"
  permit_params :nombre, :apellido, :n_cedula, :direccion, :cli_telefono, :limite_credito, :activo, :ciudade_id, :barrio_id
 
 controller do
@@ -54,8 +54,8 @@ form title: 'Clientes' do |f|
       input :direccion, label: "Direccion"
       input :cli_telefono, label: "Num de telefono"
       input :limite_credito, label: "Limite de credito"
-      input :ciudade_id,  label: "Ciudad", :as => :select, :collection => Ciudade.all.map{|a|["#{a.descripcion}", a.id]}
-      input :barrio_id,  label: "Barrio", :as => :select, :collection => Barrio.all.map{|a|["#{a.descripcion}", a.id]}
+      input :ciudade_id,  label: "Ciudad", :as => :select, :collection => Ciudade.activo.map{|a|["#{a.descripcion}", a.id]}
+      input :barrio_id,  label: "Barrio", :as => :select, :collection => Barrio.activo.map{|a|["#{a.descripcion}", a.id]}
     end
       actions
     end

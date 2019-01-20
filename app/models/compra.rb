@@ -3,6 +3,7 @@
 # Table name: compras
 #
 #  id            :bigint(8)        not null, primary key
+#  activo        :boolean          default(TRUE)
 #  fecha_compra  :date
 #  num_factura   :string
 #  created_at    :datetime         not null
@@ -29,14 +30,24 @@ class Compra < ApplicationRecord
   belongs_to :admin_user
   has_many :compra_detalles
 
-  accepts_nested_attributes_for :compra_detalles, :allow_destroy => true
+  accepts_nested_attributes_for :compra_detalles
 
   validates :provider_id, :presence => true
   validates :admin_user_id, :presence => true
   validates :fecha_compra, :presence => true
   validates :num_factura, :presence => true
 
-  #attr_accessor :provider_id, :admin_user_id, :fecha_compra, :num_factura, :compra_detalles_attributes
+
+  class << self
+    def usuario(usuario)
+        usuario.id
+    end
+
+    def activo
+			Compra.where('activo != ?', true)
+		end
+
+end
 
   def compra_detalles_total
     compra_detalles_total = 0
@@ -45,8 +56,23 @@ class Compra < ApplicationRecord
     end
     compra_detalles_total
   end
+
   def total
     compra_detalles_total
   end
+
+  # Funcion para listar segun este activo o no
+  # Todos los inactivos
+  scope :inactivo, -> {
+    where('activo != ?', true)
+  }
+  # Todos los activos
+  	scope :activo, -> {
+    where(:activo => true)
+  }
+  # Todos los registros
+  	scope :todos, -> {
+    all
+  }
 
 end

@@ -25,6 +25,12 @@ has_paper_trail
 
 	validates :telefono, presence: true
 
+	class << self
+    def activo
+      Provider.where('prov_active != ?', true)
+    end
+end
+
 # Funcion para listar segun este activo o no
 # Todos los inactivos
 	scope :inactivo, -> {

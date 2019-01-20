@@ -25,8 +25,14 @@ has_paper_trail
   belongs_to :category
   accepts_nested_attributes_for :category
 # Validaciones
-validates :subcat_descrip, presence: true
-validates_associated :category
+  validates :subcat_descrip, presence: true
+  validates_associated :category
+
+class << self
+  def activo
+    SubCategory.where('subcat_active != ?', true)
+  end
+end
 
 # Funcion para listar segun este activo o no
 # Todos los inactivos

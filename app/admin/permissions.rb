@@ -1,5 +1,5 @@
 ActiveAdmin.register ::ActiveAdmin::Permission, as: "Permission" do
-  menu parent: "Usuarios", label: "Permisos"
+  menu parent: "System", label: "Permisos"
 
   actions :index
 

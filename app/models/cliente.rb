@@ -3,7 +3,7 @@
 # Table name: clientes
 #
 #  id             :bigint(8)        not null, primary key
-#  activo         :boolean
+#  activo         :boolean          default(TRUE)
 #  apellido       :string
 #  cli_telefono   :string
 #  direccion      :string
@@ -45,6 +45,15 @@ class Cliente < ApplicationRecord
   validates :limite_credito, numericality: { only_integer: true }
   validates :n_cedula, presence: true
   validates :n_cedula, uniqueness: true
+
+  class << self
+    def activo
+      Cliente.where('activo != ?', true)
+    end
+    def nombre_completo
+     nombre + apellido
+    end
+end
 
 # Funcion para listar segun este activo o no
   	scope :inactivo, -> {

@@ -3,6 +3,7 @@
 # Table name: compras
 #
 #  id            :bigint(8)        not null, primary key
+#  activo        :boolean          default(TRUE)
 #  fecha_compra  :date
 #  num_factura   :string
 #  created_at    :datetime         not null

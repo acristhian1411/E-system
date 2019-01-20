@@ -4,7 +4,8 @@
 #
 #  id            :bigint(8)        not null, primary key
 #  cantidad      :integer
-#  descuento     :integer
+#  descuento     :integer          default(0)
+#  porcent_desc  :float
 #  precio_compra :float
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
@@ -34,10 +35,14 @@ class CompraDetalle < ApplicationRecord
   validates :descuento, :numericality => { :integer => true }
 
 
-  #ttr_accessor :cantidad, :producto_id, :precio_compra, :descuento
 
   def total
-    total = self.cantidad * self.precio_compra
+    por = ((self.precio_compra.to_f * self.porcent_desc.to_f) /  100)
+    total = (((self.cantidad * self.precio_compra.to_f) - self.descuento) - por)
+  end
+
+  def total_descuento
+    total = (((self.precio_compra.to_f * self.porcent_desc.to_f) /  100) + self.descuento)
   end
 
 end
