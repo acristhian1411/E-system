@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_01_13_140129) do
+ActiveRecord::Schema.define(version: 2019_01_18_192919) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -59,6 +59,13 @@ ActiveRecord::Schema.define(version: 2019_01_13_140129) do
   create_table "barrios", force: :cascade do |t|
     t.string "descripcion"
     t.boolean "activo", default: true
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "cajas", force: :cascade do |t|
+    t.string "descripcion"
+    t.boolean "activo"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -203,6 +210,7 @@ ActiveRecord::Schema.define(version: 2019_01_13_140129) do
     t.datetime "updated_at", null: false
     t.string "motivo"
     t.integer "num_comprobante"
+    t.boolean "activo"
     t.index ["admin_user_id"], name: "index_traslados_on_admin_user_id"
   end
 

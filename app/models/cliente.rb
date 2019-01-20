@@ -44,14 +44,18 @@ class Cliente < ApplicationRecord
   validates :n_cedula, presence: true
   validates :n_cedula, uniqueness: true
 
-  class << self
+
     def activo
       Cliente.where('activo != ?', true)
     end
+
     def nombre_completo
-     nombre + apellido
+      nombre = "Juan"
+      apellido = "perez"
+      return  "#{nombre} #{apellido}"
     end
-end
+
+
 
 # Funcion para listar segun este activo o no
   	scope :inactivo, -> {
