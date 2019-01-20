@@ -40,7 +40,7 @@ class Compra < ApplicationRecord
 
   class << self
     def usuario(usuario)
-        usuario.id
+        usuario.email
     end
 
     def activo

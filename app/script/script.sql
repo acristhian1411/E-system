@@ -59,3 +59,30 @@ ALTER FUNCTION public.tr_produc_sucursal()
 CREATE TRIGGER tg_prod_sucursal AFTER INSERT
   ON public.productos FOR EACH ROW
   EXECUTE PROCEDURE public.tr_produc_sucursal();
+
+  /*
+   Trigger para actualizar cantidad de productos
+  */
+  BEGIN
+      IF EXISTS(SELECT * FROM inserted
+            LEFT OUTER JOIN deleted
+            ON inserted.NUMBER_STOCKS = deleted.NUMBER_STOCKS
+            WHERE deleted.NUMBER_STOCKS IS NULL)
+      UPDATE STOCKS
+      SET QUANTITY = QUANTITY - NEW.QUANTITY
+      WHERE ID = New.ID;
+  END
+
+  /*
+   Trigger para actualizar cantidad de productos
+  */
+  BEGIN
+    UPDATE s
+        SET QUANTITY = QUANTITY - i.insert_quantity
+        FROM STOCKS s JOIN
+             (SELECT i.stock_id, SUM(i.quantity) as insert_quantity
+              FROM inserted i
+              GROUP BY i.stock_id
+             ) i
+             ON s.ID = i.ID;
+  END;
