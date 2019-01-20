@@ -12,6 +12,7 @@
 class Ciudade < ApplicationRecord
 # relacion con otras tablas
 	has_many :cliente
+	has_paper_trail
 
 # Validaciones
 	validates :descripcion, presence: true

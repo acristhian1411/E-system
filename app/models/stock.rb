@@ -23,6 +23,8 @@
 #
 
 class Stock < ApplicationRecord
+ has_paper_trail
+
   belongs_to :producto
   belongs_to :sucursal
 end

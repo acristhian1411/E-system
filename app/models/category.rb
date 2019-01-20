@@ -12,6 +12,8 @@
 class Category < ApplicationRecord
 # relacion con otras tablas
 	has_many :sub_category
+	 has_paper_trail
+	
 #Validaciones
 validates :category_descrip, presence: true
 

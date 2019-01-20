@@ -13,9 +13,13 @@
 #
 
 class Sucursal < ApplicationRecord
+<<<<<<< HEAD
+has_paper_trail
+=======
 
 # Relaciones con otras tablas
 belongs_to :traslados
+>>>>>>> 85f54007fd9e0e1d62e0264fe5abf925923941d6
 
 # Validaciones
 	validates :suc_descrip, presence: true
