@@ -58,7 +58,7 @@ ActiveRecord::Schema.define(version: 2019_01_13_140129) do
 
   create_table "barrios", force: :cascade do |t|
     t.string "descripcion"
-    t.boolean "activo", default: true
+    t.boolean "activo"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -72,7 +72,7 @@ ActiveRecord::Schema.define(version: 2019_01_13_140129) do
 
   create_table "ciudades", force: :cascade do |t|
     t.string "descripcion"
-    t.boolean "activo", default: true
+    t.boolean "activo"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -83,7 +83,7 @@ ActiveRecord::Schema.define(version: 2019_01_13_140129) do
     t.string "n_cedula"
     t.string "cli_telefono"
     t.integer "limite_credito"
-    t.boolean "activo", default: true
+    t.boolean "activo"
     t.bigint "ciudade_id"
     t.bigint "barrio_id"
     t.datetime "created_at", null: false
@@ -97,7 +97,7 @@ ActiveRecord::Schema.define(version: 2019_01_13_140129) do
     t.bigint "producto_id"
     t.integer "cantidad"
     t.float "precio_compra"
-    t.integer "descuento", default: 0
+    t.integer "descuento"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "compra_id"
@@ -113,7 +113,7 @@ ActiveRecord::Schema.define(version: 2019_01_13_140129) do
     t.string "num_factura"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.boolean "activo", default: true
+    t.boolean "activo"
     t.index ["admin_user_id"], name: "index_compras_on_admin_user_id"
     t.index ["provider_id"], name: "index_compras_on_provider_id"
   end
@@ -202,7 +202,7 @@ ActiveRecord::Schema.define(version: 2019_01_13_140129) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "motivo"
-    t.integer "num_comprobante"
+    t.integer "num_comprobante", null: false
     t.index ["admin_user_id"], name: "index_traslados_on_admin_user_id"
   end
 
