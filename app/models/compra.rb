@@ -22,7 +22,9 @@
 #
 
 class Compra < ApplicationRecord
+   has_paper_trail
 
+   
   belongs_to :provider
   belongs_to :admin_user
   has_many :compra_detalles

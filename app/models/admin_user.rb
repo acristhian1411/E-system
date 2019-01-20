@@ -19,7 +19,7 @@
 #
 
 class AdminUser < ApplicationRecord
-
+ has_paper_trail
 
 
 # Relaciones con otras tablas

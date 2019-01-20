@@ -26,12 +26,16 @@ gem 'active_admin_theme'
 gem 'active_admin_role'
 
 #gema para descargar en archivos PDF
-gem 'pdfkit'
-#gema para descargar en archivos PDF
+gem 'wicked_pdf'
 gem 'wkhtmltopdf-binary'
+
+
 #gema para vesiones
+
 gem 'paper_trail'
+
 gem 'activeadmin-audit'
+
 #gema para select con buscador
 gem 'select2-rails'
 gem 'activeadmin-select2', github: 'mfairburn/activeadmin-select2'

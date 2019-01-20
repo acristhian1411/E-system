@@ -10,6 +10,8 @@
 #
 
 class Marca < ApplicationRecord
+	 has_paper_trail
+	
 # Validaciones
 	validates :marca_descrip, presence: true
 

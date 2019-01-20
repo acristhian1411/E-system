@@ -20,6 +20,8 @@
 #  updated_at  :datetime         not null
 #
 class Sucursal < ApplicationRecord
+has_paper_trail
+
 # Validaciones
 	validates :suc_descrip, presence: true
 

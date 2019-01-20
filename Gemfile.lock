@@ -193,7 +193,6 @@ GEM
     paper_trail (10.0.1)
       activerecord (>= 4.2, < 5.3)
       request_store (~> 1.1)
-    pdfkit (0.8.2)
     pg (1.1.3)
     pg (1.1.3-x64-mingw32)
     public_suffix (3.0.3)
@@ -293,6 +292,7 @@ GEM
     websocket-driver (0.7.0)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.3)
+    wicked_pdf (1.1.0)
     wkhtmltopdf-binary (0.12.4)
     xdan-datetimepicker-rails (2.5.4)
       jquery-rails
@@ -321,7 +321,6 @@ DEPENDENCIES
   jquery-rails
   listen (>= 3.0.5, < 3.2)
   paper_trail
-  pdfkit
   pg (>= 0.18, < 2.0)
   puma (~> 3.11)
   rails (~> 5.2.1)
@@ -335,6 +334,7 @@ DEPENDENCIES
   tzinfo-data
   uglifier (>= 1.3.0)
   web-console (>= 3.3.0)
+  wicked_pdf
   wkhtmltopdf-binary
 
 RUBY VERSION

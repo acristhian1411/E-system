@@ -30,6 +30,9 @@
 #
 
 class Producto < ApplicationRecord
+  has_paper_trail
+
+
   belongs_to :provider
   belongs_to :category
   belongs_to :sub_category

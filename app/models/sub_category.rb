@@ -19,6 +19,8 @@
 #
 
 class SubCategory < ApplicationRecord
+has_paper_trail
+
 # relacion con otras tablas
   belongs_to :category
   accepts_nested_attributes_for :category

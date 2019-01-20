@@ -16,6 +16,7 @@
 class Provider < ApplicationRecord
 # Relaciones con otras tablas
 has_many :compra
+has_paper_trail
 
 # Validaciones
 	validates :razon_social, presence: true
