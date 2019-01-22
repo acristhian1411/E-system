@@ -19,6 +19,10 @@ has_paper_trail
 
 # Relaciones con otras tablas
 belongs_to :traslados
+<<<<<<< HEAD
+=======
+
+>>>>>>> ff0a83b8dea13022e7fb02aa59e8050839681f14
 
 # Validaciones
 	validates :suc_descrip, presence: true

@@ -12,6 +12,7 @@ menu parent: "Cliente", label: " Barrios"
      redirect_to admin_barrios_path
    end
 
+<<<<<<< HEAD
     #def generate_pdf(barrio)
     #    pdf = WickedPdf.new.pdf_from_string(
     #      barrio.content,
@@ -66,12 +67,50 @@ def show
  #action_item :activado, only: :show do
 #   link_to "Activar", activado_admin_barrio_path(barrio), method: :put if !barrio.activo
  #end
+=======
+   def pdf(barrio)
+     barrio.all
+     respond_to do |format|
+      format.html
+      format.json
+      format.pdf{render template: 'barrio/reporte', pdf: 'barrio/reporte', layouts: 'layouts/pdf.html'}
+      end
+   end
+
+ end
+
+#index download_links: [:pdf]
+ action_item :view, only: :show do
+   link_to 'Atras', admin_barrios_path
+ end
+
+  # Funcion para activar registro
+  member_action :pdf, method: :put do
+    barrio = Barrio.find(params[:id])
+    respond_to do |format|
+     format.html
+     format.json
+     format.pdf{render template: 'barrio/pdf', pdf: 'reporte', layouts: 'pdf.html'}
+     end
+  end
+
+ # Link para descargar pdf
+ action_item :pdf, only: :show do
+   link_to "Descargar PDF", pdf_admin_barrio_path(barrio)
+ end
+
+>>>>>>> ff0a83b8dea13022e7fb02aa59e8050839681f14
  # Funcion para activar registro
  member_action :activado, method: :put do
  sub_category = Barrio.find(params[:id])
  sub_category.update(activo: true)
  redirect_to admin_barrios_path
  end
+ # Link para activar registro
+ action_item :activar, only: :show do
+   link_to "Activar", activado_admin_barrio_path(barrio), method: :put if !barrio.activo
+ end
+
 
 # lista segun activo o no
  scope :inactivo
@@ -85,12 +124,16 @@ def show
  index title: "Barrios" do
  	 column "Descripcion", :descripcion
 	 column "Creado", :created_at
-   actions  do |client|
+   actions  do |barrio|
      #link_to("Mostrar", admin_barrio_path(client)) + " | " + \
      #link_to("Editar", edit_admin_barrio_path(client)) + " | " + \
      #link_to("Eliminar", admin_barrio_path(client), :method => :delete, :confirm => "Are you sure?")
+<<<<<<< HEAD
      link_to 'Create PDF document',admin_barrios_path(client, format: :pdf)
 
+=======
+      link_to "Descargar PDF", pdf_admin_barrio_path(barrio)
+>>>>>>> ff0a83b8dea13022e7fb02aa59e8050839681f14
    end
  end
 

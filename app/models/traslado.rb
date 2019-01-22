@@ -3,9 +3,10 @@
 # Table name: traslados
 #
 #  id               :bigint(8)        not null, primary key
+#  activo           :boolean
 #  fecha            :date
 #  motivo           :string
-#  num_comprobante  :integer
+#  num_comprobante  :integer          not null
 #  sucursal_destino :integer
 #  sucursal_origen  :integer
 #  created_at       :datetime         not null
@@ -43,6 +44,42 @@ class Traslado < ApplicationRecord
       "Traslado-1"
     end
   end
+
+    def usuario(usuario)
+        usuario.email
+    end
+
+    def activo
+			Traslado.where('activo != ?', true)
+		end
+
+    def sucursal(id)
+      if id == 3
+        return "RUTA 1"
+      end
+      if id == 2
+      return  "GRAL ARTIGAS"
+      end
+      if id == 1
+      return  "CASA MATRIZ"
+      end
+    end
+
 end
+
+# Funcion para listar segun este activo o no
+# Todos los inactivos
+scope :inactivo, -> {
+  where('activo != ?', true)
+}
+# Todos los activos
+  scope :activo, -> {
+  where(:activo => true)
+}
+# Todos los registros
+  scope :todos, -> {
+  all
+}
+
 
 end

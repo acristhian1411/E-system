@@ -1,22 +1,12 @@
 ActiveAdmin.register Venta do
-  menu parent: "Ventas", label: " Venta"
+menu parent: "Ventas", label: " Venta"
 
 # See permitted parameters documentation:
 # https://github.com/activeadmin/activeadmin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
 #
 
-permit_params :cliente_id, :admin_user_id, :num_factura, :fecha, venta_detalle_attributes:[:id, :producto_id, :monto_desc, :porcent_desc, :cantidad, :precio_venta]
+permit_params :cliente_id, :admin_user_id, :sucursal_id, :num_factura, :forma_pago, :fecha, venta_detalle_attributes:[:id, :producto_id, :monto_desc, :porcent_desc, :cantidad, :precio_venta]
 
-action_item :activado, only: :show do
-  link_to "Activar", activado_admin_ventum_path(venta), method: :put if !venta.activo
-end
-
-# Funcion para activar registro
-member_action :activado, method: :put do
-venta = Venta.find(params[:id])
-venta.update(activo: true)
-redirect_to admin_ventas_path
-end
 
 # Controlador personalizado para softDelete
 controller do
@@ -26,6 +16,18 @@ controller do
     venta.update_attribute(:activo, false)
     redirect_to admin_venta_path
   end
+
+#  def create
+#    respond_to do |format|
+#      if @venta.save || @venta.forma_pago == true
+#        format.html { redirect_to, notice: 'Cliente fue creado con éxito.'}
+#        format.json { render :show, status: :created, location: @cliente }
+#      else
+#        format.html { render :new }
+#        format.json { render json: @cliente.errors, status: :unprocessable_entity }
+#      end
+#    end
+#  end
 
 end
 
@@ -40,28 +42,34 @@ scope :todos
 
 
 index do
- column(:cliente) { |venta| venta.cliente.nombre }
-
- column("Fecha de venta") { |venta| venta.fecha }
- column :total do |venta|
- number_to_currency venta.total
-end
-
+   index_column
+   column :cliente do |venta|
+      venta.cliente.nombre
+   end
+   column(:apellido) { |venta| venta.cliente.apellido }
+   column("Sucursal") { |venta| venta.sucursal.suc_descrip }
+   column("Fecha de venta") { |venta| venta.fecha }
+   column("Forma de pago") { |venta| venta.forma_pago }
+   column :total do |venta|
+     number_to_currency venta.total
+   end
 actions
 end
 
 
 form do |f|
    f.input :cliente_id,  label: "Cliente", :as => :select, :collection => Cliente.activo.map{|a|["#{a.nombre || a.apellido}", a.id]}
-   f.input :admin_user_id, label: "Usuario", :hint => Venta.usuario(current_admin_user), :as => :select, :collection => AdminUser.all.map{|a|["#{a.email}", a.id]}
-
-   f.input :num_factura, label: "Numero de factura"
+   f.input :admin_user_id, label: "Usuario", :hint => "El usuario sugerido es #{Venta.usuario(current_admin_user)}", :as => :select, :collection => AdminUser.all.map{|a|["#{a.email}", a.id]}
+   f.input :sucursal_id, label: "Sucursal", :as => :select, :collection => Sucursal.activo.map{|a|["#{a.suc_descrip}", a.id]}
+   f.input :num_factura, label: "Numero de comprobante"
    f.input :fecha, label: "Fecha de compra"
+   f.input :forma_pago, label: "Forma de pago", :as => :radio, :collection => ["Contado", "Credito"]
  f.inputs "Detalles" do
    f.has_many :venta_detalle do |i|
      i.input :producto_id,  label: "Producto", :hint => "Elija un producto", :as => :select, :collection => Producto.activo.map{|a|["#{a.prod_descrip}", a.id]}
      i.input :cantidad, :hint => "Ingrese la cantidad"
-     i.input :precio_venta, label: "Precio de venta", :hint => "Ingrese el precio de venta"
+     i.input :precio_venta, label: "Precio de venta"
+     #, :as =>  Producto.precio(:producto_id)
      i.input :monto_desc, label: "Descuento",  label: "Descuento", :hint => "Ingrese el descuento"
      i.input :porcent_desc, label: "Descuento", :hint => "Ingrese el % de descuento"
    end
@@ -75,6 +83,7 @@ show  do
        row("Cliente") { |payment| payment.cliente.nombre }
        row("Usuario") { |payment| payment.admin_user.email }
        row("Numero de factura") { venta.num_factura }
+       row("Forma de pago") { venta.forma_pago }
        row("Fecha de venta") { venta.fecha }
      end
    end

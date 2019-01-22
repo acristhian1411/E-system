@@ -3,9 +3,10 @@
 # Table name: traslados
 #
 #  id               :bigint(8)        not null, primary key
+#  activo           :boolean
 #  fecha            :date
 #  motivo           :string
-#  num_comprobante  :integer
+#  num_comprobante  :integer          not null
 #  sucursal_destino :integer
 #  sucursal_origen  :integer
 #  created_at       :datetime         not null
