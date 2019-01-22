@@ -4,7 +4,7 @@
 #
 #  id            :bigint(8)        not null, primary key
 #  cantidad      :integer
-#  descuento     :integer          default(0)
+#  descuento     :integer
 #  porcent_desc  :float
 #  precio_compra :float
 #  created_at    :datetime         not null
