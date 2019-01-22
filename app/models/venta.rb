@@ -5,6 +5,7 @@
 #  id            :bigint(8)        not null, primary key
 #  activo        :boolean
 #  fecha         :date
+#  forma_pago    :string
 #  num_factura   :integer
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
@@ -38,6 +39,7 @@ class Venta < ApplicationRecord
   validates :sucursal_id, :presence => true
   validates :num_factura, :presence => true
   validates :fecha, :presence => true
+  validates :forma_pago, :presence => true
 
 class << self
     def usuario(usuario)

@@ -45,6 +45,12 @@ class Producto < ApplicationRecord
 		def activo
 			Producto.where('prod_active != ?', true)
 		end
+
+    def precio(producto_id)
+    algo = Producto.where('id = producto_id')
+    return algo.precio_venta
+    end
+
 	end
 
   # Funcion para listar segun este activo o no

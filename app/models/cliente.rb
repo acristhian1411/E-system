@@ -46,6 +46,7 @@ class Cliente < ApplicationRecord
   validates :n_cedula, presence: true
   validates :n_cedula, uniqueness: true
 
+class << self
 
     def activo
       Cliente.where('activo != ?', true)
@@ -57,6 +58,7 @@ class Cliente < ApplicationRecord
       return  "#{nombre} #{apellido}"
     end
 
+end
 
 
 # Funcion para listar segun este activo o no
