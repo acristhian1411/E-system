@@ -10,11 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-<<<<<<< HEAD
-ActiveRecord::Schema.define(version: 2019_01_13_140129) do
-=======
 ActiveRecord::Schema.define(version: 2019_01_22_161131) do
->>>>>>> ff0a83b8dea13022e7fb02aa59e8050839681f14
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -67,8 +63,6 @@ ActiveRecord::Schema.define(version: 2019_01_22_161131) do
     t.datetime "updated_at", null: false
   end
 
-<<<<<<< HEAD
-=======
   create_table "cajas", force: :cascade do |t|
     t.string "descripcion"
     t.boolean "activo"
@@ -76,7 +70,6 @@ ActiveRecord::Schema.define(version: 2019_01_22_161131) do
     t.datetime "updated_at", null: false
   end
 
->>>>>>> ff0a83b8dea13022e7fb02aa59e8050839681f14
   create_table "categories", force: :cascade do |t|
     t.string "category_descrip"
     t.boolean "category_active", default: true
@@ -132,8 +125,6 @@ ActiveRecord::Schema.define(version: 2019_01_22_161131) do
     t.index ["provider_id"], name: "index_compras_on_provider_id"
   end
 
-<<<<<<< HEAD
-=======
   create_table "credito_clientes", force: :cascade do |t|
     t.bigint "cliente_id"
     t.bigint "venta_id"
@@ -156,7 +147,6 @@ ActiveRecord::Schema.define(version: 2019_01_22_161131) do
     t.index ["credito_cliente_id"], name: "index_cuota_clientes_on_credito_cliente_id"
   end
 
->>>>>>> ff0a83b8dea13022e7fb02aa59e8050839681f14
   create_table "marcas", force: :cascade do |t|
     t.string "marca_descrip"
     t.boolean "marca_active", default: true
@@ -223,8 +213,6 @@ ActiveRecord::Schema.define(version: 2019_01_22_161131) do
     t.string "telefono"
   end
 
-<<<<<<< HEAD
-=======
   create_table "tipo_mov_cajas", force: :cascade do |t|
     t.string "descripcion"
     t.boolean "activo"
@@ -232,7 +220,6 @@ ActiveRecord::Schema.define(version: 2019_01_22_161131) do
     t.datetime "updated_at", null: false
   end
 
->>>>>>> ff0a83b8dea13022e7fb02aa59e8050839681f14
   create_table "traslado_detalles", force: :cascade do |t|
     t.bigint "producto_id"
     t.bigint "traslado_id"
@@ -251,12 +238,8 @@ ActiveRecord::Schema.define(version: 2019_01_22_161131) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "motivo"
-<<<<<<< HEAD
     t.integer "num_comprobante"
-=======
-    t.integer "num_comprobante", null: false
     t.boolean "activo"
->>>>>>> ff0a83b8dea13022e7fb02aa59e8050839681f14
     t.index ["admin_user_id"], name: "index_traslados_on_admin_user_id"
   end
 
@@ -269,10 +252,7 @@ ActiveRecord::Schema.define(version: 2019_01_22_161131) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "activo"
-<<<<<<< HEAD
-=======
     t.string "forma_pago"
->>>>>>> ff0a83b8dea13022e7fb02aa59e8050839681f14
     t.index ["admin_user_id"], name: "index_venta_on_admin_user_id"
     t.index ["cliente_id"], name: "index_venta_on_cliente_id"
     t.index ["sucursal_id"], name: "index_venta_on_sucursal_id"
@@ -310,12 +290,9 @@ ActiveRecord::Schema.define(version: 2019_01_22_161131) do
   add_foreign_key "compra_detalles", "productos"
   add_foreign_key "compras", "admin_users"
   add_foreign_key "compras", "providers"
-<<<<<<< HEAD
-=======
   add_foreign_key "credito_clientes", "clientes"
   add_foreign_key "credito_clientes", "venta", column: "venta_id"
   add_foreign_key "cuota_clientes", "credito_clientes"
->>>>>>> ff0a83b8dea13022e7fb02aa59e8050839681f14
   add_foreign_key "productos", "categories"
   add_foreign_key "productos", "marcas"
   add_foreign_key "productos", "providers"

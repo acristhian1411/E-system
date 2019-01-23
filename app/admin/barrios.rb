@@ -1,7 +1,7 @@
 ActiveAdmin.register Barrio do
 # See permitted parameters documentation:
 # https://github.com/activeadmin/activeadmin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
-menu parent: "Cliente", label: " Barrios"
+menu parent: "Ventas", label: "Barrios"
 # Campos permitidos para formulario
  permit_params :descripcion,  :activo
 
@@ -12,7 +12,6 @@ menu parent: "Cliente", label: " Barrios"
      redirect_to admin_barrios_path
    end
 
-<<<<<<< HEAD
     #def generate_pdf(barrio)
     #    pdf = WickedPdf.new.pdf_from_string(
     #      barrio.content,
@@ -67,7 +66,7 @@ def show
  #action_item :activado, only: :show do
 #   link_to "Activar", activado_admin_barrio_path(barrio), method: :put if !barrio.activo
  #end
-=======
+
    def pdf(barrio)
      barrio.all
      respond_to do |format|
@@ -77,7 +76,7 @@ def show
       end
    end
 
- end
+ 
 
 #index download_links: [:pdf]
  action_item :view, only: :show do
@@ -99,7 +98,6 @@ def show
    link_to "Descargar PDF", pdf_admin_barrio_path(barrio)
  end
 
->>>>>>> ff0a83b8dea13022e7fb02aa59e8050839681f14
  # Funcion para activar registro
  member_action :activado, method: :put do
  sub_category = Barrio.find(params[:id])
@@ -128,12 +126,11 @@ def show
      #link_to("Mostrar", admin_barrio_path(client)) + " | " + \
      #link_to("Editar", edit_admin_barrio_path(client)) + " | " + \
      #link_to("Eliminar", admin_barrio_path(client), :method => :delete, :confirm => "Are you sure?")
-<<<<<<< HEAD
+
      link_to 'Create PDF document',admin_barrios_path(client, format: :pdf)
 
-=======
-      link_to "Descargar PDF", pdf_admin_barrio_path(barrio)
->>>>>>> ff0a83b8dea13022e7fb02aa59e8050839681f14
+
+
    end
  end
 

@@ -10,11 +10,9 @@
 #
 
 class Marca < ApplicationRecord
-<<<<<<< HEAD
-=======
 
 	 has_paper_trail
->>>>>>> ff0a83b8dea13022e7fb02aa59e8050839681f14
+
 
 	class << self
 		def activo
@@ -22,10 +20,7 @@ class Marca < ApplicationRecord
 		end
 	end
 
-<<<<<<< HEAD
 
-=======
->>>>>>> ff0a83b8dea13022e7fb02aa59e8050839681f14
 # Validaciones
 	validates :marca_descrip, presence: true
 
