@@ -23,5 +23,11 @@
 #
 
 class CuotaCliente < ApplicationRecord
-  belongs_to :credito_cliente
+  belongs_to :credito_clientes
+
+    def saldo_cuota
+          saldo = self.monto_cuota - self.monto_pagado
+           return saldo
+    end
+
 end

@@ -22,4 +22,18 @@
 class CreditoCliente < ApplicationRecord
   belongs_to :cliente
   belongs_to :venta
+  has_many :cuota_clientes
+
+    def cuota_total
+      cuota_total = 0
+      self.cuota_clientes.each do |i|
+        cuota_total += i.saldo_cuota
+      end
+      cuota_total
+    end
+
+    def total
+      cuota_total
+    end
+
 end

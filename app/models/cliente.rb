@@ -28,7 +28,7 @@
 
 class Cliente < ApplicationRecord
  has_paper_trail
-
+has_many :credito_clientes
 
 # relacion con otras tablas
   belongs_to :ciudade

@@ -74,15 +74,37 @@ form title: 'Clientes' do |f|
     end
   end
 
-  sidebar "Total Vendido", :only => :show do
-    h2 number_to_currency(Venta.where(:cliente_id => cliente.id).all.sum(&:total)), :style => "text-align: center; margin-top: 20px;"
-  end
   sidebar "Ultimas ventas", :only => :show do
     table_for Venta.where(:cliente_id => cliente.id).order('created_at desc').limit(5).all do |t|
       t.column("Forma de pago") { |venta| venta.forma_pago }
       t.column("Comprobante") { |venta| link_to "##{venta.num_factura}", admin_ventum_path(venta) }
       t.column("Total") { |venta| number_to_currency venta.venta_detalles_total }
     end
+  end
+
+  sidebar "Saldo", :only => :show do
+    @credito = CreditoCliente.where(:cliente_id => cliente.id).order('created_at desc').all
+#    panel "Credito" do
+#      table_for @credito do |t|
+#        t.column("Comprobante")   do |credito|
+#          credito.venta.num_factura
+#        end
+#        t.column("Fecha de compra") { |credito| credito.venta.fecha }
+#      end
+#    end
+#    panel "Cuotas" do
+      table_for CuotaCliente.where(:credito_cliente_id => @credito.ids).order('vencimiento asc') do |t|
+        t.column("Cuota")  do |cuota|
+            cuota.saldo_cuota
+        end
+        t.column("Vencimiento") { |cuota| cuota.vencimiento }
+      end
+#    end
+
+  end
+
+  sidebar "Total Vendido", :only => :show do
+    h2 number_to_currency(Venta.where(:cliente_id => cliente.id).all.sum(&:total)), :style => "text-align: center; margin-top: 20px;"
   end
 
 end

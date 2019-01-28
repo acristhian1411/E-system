@@ -47,10 +47,9 @@ class Producto < ApplicationRecord
 		end
 
     def precio(producto_id)
-    algo = Producto.where('id = producto_id')
+    algo = self.find(params[producto_id])
     return algo.precio_venta
     end
-
 	end
 
   # Funcion para listar segun este activo o no

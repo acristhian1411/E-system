@@ -31,6 +31,7 @@ class Venta < ApplicationRecord
   belongs_to :sucursal
   belongs_to :cliente
   has_many :venta_detalle
+  has_many :credito_cliente
 
   accepts_nested_attributes_for :venta_detalle
 

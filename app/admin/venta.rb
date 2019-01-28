@@ -40,7 +40,6 @@ scope :inactivo
 scope :activo, :default => true
 scope :todos
 
-
 index do
    index_column
    column :cliente do |venta|
@@ -53,6 +52,7 @@ index do
    column :total do |venta|
      number_to_currency venta.total
    end
+
 actions
 end
 
@@ -64,12 +64,23 @@ form do |f|
    f.input :num_factura, label: "Numero de comprobante"
    f.input :fecha, label: "Fecha de compra"
    f.input :forma_pago, label: "Forma de pago", :as => :radio, :collection => ["Contado", "Credito"]
+
+
+#if :forma_pago == "Credito"
+#  f.inputs "Credito" do
+#    f.has_many :credito_cliente do |i|
+#      i.input :cliente_id, label: "Descuento",  label: "Descuento", :hint => "Ingrese el descuento"
+#      i.input :venta_id, label: "Descuento", :hint => "Ingrese el % de descuento"
+#    end
+#  end
+#end
+render partial: "credito_clientes", layout: "active_admin" 
+
  f.inputs "Detalles" do
    f.has_many :venta_detalle do |i|
      i.input :producto_id,  label: "Producto", :hint => "Elija un producto", :as => :select, :collection => Producto.activo.map{|a|["#{a.prod_descrip}", a.id]}
      i.input :cantidad, :hint => "Ingrese la cantidad"
      i.input :precio_venta, label: "Precio de venta"
-     #, :as =>  Producto.precio(:producto_id)
      i.input :monto_desc, label: "Descuento",  label: "Descuento", :hint => "Ingrese el descuento"
      i.input :porcent_desc, label: "Descuento", :hint => "Ingrese el % de descuento"
    end
@@ -80,8 +91,8 @@ end
 show  do
    panel "Invoice Details" do
      attributes_table_for venta do
-       row("Cliente") { |payment| payment.cliente.nombre }
-       row("Usuario") { |payment| payment.admin_user.email }
+       row("Cliente") { |venta| venta.cliente.nombre }
+       row("Usuario") { |venta| venta.admin_user.email }
        row("Numero de factura") { venta.num_factura }
        row("Forma de pago") { venta.forma_pago }
        row("Fecha de venta") { venta.fecha }
@@ -93,7 +104,7 @@ show  do
        t.column("Cantidad") { |venta_detalle| number_with_delimiter venta_detalle.cantidad }
        t.column("Descripcion") { |venta_detalle| venta_detalle.producto.prod_descrip }
        t.column("Costo unitario") { |venta_detalle| number_to_currency venta_detalle.precio_venta }
-       t.column("Descuento") { |v| number_to_currency v.total_descuento}
+#       t.column("Descuento") { |v| number_to_currency v.total_descuento}
 
        tr do
          2.times { td "" }
