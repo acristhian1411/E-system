@@ -20,7 +20,6 @@ has_paper_trail
 # Relaciones con otras tablas
 belongs_to :traslados
 
-
 # Validaciones
 	validates :suc_descrip, presence: true
 

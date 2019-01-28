@@ -74,7 +74,8 @@ form do |f|
 #    end
 #  end
 #end
-render partial: "credito_clientes", layout: "active_admin" 
+
+#render partial: "credito_clientes", layout: "active_admin"
 
  f.inputs "Detalles" do
    f.has_many :venta_detalle do |i|

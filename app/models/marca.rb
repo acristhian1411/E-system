@@ -13,11 +13,13 @@ class Marca < ApplicationRecord
 
 	 has_paper_trail
 
+
 	class << self
 		def activo
 			Marca.where('marca_active != ?', true)
 		end
 	end
+
 
 # Validaciones
 	validates :marca_descrip, presence: true

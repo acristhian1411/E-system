@@ -238,7 +238,7 @@ ActiveRecord::Schema.define(version: 2019_01_22_161131) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "motivo"
-    t.integer "num_comprobante", null: false
+    t.integer "num_comprobante"
     t.boolean "activo"
     t.index ["admin_user_id"], name: "index_traslados_on_admin_user_id"
   end
