@@ -4,7 +4,6 @@
 #
 #  id             :bigint(8)        not null, primary key
 #  activo         :boolean
-#  apellido       :string
 #  cli_telefono   :string
 #  direccion      :string
 #  limite_credito :integer
@@ -38,7 +37,6 @@ has_many :credito_clientes
   validates_associated :ciudade
   validates_associated :barrio
   validates :nombre, presence: true
-  validates :apellido, presence: true
   validates :cli_telefono, presence: true
   validates :direccion, presence: true
   validates :limite_credito , presence: true

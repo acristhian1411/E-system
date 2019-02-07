@@ -2,7 +2,7 @@ ActiveAdmin.register Cliente do
 # See permitted parameters documentation:
 # https://github.com/activeadmin/activeadmin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
 menu parent: "Ventas", label: "Clientes"
- permit_params :nombre, :apellido, :n_cedula, :direccion, :cli_telefono, :limite_credito, :activo, :ciudade_id, :barrio_id
+ permit_params :nombre, :n_cedula, :direccion, :cli_telefono, :limite_credito, :activo, :ciudade_id, :barrio_id
 
 controller do
   def destroy
@@ -32,12 +32,17 @@ end
  scope :activo, :default => true
  scope :todos
 
- filter :nombre, label: "Nombre"
+ filter :nombre, label: "Nombre y apellido"
+ filter :n_cedula, label: "N° de Cedula"
+ filter :direccion
+ filter :ciudade_id,  :as => :select, :collection => Ciudade.activo.map{|a|["#{a.descripcion}", a.id]},
+ label: 'Ciudad'
+ filter :barrio_id,  :as => :select, :collection => Barrio.activo.map{|a|["#{a.descripcion}", a.id]},
+ label: 'Barrio'
 
 # tabla en index
  index title: "Clientes" do
      column :nombre
-     column :apellido
    column :n_cedula
   	column :cli_telefono
      column :direccion
@@ -48,8 +53,7 @@ end
 # Formulario personalizado
 form title: 'Clientes' do |f|
     inputs 'Detalles' do
-      input :nombre, label: "Nombre"
-      input :apellido, label: "Apellido"
+      input :nombre, label: "Nombre y Apellido"
       input :n_cedula, label: "Num de Cedula"
       input :direccion, label: "Direccion"
       input :cli_telefono, label: "Num de telefono"
@@ -57,14 +61,15 @@ form title: 'Clientes' do |f|
       input :ciudade_id,  label: "Ciudad", :as => :select, :collection => Ciudade.activo.map{|a|["#{a.descripcion}", a.id]}
       input :barrio_id,  label: "Barrio", :as => :select, :collection => Barrio.activo.map{|a|["#{a.descripcion}", a.id]}
     end
-      actions
+      actions do
+        button 'Guardar'
+      end
     end
 
   show :title => :nombre do
     panel "Client Details" do
       attributes_table_for cliente do
         row("Nombre") { cliente.nombre }
-        row("Apellido") { cliente.apellido }
         row("Cedula") { cliente.n_cedula }
         row("Telefono") { cliente.cli_telefono }
         row("Direccion") { cliente.direccion }

@@ -30,10 +30,11 @@ gem 'wicked_pdf'
 gem 'wkhtmltopdf-binary'
 
 
+# gema para buscador
+gem 'ransack'
+
 #gema para vesiones
-
 gem 'paper_trail'
-
 gem 'activeadmin-audit'
 
 #gema para select con buscador

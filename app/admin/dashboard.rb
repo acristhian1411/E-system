@@ -3,6 +3,7 @@
   menu priority: 1, label: proc{ I18n.t("active_admin.dashboard") }
 
 
+
   content title: proc{ I18n.t("active_admin.dashboard") } do
 #    div class: "blank_slate_container", id: "dashboard_default_message" do
 #      span class: "blank_slate" do
@@ -31,7 +32,7 @@
                 end
                 column :fecha
                 column "Numero de factura" do |venta|
-                  link_to "##{venta.num_factura}", admin_ventum_path(venta) 
+                  link_to "##{venta.num_factura}", admin_ventum_path(venta)
                 end
                 column :total do |venta|
                 number_to_currency venta.venta_detalles_total
@@ -56,12 +57,26 @@
                         end
                       end
                   end
+                end
+
        end
-       end
+       columns do
+         column do
+           panel "Vencimiento de cuotas" do
+             credito = CreditoCliente.all
+                cuota = CuotaCliente.where(:credito_cliente_id => credito.ids).order("created_at desc")
+                   table_for cuota do |cuotas|
+                     cuota.each do |cuot|
+                     if cuot.vencimiento == Date.today
+                          column :monto_cuota
+                     end #end if
+                   end #end each
+                    end #table_fors
 
 
-
-
+            end #panel
+          end #column
+        end #columns
 
   end #  content
 end

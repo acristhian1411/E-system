@@ -39,6 +39,7 @@ class Producto < ApplicationRecord
   belongs_to :marca
 
   has_many :compra_detalles
+  has_many :venta_detalles
   has_many :traslado_detalles
 
   class << self
