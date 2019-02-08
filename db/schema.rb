@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_01_22_161131) do
+ActiveRecord::Schema.define(version: 2019_02_07_233401) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -281,6 +281,7 @@ ActiveRecord::Schema.define(version: 2019_01_22_161131) do
     t.text "additional_objects"
     t.text "additional_objects_changes"
     t.datetime "created_at"
+    t.string "email"
     t.index ["item_type", "item_id"], name: "index_versions_on_item_type_and_item_id"
   end
 
