@@ -4,7 +4,6 @@
 #
 #  id             :bigint(8)        not null, primary key
 #  activo         :boolean
-#  apellido       :string
 #  cli_telefono   :string
 #  direccion      :string
 #  limite_credito :integer
@@ -28,7 +27,7 @@
 
 class Cliente < ApplicationRecord
  has_paper_trail
-
+has_many :credito_clientes
 
 # relacion con otras tablas
   belongs_to :ciudade
@@ -38,7 +37,6 @@ class Cliente < ApplicationRecord
   validates_associated :ciudade
   validates_associated :barrio
   validates :nombre, presence: true
-  validates :apellido, presence: true
   validates :cli_telefono, presence: true
   validates :direccion, presence: true
   validates :limite_credito , presence: true

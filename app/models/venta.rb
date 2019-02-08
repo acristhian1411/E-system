@@ -31,6 +31,7 @@ class Venta < ApplicationRecord
   belongs_to :sucursal
   belongs_to :cliente
   has_many :venta_detalle
+  has_many :credito_cliente
 
   accepts_nested_attributes_for :venta_detalle
 
@@ -64,16 +65,29 @@ end
   end
 
   # Funcion para listar segun este activo o no
-  # Todos los inactivos
-  scope :inactivo, -> {
-    where('activo != ?', true)
-  }
-  # Todos los activos
-    scope :activo, -> {
-    where(:activo => true)
-  }
-  # Todos los registros
-    scope :todos, -> {
-    all
-  }
+    # Todos los inactivos
+    scope :inactivo, -> {
+      where('activo != ?', true)
+    }
+    # Todos los activos
+      scope :activo, -> {
+      where(:activo => true)
+    }
+    # Todos los registros
+      scope :todos, -> {
+      all
+    }
+
+# buscador
+  ransacker :producto_id,
+             :formatter => -> (venta_id) {
+               detalle = VentaDetalle.where(:producto_id => Producto.ids).all
+                  ids = Venta.where(:id => VentaDetalle.venta_id)
+               (ids.empty?) ? ids << 0: ids #activeadmin translates the queries into IN operator, may get syntax error if empty
+                     # id = 0 is non-existent in Users as id >= 1
+               return ids #maybe is not needed
+               } do |parent|
+   parent.table[:id]
+   end
+
 end

@@ -29,10 +29,11 @@ gem 'active_admin_role'
 gem 'prawn_rails'
 
 
+# gema para buscador
+gem 'ransack'
+
 #gema para vesiones
-
 gem 'paper_trail'
-
 gem 'activeadmin-audit'
 
 #gema para select con buscador

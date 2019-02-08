@@ -5,7 +5,7 @@ menu parent: "Ventas", label: " Venta"
 # https://github.com/activeadmin/activeadmin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
 #
 
-permit_params :cliente_id, :admin_user_id, :sucursal_id, :num_factura, :forma_pago, :fecha, venta_detalle_attributes:[:id, :producto_id, :monto_desc, :porcent_desc, :cantidad, :precio_venta]
+@algo = permit_params :cliente_id, :admin_user_id, :sucursal_id, :num_factura, :forma_pago, :fecha, venta_detalle_attributes:[:id, :producto_id, :monto_desc, :porcent_desc, :cantidad, :precio_venta]
 
 
 # Controlador personalizado para softDelete
@@ -17,16 +17,28 @@ controller do
     redirect_to admin_venta_path
   end
 
+#  def new
+#    @venta = Venta.new
+#  end
+
+
 #  def create
+#    @venta = Venta.new()
+
 #    respond_to do |format|
-#      if @venta.save || @venta.forma_pago == true
-#        format.html { redirect_to, notice: 'Cliente fue creado con éxito.'}
+#      if @venta.save
+#        format.html { redirect_to credito_new_path, notice: 'Cliente fue creado con éxito.'}
 #        format.json { render :show, status: :created, location: @cliente }
 #      else
 #        format.html { render :new }
 #        format.json { render json: @cliente.errors, status: :unprocessable_entity }
 #      end
 #    end
+
+#  end
+
+#  def venta_params
+#    params.require(:venta).permit(:activo, :fecha, :num_factura, :forma_pago, :cliente_id, :sucursal_id, :admin_user_id, venta_detalle_attributes:[:id, :producto_id, :monto_desc, :porcent_desc, :cantidad, :precio_venta] )
 #  end
 
 end
@@ -40,19 +52,27 @@ scope :inactivo
 scope :activo, :default => true
 scope :todos
 
+filter :cliente_id,  :as => :select, :collection => Cliente.activo.map{|a|["#{a.nombre}", a.id]},
+label: 'Clientes'
+filter :forma_pago,  :as => :select, :collection => ["Credito", "Contado"],
+label: 'Forma de Pago'
+filter :fecha, label: 'Fecha de venta'
+filter :producto_id_in, :as => :select, collection: Producto.activo.map{|a|["#{a.prod_descrip}", a.id]},
+label: 'Productos'
+
 
 index do
    index_column
    column :cliente do |venta|
       venta.cliente.nombre
    end
-   column(:apellido) { |venta| venta.cliente.apellido }
    column("Sucursal") { |venta| venta.sucursal.suc_descrip }
    column("Fecha de venta") { |venta| venta.fecha }
    column("Forma de pago") { |venta| venta.forma_pago }
    column :total do |venta|
      number_to_currency venta.total
    end
+
 actions
 end
 
@@ -64,12 +84,19 @@ form do |f|
    f.input :num_factura, label: "Numero de comprobante"
    f.input :fecha, label: "Fecha de compra"
    f.input :forma_pago, label: "Forma de pago", :as => :radio, :collection => ["Contado", "Credito"]
+
+
+f.inputs "Credito" do
+  f.template.render partial: 'credito/credito'
+
+end
+#render partial: "credito"
+
  f.inputs "Detalles" do
    f.has_many :venta_detalle do |i|
      i.input :producto_id,  label: "Producto", :hint => "Elija un producto", :as => :select, :collection => Producto.activo.map{|a|["#{a.prod_descrip}", a.id]}
      i.input :cantidad, :hint => "Ingrese la cantidad"
      i.input :precio_venta, label: "Precio de venta"
-     #, :as =>  Producto.precio(:producto_id)
      i.input :monto_desc, label: "Descuento",  label: "Descuento", :hint => "Ingrese el descuento"
      i.input :porcent_desc, label: "Descuento", :hint => "Ingrese el % de descuento"
    end
@@ -80,8 +107,8 @@ end
 show  do
    panel "Invoice Details" do
      attributes_table_for venta do
-       row("Cliente") { |payment| payment.cliente.nombre }
-       row("Usuario") { |payment| payment.admin_user.email }
+       row("Cliente") { |venta| venta.cliente.nombre }
+       row("Usuario") { |venta| venta.admin_user.email }
        row("Numero de factura") { venta.num_factura }
        row("Forma de pago") { venta.forma_pago }
        row("Fecha de venta") { venta.fecha }
@@ -93,7 +120,7 @@ show  do
        t.column("Cantidad") { |venta_detalle| number_with_delimiter venta_detalle.cantidad }
        t.column("Descripcion") { |venta_detalle| venta_detalle.producto.prod_descrip }
        t.column("Costo unitario") { |venta_detalle| number_to_currency venta_detalle.precio_venta }
-       t.column("Descuento") { |v| number_to_currency v.total_descuento}
+#       t.column("Descuento") { |v| number_to_currency v.total_descuento}
 
        tr do
          2.times { td "" }

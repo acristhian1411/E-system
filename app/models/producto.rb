@@ -39,6 +39,7 @@ class Producto < ApplicationRecord
   belongs_to :marca
 
   has_many :compra_detalles
+  has_many :venta_detalles
   has_many :traslado_detalles
 
   class << self
@@ -47,10 +48,9 @@ class Producto < ApplicationRecord
 		end
 
     def precio(producto_id)
-    algo = Producto.where('id = producto_id')
+    algo = self.find(params[producto_id])
     return algo.precio_venta
     end
-
 	end
 
   # Funcion para listar segun este activo o no
