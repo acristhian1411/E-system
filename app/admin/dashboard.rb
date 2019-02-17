@@ -23,6 +23,9 @@
 
     # Here is an example of a simple dashboard with columns and panels.
     #
+
+
+    
      columns do
        column do
          panel "Ventas recientes" do

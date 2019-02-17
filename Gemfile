@@ -26,8 +26,7 @@ gem 'active_admin_theme'
 gem 'active_admin_role'
 
 #gema para descargar en archivos PDF
-gem 'wicked_pdf'
-gem 'wkhtmltopdf-binary'
+gem 'prawn_rails'
 
 
 # gema para buscador

@@ -12,8 +12,18 @@
 class Barrio < ApplicationRecord
 # Relacion con otras tablas
 	has_many :cliente
+<<<<<<< HEAD
 
   has_paper_trail
+=======
+    has_paper_trail
+	
+	has_versions(
+	    meta: {
+	      admin_user:[:id] :admin_user[:id], # model attribute
+	       }
+  	)
+>>>>>>> 2fb7d327517539720b7b234cdeabcf76b1d484dd
 
 # Validaciones
 	validates :descripcion, presence: true
