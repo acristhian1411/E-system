@@ -10,6 +10,7 @@
 #
 
 class Caja < ApplicationRecord
+  has_paper_trail
 
   validates :descripcion, :presence => true
 

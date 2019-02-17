@@ -12,8 +12,8 @@
 class Barrio < ApplicationRecord
 # Relacion con otras tablas
 	has_many :cliente
-    has_paper_trail
-	
+
+  has_paper_trail
 
 # Validaciones
 	validates :descripcion, presence: true

@@ -23,6 +23,8 @@
 #
 
 class Traslado < ApplicationRecord
+  has_paper_trail
+  
   belongs_to :admin_user
   has_many :sucursal
   has_many :traslado_detalles

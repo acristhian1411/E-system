@@ -17,30 +17,6 @@ controller do
     redirect_to admin_venta_path
   end
 
-#  def new
-#    @venta = Venta.new
-#  end
-
-
-#  def create
-#    @venta = Venta.new()
-
-#    respond_to do |format|
-#      if @venta.save
-#        format.html { redirect_to credito_new_path, notice: 'Cliente fue creado con éxito.'}
-#        format.json { render :show, status: :created, location: @cliente }
-#      else
-#        format.html { render :new }
-#        format.json { render json: @cliente.errors, status: :unprocessable_entity }
-#      end
-#    end
-
-#  end
-
-#  def venta_params
-#    params.require(:venta).permit(:activo, :fecha, :num_factura, :forma_pago, :cliente_id, :sucursal_id, :admin_user_id, venta_detalle_attributes:[:id, :producto_id, :monto_desc, :porcent_desc, :cantidad, :precio_venta] )
-#  end
-
 end
 
 # Boton atras en vista show
@@ -88,9 +64,7 @@ form do |f|
 
 f.inputs "Credito" do
   f.template.render partial: 'credito/credito'
-
 end
-#render partial: "credito"
 
  f.inputs "Detalles" do
    f.has_many :venta_detalle do |i|

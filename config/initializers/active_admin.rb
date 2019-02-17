@@ -289,7 +289,7 @@ ActiveAdmin.setup do |config|
   # By default, the footer shows the current Active Admin version. You can
   # override the content of the footer here.
   #
-   config.footer = Date.today
+   config.footer = "Analisis de sistemas #{Date.today}"
 
   # == Sorting
   #

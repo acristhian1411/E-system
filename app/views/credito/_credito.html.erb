@@ -1,40 +1,13 @@
-<section class="charts">
-            <div class="container-fluid">
-              <div class="row">
-                <!-- Line Charts-->
-                <div class="col-lg-8">
-                  <div class="line-chart-example card">
 
-                    <div class="card-header d-flex align-items-center">
-                    </div>
-            <div class="row">
 <%= semantic_form_for(CreditoCliente.new, :url => { :action => "create" }) do |f| %>
 
-<div class="col-lg-12">
-                   <div class="form d-flex align-items-center">
-
-                  <div class="  content">
-  <div class="field">
     <%= f.input :venta_id %><br>
     <%= f.input :cliente_id %>
-  </div>
+
 
 <%=  f.inputs "Cuota" do %>
 <%=    f.template.render partial: 'cuotas/cuota' %>
 
 <%  end %>
 
-  <div class="actions">
-    <%= f.submit %>
-  </div>
-  </div>
-    </div>
-  </div>
- </div>
 <% end %>
-  </div>
-</div>
-                </div>
-              </div>
-            </div>
-</section>

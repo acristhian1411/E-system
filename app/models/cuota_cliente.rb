@@ -23,6 +23,8 @@
 #
 
 class CuotaCliente < ApplicationRecord
+  has_paper_trail
+
   belongs_to :credito_clientes
 
     def saldo_cuota

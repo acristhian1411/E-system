@@ -13,7 +13,7 @@ ActiveAdmin.register Traslado do
 	redirect_to admin_traslados_path
 	end
 
-	# Controlador personalizado para softDelete
+	# Controlador personalizado para borrado logico
 	controller do
 
 		def destroy
@@ -26,7 +26,7 @@ ActiveAdmin.register Traslado do
 
 	# Boton atras en vista show
 	action_item :view, only: :show do
-		link_to 'Atras', admin_compras_path
+		link_to 'Atras', admin_traslados_path
 	end
 
 	scope :inactivo

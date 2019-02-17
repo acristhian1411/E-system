@@ -66,6 +66,7 @@ form title: 'Clientes' do |f|
       end
     end
 
+
   show :title => :nombre do
     panel "Client Details" do
       attributes_table_for cliente do
