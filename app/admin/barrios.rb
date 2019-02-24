@@ -12,7 +12,6 @@ menu parent: "Ventas", label: "Barrios"
      redirect_to admin_barrios_path
    end
 
-<<<<<<< HEAD
 
 def pdf
     respond_to do |format|
@@ -41,13 +40,8 @@ def pdf
      end
   end
 
- end
-=======
 
  end
-
-
-
 
  action_item :view, only: :show do
    link_to 'Atras', admin_barrios_path
@@ -58,12 +52,6 @@ def pdf
    link_to "Activar", activado_admin_barrio_path(barrio), method: :put if !barrio.activo
  end
 
-   
- 
->>>>>>> 2fb7d327517539720b7b234cdeabcf76b1d484dd
-
-#index download_links: [:pdf]
- 
 
   # Funcion para activar registro
   member_action :pdf, method: :put do
@@ -109,13 +97,7 @@ def pdf
      #link_to("Editar", edit_admin_barrio_path(client)) + " | " + \
      #link_to("Eliminar", admin_barrio_path(client), :method => :delete, :confirm => "Are you sure?")
 
-<<<<<<< HEAD
     # link_to 'Create PDF document',admin_barrios_path(client, format: :pdf)
-
-=======
-     
->>>>>>> 2fb7d327517539720b7b234cdeabcf76b1d484dd
-
 
    end
  end
@@ -130,7 +112,7 @@ def pdf
 
 # Vista show
  show title: "Barrio"  do
-   attributes_table_for barrio do 
+   attributes_table_for barrio do
      row("Descripcion") {barrio.descripcion}
      row("Creado") {barrio.created_at}
    end

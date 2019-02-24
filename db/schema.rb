@@ -10,11 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-<<<<<<< HEAD
 ActiveRecord::Schema.define(version: 2019_02_07_233401) do
-=======
-ActiveRecord::Schema.define(version: 2019_02_04_163541) do
->>>>>>> 68d322c7d777d0b0cb8677c7ca9e4bcc1b7e4f68
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -123,7 +119,7 @@ ActiveRecord::Schema.define(version: 2019_02_04_163541) do
     t.string "num_factura"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.boolean "activo"
+    t.boolean "activo", default: true
     t.index ["admin_user_id"], name: "index_compras_on_admin_user_id"
     t.index ["provider_id"], name: "index_compras_on_provider_id"
   end
@@ -242,7 +238,7 @@ ActiveRecord::Schema.define(version: 2019_02_04_163541) do
     t.datetime "updated_at", null: false
     t.string "motivo"
     t.integer "num_comprobante", null: false
-    t.boolean "activo"
+    t.boolean "activo", default: true
     t.index ["admin_user_id"], name: "index_traslados_on_admin_user_id"
   end
 
