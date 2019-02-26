@@ -14,11 +14,7 @@ class Barrio < ApplicationRecord
 	has_many :cliente
     has_paper_trail
 	
-	has_versions(
-	    meta: {
-	      admin_user:[:id] :admin_user[:id], # model attribute
-	       }
-  	)
+	has_versions
 
 # Validaciones
 	validates :descripcion, presence: true

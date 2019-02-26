@@ -11,11 +11,26 @@ menu parent: "Ventas", label: "Barrios"
      barrio.update_attribute(:activo, false)
      redirect_to admin_barrios_path
    end
+#descargar PDF
 
+ 
+# crear pdf inicio
+require 'prawn/table'
+require 'prawn'
 
+# Using explicit block form and rendering to a file
+content = "hjjj"
+Prawn::Document.generate "ejemplo.pdf" do |pdf|
+  # self here is left alone
+  pdf.font "Times-Roman"
+  pdf.draw_text content, :at => [200,720], :size => 32
+ 
+
+end
+
+# crear pdf fin
  end
-
-
+ 
 
 
  action_item :view, only: :show do
@@ -30,7 +45,7 @@ menu parent: "Ventas", label: "Barrios"
    
  
 
-#index download_links: [:pdf]
+
  
 
   # Funcion para activar registro
@@ -45,7 +60,7 @@ menu parent: "Ventas", label: "Barrios"
 
  # Link para descargar pdf
  action_item :pdf, only: :show do
-   link_to "Descargar PDF", pdf_admin_barrio_path(barrio)
+ link_to "Descargar PDF", pdf_admin_barrio_path(format: 'pdf_file')
  end
 
  # Funcion para activar registro
