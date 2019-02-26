@@ -66,17 +66,12 @@
        columns do
          column do
            panel "Vencimiento de cuotas" do
-             credito = CreditoCliente.all
-                cuota = CuotaCliente.where(:credito_cliente_id => credito.ids).order("created_at desc")
-                   table_for cuota do |cuotas|
-                     cuota.each do |cuot|
-                     if cuot.vencimiento == Date.today
+             @cuota = CuotaCliente.where(:vencimiento => Date.today).order("created_at desc")
+             @credito = CreditoCliente.where(:ids => @cuota.ids)
+                   table_for @cuota do |cuotas|
                           column :monto_cuota
-                     end #end if
-                   end #end each
+                          column :cantidad_cuota
                     end #table_fors
-
-
             end #panel
           end #column
         end #columns

@@ -79,8 +79,7 @@ menu parent: "Producto", label: "Productos"
            row(:sub_categoria) { |payment| payment.sub_category.subcat_descrip }
            row(:marca) { |payment| payment.marca.marca_descrip }
            row(:proveedor) { |payment| payment.provider.razon_social }
-           row :iva
-           row :prod_active
+           row("Iva") { |producto| "#{producto.iva}%"}
            row :created_at
          end
        end
@@ -88,7 +87,7 @@ menu parent: "Producto", label: "Productos"
 
 sidebar "Stock en Sucursales", :only => :show do
   table_for Stock.where(:producto_id => producto.id).limit(3).all do |t|
-   t.column("Stock") { |stock|  stock.sucursal.suc_descrip }
+   t.column("Sucursal") { |stock|  stock.sucursal.suc_descrip }
    t.column("Cantidad") { |stock|  stock.cantidad }
   end
 end

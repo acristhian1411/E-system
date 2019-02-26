@@ -28,7 +28,7 @@ menu parent: "Cajas", label: "Caja"
 
  # Boton atras en vista show
  action_item :view, only: :show do
-   link_to 'Atras', admin_compras_path
+   link_to 'Atras', admin_cajas_path
  end
 
  scope :inactivo

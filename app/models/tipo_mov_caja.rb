@@ -10,4 +10,6 @@
 #
 
 class TipoMovCaja < ApplicationRecord
+  has_paper_trail
+  
 end

@@ -26,12 +26,42 @@ Prawn::Document.generate "ejemplo.pdf" do |pdf|
   pdf.draw_text content, :at => [200,720], :size => 32
  
 
+<<<<<<< HEAD
 end
+=======
+def pdf
+    respond_to do |format|
+      format.html
+      format.pdf do
+        render pdf:"PDF-de-#{@barrio.id}",
+        header: {
+          center: "Codigo Facilito"
+        },
+        footer: {
+          center: "www.codigofacilito.com"
+        },
+        layout: 'layouts/pdf.html.erb',
+        page_size: 'letter',
+        file:'layouts/show.pdf.erb'
+      end
+    end
+  end
+
+  def pdf(barrio)
+    barrio.all
+    respond_to do |format|
+     format.html
+     format.json
+     format.pdf{render template: 'barrio/reporte', pdf: 'barrio/reporte', layouts: 'layouts/pdf.html'}
+     end
+  end
+>>>>>>> e185d681569d6d65915e8cacdb6c5197a4aa80f5
 
 # crear pdf fin
  end
  
 
+ end
 
  action_item :view, only: :show do
    link_to 'Atras', admin_barrios_path
@@ -42,11 +72,14 @@ end
    link_to "Activar", activado_admin_barrio_path(barrio), method: :put if !barrio.activo
  end
 
+<<<<<<< HEAD
    
  
 
 
  
+=======
+>>>>>>> e185d681569d6d65915e8cacdb6c5197a4aa80f5
 
   # Funcion para activar registro
   member_action :pdf, method: :put do
@@ -58,15 +91,22 @@ end
      end
   end
 
+<<<<<<< HEAD
  # Link para descargar pdf
  action_item :pdf, only: :show do
  link_to "Descargar PDF", pdf_admin_barrio_path(format: 'pdf_file')
  end
+=======
+# Link para descargar pdf
+#action_item :pdf, only: :show do
+#   link_to "Descargar PDF", pdf_admin_barrio_path(barrio)
+# end
+>>>>>>> e185d681569d6d65915e8cacdb6c5197a4aa80f5
 
  # Funcion para activar registro
  member_action :activado, method: :put do
- sub_category = Barrio.find(params[:id])
- sub_category.update(activo: true)
+ barrio = Barrio.find(params[:id])
+ barrio.update(activo: true)
  redirect_to admin_barrios_path
  end
  # Link para activar registro
@@ -92,8 +132,7 @@ end
      #link_to("Editar", edit_admin_barrio_path(client)) + " | " + \
      #link_to("Eliminar", admin_barrio_path(client), :method => :delete, :confirm => "Are you sure?")
 
-     
-
+    # link_to 'Create PDF document',admin_barrios_path(client, format: :pdf)
 
    end
  end
@@ -108,10 +147,9 @@ end
 
 # Vista show
  show title: "Barrio"  do
-   attributes_table do
-     row :descripcion
-     row :activo
-     row :created_at
+   attributes_table_for barrio do
+     row("Descripcion") {barrio.descripcion}
+     row("Creado") {barrio.created_at}
    end
  end
 

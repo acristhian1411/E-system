@@ -3,7 +3,7 @@
 # Table name: traslados
 #
 #  id               :bigint(8)        not null, primary key
-#  activo           :boolean
+#  activo           :boolean          default(TRUE)
 #  fecha            :date
 #  motivo           :string
 #  num_comprobante  :integer          not null
@@ -23,6 +23,8 @@
 #
 
 class Traslado < ApplicationRecord
+  has_paper_trail
+  
   belongs_to :admin_user
   has_many :sucursal
   has_many :traslado_detalles

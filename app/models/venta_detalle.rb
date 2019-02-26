@@ -24,6 +24,8 @@
 #
 
 class VentaDetalle < ApplicationRecord
+  has_paper_trail
+  
   belongs_to :venta
   belongs_to :producto
 

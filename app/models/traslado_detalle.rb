@@ -21,12 +21,14 @@
 #
 
 class TrasladoDetalle < ApplicationRecord
+  has_paper_trail
+  
   belongs_to :producto
   belongs_to :traslado
 
   validates :cantidad, :presence => true, :numericality => { :integer => true }
   validates :producto_id, :presence => true
-  
+
 
 
 
