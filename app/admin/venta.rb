@@ -1,3 +1,29 @@
+# crear pdf inicio
+def generate_venta(venta)
+ #data = ["#{@venta_detalle.productos.prod_descrip}"]
+   Prawn::Document.generate @venta.venta_location do |pdf|
+     pdf.formatted_text [ {text: "Compra numero #{@venta.id}",size: 25,styles: [:bold]} ]
+     pdf.stroke_horizontal_line 0,275
+     pdf.move_down 20
+     pdf.text "Cliente: #{@venta.cliente.nombre} Usuario: #{@venta.admin_user.email} Numero de factura: #{@venta.num_factura} 
+
+     Forma de pago: #{@venta.forma_pago}  Fecha de venta: #{@venta.fecha} ", inline_format: true ,size: 14
+     pdf.move_down 20
+     pdf.formatted_text [ {text: "Items",size: 25,styles: [:bold]} ]
+     pdf.stroke_horizontal_line 0,275
+     detalle = VentaDetalle.where(:venta_id => @venta.id)
+     detalle.each do |det|
+            det.text "Cantidad: #{detalle.cantidad} "
+           # Descripcion: #{ data} Costo unitario: #{ data} , inline_format: true ,size: 14
+
+     end
+     
+     pdf.draw_text "Generado el #{l(Time.now, :format => :short)}", :at => [0, 0]
+     pdf.render_file "#{venta.venta_location}"
+
+   end
+end
+# crear pdf fin
 ActiveAdmin.register Venta do
 menu parent: "Ventas", label: " Venta"
 
@@ -5,7 +31,7 @@ menu parent: "Ventas", label: " Venta"
 # https://github.com/activeadmin/activeadmin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
 #
 
-@algo = permit_params :cliente_id, :admin_user_id, :sucursal_id, :num_factura, :forma_pago, :fecha, venta_detalle_attributes:[:id, :producto_id, :monto_desc, :porcent_desc, :cantidad, :precio_venta]
+permit_params :cliente_id, :admin_user_id, :sucursal_id, :num_factura, :forma_pago, :fecha, venta_detalle_attributes:[:id, :producto_id, :monto_desc, :porcent_desc, :cantidad, :precio_venta]
 
 
 # Controlador personalizado para softDelete
@@ -18,6 +44,17 @@ controller do
   end
 
 end
+ #boton para generar PDF
+action_item :only => :show do
+  link_to "Generar PDF", generate_pdf_admin_ventum_path(venta)
+end
+
+member_action :generate_pdf do
+  @venta = Venta.find(params[:id])
+  generate_venta(@venta)
+  send_file @venta.venta_location
+end
+#boton para generar PDF FIN
 
 # Boton atras en vista show
 action_item :view, only: :show do
@@ -71,7 +108,7 @@ end
      i.input :producto_id,  label: "Producto", :hint => "Elija un producto", :as => :select, :collection => Producto.activo.map{|a|["#{a.prod_descrip}", a.id]}
      i.input :cantidad, :hint => "Ingrese la cantidad"
      i.input :precio_venta, label: "Precio de venta"
-     i.input :monto_desc, label: "Descuento",  label: "Descuento", :hint => "Ingrese el descuento"
+     i.input :monto_desc, label: "Descuento", :hint => "Ingrese el descuento"
      i.input :porcent_desc, label: "Descuento", :hint => "Ingrese el % de descuento"
    end
  end

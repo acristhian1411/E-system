@@ -1,3 +1,33 @@
+# crear pdf inicio
+def generate_cliente(cliente)
+  
+   Prawn::Document.generate cliente.cliente_location do |pdf|
+     pdf.formatted_text [ {text: 'Informacion De Cliente',size: 25,styles: [:bold]} ]
+     pdf.stroke_horizontal_line 0,275
+     pdf.move_down 20
+     pdf.text "Nombre: #{@cliente.nombre}", inline_format: true ,size: 14
+     pdf.move_down 5
+     pdf.text "Cedula: #{@cliente.n_cedula}", inline_format: true ,size: 14
+     pdf.move_down 5
+     pdf.text "Direccion: #{@cliente.direccion}", inline_format: true ,size: 14
+     pdf.move_down 5
+     pdf.text "Telefono: #{@cliente.cli_telefono}", inline_format: true ,size: 14
+     pdf.move_down 5
+     pdf.text "Limite de credito: #{@cliente.limite_credito}", inline_format: true ,size: 14
+     pdf.move_down 5
+     pdf.text "cliente esta activo: #{@cliente.activo}", inline_format: true ,size: 14
+     pdf.move_down 5
+     pdf.text "Ciudade: #{@cliente.ciudade.descripcion}", inline_format: true ,size: 14
+     pdf.move_down 5
+     pdf.text "Barrio: #{@cliente.barrio.descripcion}", inline_format: true ,size: 14
+
+     pdf.draw_text "Generado el #{l(Time.now, :format => :short)}", :at => [0, 0]
+     pdf.render_file "#{cliente.cliente_location}"
+
+   end
+end
+# crear pdf fin
+
 ActiveAdmin.register Cliente do
 # See permitted parameters documentation:
 # https://github.com/activeadmin/activeadmin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
@@ -11,6 +41,18 @@ controller do
     redirect_to admin_clientes_path
   end
 end
+
+#boton para generar PDF
+action_item :only => :show do
+  link_to "Generar PDF", generate_pdf_admin_cliente_path(cliente)
+end
+member_action :generate_pdf do
+  @cliente = Cliente.find(params[:id])
+  generate_cliente(@cliente)
+  send_file @cliente.cliente_location
+end
+#boton para generar PDF FIN
+
 
 action_item :view, only: :show do
   link_to 'Atras', admin_clientes_path

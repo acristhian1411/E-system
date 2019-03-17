@@ -48,6 +48,9 @@ class Compra < ApplicationRecord
 		end
 
 end
+    def compra_location
+    "#{Rails.root}/app/pdfs/compras/Compra-#{self.id}.pdf"
+    end
 
   def compra_detalles_total
     compra_detalles_total = 0

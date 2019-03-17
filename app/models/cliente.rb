@@ -58,7 +58,10 @@ class << self
 
 end
 
-
+#ruta de descarga de PDF
+  def cliente_location
+    "#{Rails.root}/app/pdfs/clientes/cliente-#{self.id}.pdf"
+  end
 # Funcion para listar segun este activo o no
   	scope :inactivo, -> {
   where('activo != ?', true)

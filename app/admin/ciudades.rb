@@ -1,16 +1,19 @@
+# crear pdf inicio
 def generate_ciudad(ciudade)
+  
   # Generate invoice
-
    Prawn::Document.generate ciudade.ciudad_location do |pdf|
-     pdf.text "Hello There"
-
-     pdf.draw_text "Generated at #{l(Time.now, :format => :short)}", :at => [0, 0]
-
-     pdf.render_file "#{ciudade.ciudad_location}"
+     pdf.text "Descripcion"
+     pdf.text ciudade.descripcion
+     pdf.draw_text "Generado el #{l(Time.now, :format => :short)}", :at => [0, 0]
+	 pdf.render_file "#{ciudade.ciudad_location}"
 
    end
 
 end
+
+# crear pdf fin
+
 ActiveAdmin.register Ciudade do
 # See permitted parameters documentation:
 # https://github.com/activeadmin/activeadmin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
@@ -40,8 +43,9 @@ controller do
 
 end
 
+#boton para generar PDF
 action_item :only => :show do
-	link_to "Generate PDF", generate_pdf_admin_ciudade_path(ciudade)
+	link_to "Generar PDF", generate_pdf_admin_ciudade_path(ciudade)
 end
 
 member_action :generate_pdf do
