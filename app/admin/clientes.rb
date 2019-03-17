@@ -1,8 +1,38 @@
+# crear pdf inicio
+def generate_cliente(cliente)
+  
+   Prawn::Document.generate cliente.cliente_location do |pdf|
+     pdf.formatted_text [ {text: 'Informacion De Cliente',size: 25,styles: [:bold]} ]
+     pdf.stroke_horizontal_line 0,275
+     pdf.move_down 20
+     pdf.text "Nombre: #{@cliente.nombre}", inline_format: true ,size: 14
+     pdf.move_down 5
+     pdf.text "Cedula: #{@cliente.n_cedula}", inline_format: true ,size: 14
+     pdf.move_down 5
+     pdf.text "Direccion: #{@cliente.direccion}", inline_format: true ,size: 14
+     pdf.move_down 5
+     pdf.text "Telefono: #{@cliente.cli_telefono}", inline_format: true ,size: 14
+     pdf.move_down 5
+     pdf.text "Limite de credito: #{@cliente.limite_credito}", inline_format: true ,size: 14
+     pdf.move_down 5
+     pdf.text "cliente esta activo: #{@cliente.activo}", inline_format: true ,size: 14
+     pdf.move_down 5
+     pdf.text "Ciudade: #{@cliente.ciudade.descripcion}", inline_format: true ,size: 14
+     pdf.move_down 5
+     pdf.text "Barrio: #{@cliente.barrio.descripcion}", inline_format: true ,size: 14
+
+     pdf.draw_text "Generado el #{l(Time.now, :format => :short)}", :at => [0, 0]
+     pdf.render_file "#{cliente.cliente_location}"
+
+   end
+end
+# crear pdf fin
+
 ActiveAdmin.register Cliente do
 # See permitted parameters documentation:
 # https://github.com/activeadmin/activeadmin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
-menu parent: "Cliente", label: " Clientes"
- permit_params :nombre, :apellido, :n_cedula, :direccion, :cli_telefono, :limite_credito, :activo, :ciudade_id, :barrio_id
+menu parent: "Ventas", label: "Clientes"
+ permit_params :nombre, :n_cedula, :direccion, :cli_telefono, :limite_credito, :activo, :ciudade_id, :barrio_id
 
 controller do
   def destroy
@@ -11,6 +41,18 @@ controller do
     redirect_to admin_clientes_path
   end
 end
+
+#boton para generar PDF
+action_item :only => :show do
+  link_to "Generar PDF", generate_pdf_admin_cliente_path(cliente)
+end
+member_action :generate_pdf do
+  @cliente = Cliente.find(params[:id])
+  generate_cliente(@cliente)
+  send_file @cliente.cliente_location
+end
+#boton para generar PDF FIN
+
 
 action_item :view, only: :show do
   link_to 'Atras', admin_clientes_path
@@ -32,12 +74,17 @@ end
  scope :activo, :default => true
  scope :todos
 
- filter :nombre, label: "Nombre"
+ filter :nombre, label: "Nombre y apellido"
+ filter :n_cedula, label: "N° de Cedula"
+ filter :direccion
+ filter :ciudade_id,  :as => :select, :collection => Ciudade.activo.map{|a|["#{a.descripcion}", a.id]},
+ label: 'Ciudad'
+ filter :barrio_id,  :as => :select, :collection => Barrio.activo.map{|a|["#{a.descripcion}", a.id]},
+ label: 'Barrio'
 
 # tabla en index
  index title: "Clientes" do
      column :nombre
-     column :apellido
    column :n_cedula
   	column :cli_telefono
      column :direccion
@@ -48,31 +95,64 @@ end
 # Formulario personalizado
 form title: 'Clientes' do |f|
     inputs 'Detalles' do
-      input :nombre, label: "Nombre"
-      input :apellido, label: "Apellido"
+      input :nombre, label: "Nombre y Apellido"
       input :n_cedula, label: "Num de Cedula"
       input :direccion, label: "Direccion"
       input :cli_telefono, label: "Num de telefono"
       input :limite_credito, label: "Limite de credito"
-      input :ciudade_id,  label: "Ciudad", :as => :select, :collection => Ciudade.all.map{|a|["#{a.descripcion}", a.id]}
-      input :barrio_id,  label: "Barrio", :as => :select, :collection => Barrio.all.map{|a|["#{a.descripcion}", a.id]}
+      input :ciudade_id,  label: "Ciudad", :as => :select, :collection => Ciudade.activo.map{|a|["#{a.descripcion}", a.id]}
+      input :barrio_id,  label: "Barrio", :as => :select, :collection => Barrio.activo.map{|a|["#{a.descripcion}", a.id]}
     end
-      actions
+      actions do
+        button 'Guardar'
+      end
     end
+
 
   show :title => :nombre do
     panel "Client Details" do
       attributes_table_for cliente do
         row("Nombre") { cliente.nombre }
-        row("Apellido") { cliente.apellido }
         row("Cedula") { cliente.n_cedula }
         row("Telefono") { cliente.cli_telefono }
         row("Direccion") { cliente.direccion }
-        row("Activo") { cliente.activo }
         row(:ciudad) { |payment| payment.ciudade.descripcion }
         row(:barrio) { |payment| payment.barrio.descripcion }
       end
     end
+  end
+
+  sidebar "Ultimas ventas", :only => :show do
+    table_for Venta.where(:cliente_id => cliente.id).order('created_at desc').limit(5).all do |t|
+      t.column("Forma de pago") { |venta| venta.forma_pago }
+      t.column("Comprobante") { |venta| link_to "##{venta.num_factura}", admin_ventum_path(venta) }
+      t.column("Total") { |venta| number_to_currency venta.venta_detalles_total }
+    end
+  end
+
+  sidebar "Saldo", :only => :show do
+    @credito = CreditoCliente.where(:cliente_id => cliente.id).order('created_at desc').all
+#    panel "Credito" do
+#      table_for @credito do |t|
+#        t.column("Comprobante")   do |credito|
+#          credito.venta.num_factura
+#        end
+#        t.column("Fecha de compra") { |credito| credito.venta.fecha }
+#      end
+#    end
+#    panel "Cuotas" do
+      table_for CuotaCliente.where(:credito_cliente_id => @credito.ids).order('vencimiento asc') do |t|
+        t.column("Cuota")  do |cuota|
+            cuota.saldo_cuota
+        end
+        t.column("Vencimiento") { |cuota| cuota.vencimiento }
+      end
+#    end
+
+  end
+
+  sidebar "Total Vendido", :only => :show do
+    h2 number_to_currency(Venta.where(:cliente_id => cliente.id).all.sum(&:total)), :style => "text-align: center; margin-top: 20px;"
   end
 
 end

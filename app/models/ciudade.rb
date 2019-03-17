@@ -12,9 +12,20 @@
 class Ciudade < ApplicationRecord
 # relacion con otras tablas
 	has_many :cliente
+	has_paper_trail
 
 # Validaciones
 	validates :descripcion, presence: true
+
+	class << self
+		def activo
+			Ciudade.where('activo != ?', true)
+		end
+	end
+#ruta de descarga de PDF
+	def ciudad_location
+    "#{Rails.root}/app/pdfs/ciudades/ciudad-#{self.id}.pdf"
+    end
 
 # Funcion para listar segun este activo o no
 # Todos los inactivos

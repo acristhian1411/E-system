@@ -1,4 +1,10 @@
 Rails.application.configure do
+
+
+  #config/environments/prodcution.rb
+config.assets.precompile += ['your-stylesheet.css.scss', 'your-javascript-library.js']
+
+
   # Settings specified here will take precedence over those in config/application.rb.
 
   # Code is not reloaded between requests.

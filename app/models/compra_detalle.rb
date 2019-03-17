@@ -5,6 +5,7 @@
 #  id            :bigint(8)        not null, primary key
 #  cantidad      :integer
 #  descuento     :integer
+#  porcent_desc  :float
 #  precio_compra :float
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
@@ -23,6 +24,8 @@
 #
 
 class CompraDetalle < ApplicationRecord
+   has_paper_trail
+  
   belongs_to :compra
   belongs_to :producto
 
@@ -31,10 +34,19 @@ class CompraDetalle < ApplicationRecord
   validates :producto_id, :presence => true
   validates :descuento, :numericality => { :integer => true }
 
+<<<<<<< HEAD
 #  attr_accessor :cantidad, :descuento, :precio_compra, :producto_id, :compra_id
+=======
+
+>>>>>>> 6b93a2dbe2081de6e25592b2a40dd08bff062c78
 
   def total
-    total = self.cantidad * self.precio_compra
+    por = ((self.precio_compra.to_f * self.porcent_desc.to_f) /  100)
+    total = (((self.cantidad * self.precio_compra.to_f) - self.descuento) - por)
+  end
+
+  def total_descuento
+    total = (((self.precio_compra.to_f * self.porcent_desc.to_f) /  100) + self.descuento)
   end
 
 end

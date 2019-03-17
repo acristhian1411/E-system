@@ -13,8 +13,19 @@ class Barrio < ApplicationRecord
 # Relacion con otras tablas
 	has_many :cliente
 
+    has_paper_trail
+
+	has_versions
+
+
 # Validaciones
 	validates :descripcion, presence: true
+
+	class << self
+    def activo
+      Barrio.where('activo != ?', true)
+    end
+end
 
 # Funcion para listar segun este activo o no
 # Todos los inactivos

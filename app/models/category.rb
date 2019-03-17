@@ -12,8 +12,16 @@
 class Category < ApplicationRecord
 # relacion con otras tablas
 	has_many :sub_category
+	 has_paper_trail
+	
 #Validaciones
 validates :category_descrip, presence: true
+
+class << self
+	def activo
+		Category.where('category_active != ?', true)
+	end
+end
 
 # Funcion para listar segun este activo o no
 	scope :inactivo, -> {

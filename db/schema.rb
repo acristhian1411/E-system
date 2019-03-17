@@ -10,7 +10,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+<<<<<<< HEAD
 ActiveRecord::Schema.define(version: 2018_11_11_213749) do
+=======
+ActiveRecord::Schema.define(version: 2019_02_07_233401) do
+>>>>>>> 6b93a2dbe2081de6e25592b2a40dd08bff062c78
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -63,6 +67,13 @@ ActiveRecord::Schema.define(version: 2018_11_11_213749) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "cajas", force: :cascade do |t|
+    t.string "descripcion"
+    t.boolean "activo"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "categories", force: :cascade do |t|
     t.string "category_descrip"
     t.boolean "category_active", default: true
@@ -79,7 +90,6 @@ ActiveRecord::Schema.define(version: 2018_11_11_213749) do
 
   create_table "clientes", force: :cascade do |t|
     t.string "nombre"
-    t.string "apellido"
     t.string "n_cedula"
     t.string "cli_telefono"
     t.integer "limite_credito"
@@ -101,6 +111,7 @@ ActiveRecord::Schema.define(version: 2018_11_11_213749) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "compra_id"
+    t.float "porcent_desc"
     t.index ["compra_id"], name: "index_compra_detalles_on_compra_id"
     t.index ["producto_id"], name: "index_compra_detalles_on_producto_id"
   end
@@ -112,8 +123,31 @@ ActiveRecord::Schema.define(version: 2018_11_11_213749) do
     t.string "num_factura"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "activo", default: true
     t.index ["admin_user_id"], name: "index_compras_on_admin_user_id"
     t.index ["provider_id"], name: "index_compras_on_provider_id"
+  end
+
+  create_table "credito_clientes", force: :cascade do |t|
+    t.bigint "cliente_id"
+    t.bigint "venta_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["cliente_id"], name: "index_credito_clientes_on_cliente_id"
+    t.index ["venta_id"], name: "index_credito_clientes_on_venta_id"
+  end
+
+  create_table "cuota_clientes", force: :cascade do |t|
+    t.bigint "credito_cliente_id"
+    t.integer "cantidad_cuota"
+    t.float "monto_cuota"
+    t.date "vencimiento"
+    t.float "intereses"
+    t.float "monto_pagado"
+    t.string "estado"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["credito_cliente_id"], name: "index_cuota_clientes_on_credito_cliente_id"
   end
 
   create_table "marcas", force: :cascade do |t|
@@ -182,6 +216,64 @@ ActiveRecord::Schema.define(version: 2018_11_11_213749) do
     t.string "telefono"
   end
 
+  create_table "tipo_mov_cajas", force: :cascade do |t|
+    t.string "descripcion"
+    t.boolean "activo"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "traslado_detalles", force: :cascade do |t|
+    t.bigint "producto_id"
+    t.bigint "traslado_id"
+    t.integer "cantidad"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["producto_id"], name: "index_traslado_detalles_on_producto_id"
+    t.index ["traslado_id"], name: "index_traslado_detalles_on_traslado_id"
+  end
+
+  create_table "traslados", force: :cascade do |t|
+    t.integer "sucursal_origen"
+    t.integer "sucursal_destino"
+    t.date "fecha"
+    t.bigint "admin_user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "motivo"
+    t.integer "num_comprobante", null: false
+    t.boolean "activo", default: true
+    t.index ["admin_user_id"], name: "index_traslados_on_admin_user_id"
+  end
+
+  create_table "venta", force: :cascade do |t|
+    t.bigint "admin_user_id"
+    t.bigint "sucursal_id"
+    t.bigint "cliente_id"
+    t.date "fecha"
+    t.integer "num_factura"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.boolean "activo"
+    t.string "forma_pago"
+    t.index ["admin_user_id"], name: "index_venta_on_admin_user_id"
+    t.index ["cliente_id"], name: "index_venta_on_cliente_id"
+    t.index ["sucursal_id"], name: "index_venta_on_sucursal_id"
+  end
+
+  create_table "venta_detalles", force: :cascade do |t|
+    t.bigint "venta_id"
+    t.bigint "producto_id"
+    t.integer "cantidad"
+    t.float "monto_desc"
+    t.float "porcent_desc"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.float "precio_venta"
+    t.index ["producto_id"], name: "index_venta_detalles_on_producto_id"
+    t.index ["venta_id"], name: "index_venta_detalles_on_venta_id"
+  end
+
   create_table "versions", force: :cascade do |t|
     t.string "item_type", null: false
     t.integer "item_id", null: false
@@ -192,6 +284,7 @@ ActiveRecord::Schema.define(version: 2018_11_11_213749) do
     t.text "additional_objects"
     t.text "additional_objects_changes"
     t.datetime "created_at"
+    t.string "email"
     t.index ["item_type", "item_id"], name: "index_versions_on_item_type_and_item_id"
   end
 
@@ -201,6 +294,9 @@ ActiveRecord::Schema.define(version: 2018_11_11_213749) do
   add_foreign_key "compra_detalles", "productos"
   add_foreign_key "compras", "admin_users"
   add_foreign_key "compras", "providers"
+  add_foreign_key "credito_clientes", "clientes"
+  add_foreign_key "credito_clientes", "venta", column: "venta_id"
+  add_foreign_key "cuota_clientes", "credito_clientes"
   add_foreign_key "productos", "categories"
   add_foreign_key "productos", "marcas"
   add_foreign_key "productos", "providers"
@@ -208,4 +304,12 @@ ActiveRecord::Schema.define(version: 2018_11_11_213749) do
   add_foreign_key "stocks", "productos"
   add_foreign_key "stocks", "sucursals"
   add_foreign_key "sub_categories", "categories"
+  add_foreign_key "traslado_detalles", "productos"
+  add_foreign_key "traslado_detalles", "traslados"
+  add_foreign_key "traslados", "admin_users"
+  add_foreign_key "venta", "admin_users"
+  add_foreign_key "venta", "clientes"
+  add_foreign_key "venta", "sucursals"
+  add_foreign_key "venta_detalles", "productos"
+  add_foreign_key "venta_detalles", "venta", column: "venta_id"
 end

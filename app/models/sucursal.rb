@@ -11,6 +11,7 @@
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
 #
+<<<<<<< HEAD
 #  suc_active  :boolean
 
 #  direccion   :string
@@ -22,8 +23,25 @@
 #  updated_at  :datetime         not null
 #
 class Sucursal < ApplicationRecord
+=======
+
+class Sucursal < ApplicationRecord
+
+has_paper_trail
+
+
+# Relaciones con otras tablas
+belongs_to :traslados
+
+>>>>>>> 6b93a2dbe2081de6e25592b2a40dd08bff062c78
 # Validaciones
 	validates :suc_descrip, presence: true
+
+	class << self
+	  def activo
+	    Sucursal.where('suc_active != ?', true)
+	  end
+	end
 
 # Funcion para listar segun este activo o no
 # Todos los inactivos

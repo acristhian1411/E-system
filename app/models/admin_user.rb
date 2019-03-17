@@ -19,11 +19,13 @@
 #
 
 class AdminUser < ApplicationRecord
-
+ has_paper_trail
 
 
 # Relaciones con otras tablas
 has_many :compra
+has_many :traslados
+
   role_based_authorizable
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable

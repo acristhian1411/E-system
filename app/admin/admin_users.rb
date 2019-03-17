@@ -1,5 +1,5 @@
 ActiveAdmin.register AdminUser do
-  menu parent: "Usuarios", label: "Usuarios"
+  menu parent: "System", label: "Usuarios"
 
   role_changeable
 

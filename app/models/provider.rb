@@ -16,6 +16,7 @@
 class Provider < ApplicationRecord
 # Relaciones con otras tablas
 has_many :compra
+has_paper_trail
 
 # Validaciones
 	validates :razon_social, presence: true
@@ -23,6 +24,12 @@ has_many :compra
 	validates :ruc, uniqueness: true
 
 	validates :telefono, presence: true
+
+	class << self
+    def activo
+      Provider.where('prov_active != ?', true)
+    end
+end
 
 # Funcion para listar segun este activo o no
 # Todos los inactivos

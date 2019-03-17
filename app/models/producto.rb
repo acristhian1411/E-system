@@ -30,12 +30,28 @@
 #
 
 class Producto < ApplicationRecord
+  has_paper_trail
+
+
   belongs_to :provider
   belongs_to :category
   belongs_to :sub_category
   belongs_to :marca
 
-  has_many :compra_detalle
+  has_many :compra_detalles
+  has_many :venta_detalles
+  has_many :traslado_detalles
+
+  class << self
+		def activo
+			Producto.where('prod_active != ?', true)
+		end
+
+    def precio(producto_id)
+    algo = self.find(params[producto_id])
+    return algo.precio_venta
+    end
+	end
 
   # Funcion para listar segun este activo o no
   # Todos los inactivos

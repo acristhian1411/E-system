@@ -237,9 +237,9 @@ ActiveAdmin.setup do |config|
   #
 
 
-  config.download_links = false
-  config.download_links = [:csv, :xml, :json, :pdf]
-  
+  #config.download_links = false
+  config.download_links = [:pdf]
+
 
 
   # To disable/customize for the :admin namespace:
@@ -289,7 +289,7 @@ ActiveAdmin.setup do |config|
   # By default, the footer shows the current Active Admin version. You can
   # override the content of the footer here.
   #
-   config.footer = 'Analisis de sistemas'
+   config.footer = "Analisis de sistemas #{Date.today}"
 
   # == Sorting
   #

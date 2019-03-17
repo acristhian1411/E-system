@@ -37,16 +37,16 @@ menu parent: "Producto", label: "Productos"
  # Filtros de busqueda
  filter :prod_descrip, label: "Descripcion"
 
-    filter :category_id,  :as => :select, :collection => Category.all.map{|a|["#{a.category_descrip}", a.id]},
+    filter :category_id,  :as => :select, :collection => Category.activo.map{|a|["#{a.category_descrip}", a.id]},
     label: 'Categorias'
 
- filter :sub_category_id, :as => :select, :collection => SubCategory.all.map{|a|["#{a.subcat_descrip}", a.id]},
+ filter :sub_category_id, :as => :select, :collection => SubCategory.activo.map{|a|["#{a.subcat_descrip}", a.id]},
      label: 'Sub Categorias'
 
- filter :marca_id, :as => :select, :collection => Marca.all.map{|a|["#{a.marca_descrip}", a.id]},
+ filter :marca_id, :as => :select, :collection => Marca.activo.map{|a|["#{a.marca_descrip}", a.id]},
      label: 'Marcas'
 
- filter :provider_id, :as => :select, :collection => Provider.all.map{|a|["#{a.razon_social}", a.id]},
+ filter :provider_id, :as => :select, :collection => Provider.activo.map{|a|["#{a.razon_social}", a.id]},
      label: 'Proveedores'
 
 # Vista de tabla principal
@@ -61,11 +61,10 @@ menu parent: "Producto", label: "Productos"
      form title: 'Productos' do |f|
          inputs 'Detalles' do
            input :prod_descrip, label: "Descripcion"
-           input :category_id,  label: "Categoria", :as => :select, :collection => Category.all.map{|a|["#{a.category_descrip}", a.id]}
-           input :sub_category_id,  label: "Sub Categoria", :as => :select, :collection => SubCategory.all.map{|a|["#{a.subcat_descrip}", a.id]}
-           input :marca_id,  label: "Marca", :as => :select, :collection => Marca.all.map{|a|["#{a.marca_descrip}", a.id]}
-# select con buscador(implementar)
-           input :provider_id,  label: "Proveedor", :as => :select2, :collection => Provider.all.map{|a|["#{a.razon_social}", a.id]}
+           input :category_id,  label: "Categoria", :as => :select, :collection => Category.activo.map{|a|["#{a.category_descrip}", a.id]}
+           input :sub_category_id,  label: "Sub Categoria", :as => :select, :collection => SubCategory.activo.map{|a|["#{a.subcat_descrip}", a.id]}
+           input :marca_id,  label: "Marca", :as => :select, :collection => Marca.activo.map{|a|["#{a.marca_descrip}", a.id]}
+           input :provider_id,  label: "Proveedor", :as => :select2, :collection => Provider.activo.map{|a|["#{a.razon_social}", a.id]}
            input :precio_venta, label: "Precio venta"
            input :iva, :as => :select,      :collection => [5, 10]
          end
@@ -80,8 +79,7 @@ menu parent: "Producto", label: "Productos"
            row(:sub_categoria) { |payment| payment.sub_category.subcat_descrip }
            row(:marca) { |payment| payment.marca.marca_descrip }
            row(:proveedor) { |payment| payment.provider.razon_social }
-           row :iva
-           row :prod_active
+           row("Iva") { |producto| "#{producto.iva}%"}
            row :created_at
          end
        end
@@ -89,7 +87,7 @@ menu parent: "Producto", label: "Productos"
 
 sidebar "Stock en Sucursales", :only => :show do
   table_for Stock.where(:producto_id => producto.id).limit(3).all do |t|
-   t.column("Stock") { |stock|  stock.sucursal.suc_descrip }
+   t.column("Sucursal") { |stock|  stock.sucursal.suc_descrip }
    t.column("Cantidad") { |stock|  stock.cantidad }
   end
 end

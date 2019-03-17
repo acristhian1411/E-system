@@ -4,7 +4,6 @@
 #
 #  id             :bigint(8)        not null, primary key
 #  activo         :boolean
-#  apellido       :string
 #  cli_telefono   :string
 #  direccion      :string
 #  limite_credito :integer
@@ -27,6 +26,8 @@
 #
 
 class Cliente < ApplicationRecord
+ has_paper_trail
+has_many :credito_clientes
 
 # relacion con otras tablas
   belongs_to :ciudade
@@ -36,7 +37,6 @@ class Cliente < ApplicationRecord
   validates_associated :ciudade
   validates_associated :barrio
   validates :nombre, presence: true
-  validates :apellido, presence: true
   validates :cli_telefono, presence: true
   validates :direccion, presence: true
   validates :limite_credito , presence: true
@@ -44,6 +44,24 @@ class Cliente < ApplicationRecord
   validates :n_cedula, presence: true
   validates :n_cedula, uniqueness: true
 
+class << self
+
+    def activo
+      Cliente.where('activo != ?', true)
+    end
+
+    def nombre_completo
+      nombre = "Juan"
+      apellido = "perez"
+      return  "#{nombre} #{apellido}"
+    end
+
+end
+
+#ruta de descarga de PDF
+  def cliente_location
+    "#{Rails.root}/app/pdfs/clientes/cliente-#{self.id}.pdf"
+  end
 # Funcion para listar segun este activo o no
   	scope :inactivo, -> {
   where('activo != ?', true)

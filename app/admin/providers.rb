@@ -1,5 +1,5 @@
 ActiveAdmin.register Provider do
-	menu parent: "Producto", label: "Proveedores"
+	menu parent: "Compras", label: " Proveedor"
 # See permitted parameters documentation:
 # https://github.com/activeadmin/activeadmin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
  permit_params :razon_social, :ruc, :prov_direccion, :telefono, :email, :prov_active

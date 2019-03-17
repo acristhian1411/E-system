@@ -3,6 +3,7 @@
 # Table name: compras
 #
 #  id            :bigint(8)        not null, primary key
+#  activo        :boolean          default(TRUE)
 #  fecha_compra  :date
 #  num_factura   :string
 #  created_at    :datetime         not null
@@ -22,7 +23,9 @@
 #
 
 class Compra < ApplicationRecord
+   has_paper_trail
 
+   
   belongs_to :provider
   belongs_to :admin_user
   has_many :compra_detalles
@@ -34,7 +37,25 @@ class Compra < ApplicationRecord
   validates :fecha_compra, :presence => true
   validates :num_factura, :presence => true
 
+<<<<<<< HEAD
 #  attr_accessor :compra_detalles_attributes
+=======
+
+  class << self
+    def usuario(usuario)
+        usuario.email
+    end
+
+    def activo
+			Compra.where('activo != ?', true)
+		end
+
+end
+    def compra_location
+    "#{Rails.root}/app/pdfs/compras/Compra-#{self.id}.pdf"
+    end
+
+>>>>>>> 6b93a2dbe2081de6e25592b2a40dd08bff062c78
   def compra_detalles_total
     compra_detalles_total = 0
     self.compra_detalles.each do |i|
@@ -42,8 +63,23 @@ class Compra < ApplicationRecord
     end
     compra_detalles_total
   end
+
   def total
     compra_detalles_total
   end
+
+  # Funcion para listar segun este activo o no
+  # Todos los inactivos
+  scope :inactivo, -> {
+    where('activo != ?', true)
+  }
+  # Todos los activos
+  	scope :activo, -> {
+    where(:activo => true)
+  }
+  # Todos los registros
+  	scope :todos, -> {
+    all
+  }
 
 end
