@@ -337,6 +337,7 @@ DEPENDENCIES
   rails (~> 5.2.1)
   rake (~> 12.3, >= 12.3.1)
   ransack
+  responders
   sass-rails (~> 5.0)
   select2-rails
   selenium-webdriver

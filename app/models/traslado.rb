@@ -46,6 +46,7 @@ class Traslado < ApplicationRecord
       "Traslado-1"
     end
   end
+#ruta de descarga de PDF
 
     def usuario(usuario)
         usuario.email
@@ -68,7 +69,9 @@ class Traslado < ApplicationRecord
     end
 
 end
-
+  def traslado_location
+    "#{Rails.root}/app/pdfs/traslados/traslado-#{self.id}.pdf"
+    end
 # Funcion para listar segun este activo o no
 # Todos los inactivos
 scope :inactivo, -> {

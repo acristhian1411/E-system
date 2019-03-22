@@ -27,7 +27,9 @@ gem 'active_admin_role'
 
 #gema para descargar en archivos PDF
 gem 'prawn_rails'
+gem 'responders'
 gem 'prawn-table'
+
 
 # gema para buscador
 gem 'ransack'

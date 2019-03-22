@@ -1,3 +1,28 @@
+# crear pdf inicio
+def generate_traslado(traslado)
+  
+   Prawn::Document.generate @traslado.traslado_location do |pdf|
+     pdf.formatted_text [ {text: "Traslado numero #{@traslado.id}",size: 25,styles: [:bold]} ]
+     pdf.stroke_horizontal_line 0,275
+     pdf.move_down 20
+     pdf.text "Usuario: #{@traslado.admin_user.email} Sucursal De Origen: #{Traslado.sucursal(@traslado.sucursal_origen)} 
+
+     Sucursal De Destino: #{Traslado.sucursal(@traslado.sucursal_destino)} Numero De Comprobante: #{@traslado.num_comprobante}  
+
+     Fecha De Traslado: #{@traslado.fecha} ", inline_format: true ,size: 14
+     
+     pdf.move_down 20
+     pdf.formatted_text [ {text: "Items",size: 25,styles: [:bold]} ]
+     pdf.stroke_horizontal_line 0,275
+     
+     #pdf.text "Cantidad: #{@compra_detalles.cantidad} Descripcion: #{@compra_detalles.producto_id} Costo unitario: #{@compra_detalles.precio_compra} ", inline_format: true ,size: 14
+     
+     pdf.draw_text "Generado el #{l(Time.now, :format => :short)}", :at => [0, 0]
+     pdf.render_file "#{traslado.traslado_location}"
+     pdf.text "Usuario: #{@traslado.traslado_detalles.producto_id}"
+   end
+end
+# crear pdf fin
 ActiveAdmin.register Traslado do
 
 	menu parent: "Stock", label: "Traslado"
@@ -23,6 +48,17 @@ ActiveAdmin.register Traslado do
 		end
 
 	end
+#boton para generar PDF
+action_item :only => :show do
+  link_to "Generar PDF", generate_pdf_admin_traslado_path(traslado)
+end
+member_action :generate_pdf do
+  @traslado= Traslado.find(params[:id])
+  @detalles = TrasladoDetalle.where('traslado_id' => @traslado.id)
+  generate_traslado(@traslado)
+  send_file @traslado.traslado_location
+end
+#boton para generar PDF FIN
 
 	# Boton atras en vista show
 	action_item :view, only: :show do
@@ -84,7 +120,7 @@ show  do
     panel "Productos" do
       table_for traslado.traslado_detalles do |t|
         t.column("Cantidad") { |traslado_detalles| number_with_delimiter traslado_detalles.cantidad }
-        t.column("Descripcion") { |traslado_detalles| traslado_detalles.producto.prod_descrip }
+        t.column("Producto") { |traslado_detalles| traslado_detalles.producto.prod_descrip }
 
       end
     end

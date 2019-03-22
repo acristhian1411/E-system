@@ -15,6 +15,9 @@ class Barrio < ApplicationRecord
 
     has_paper_trail
 
+	has_versions
+
+
 # Validaciones
 	validates :descripcion, presence: true
 

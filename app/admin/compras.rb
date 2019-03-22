@@ -1,3 +1,24 @@
+# crear pdf inicio
+def generate_compra(compra)
+  
+   Prawn::Document.generate @compra.compra_location do |pdf|
+     pdf.formatted_text [ {text: "Compra numero #{@compra.id}",size: 25,styles: [:bold]} ]
+     pdf.stroke_horizontal_line 0,275
+     pdf.move_down 20
+     pdf.text "Proveedor: #{@compra.provider.razon_social}  Numero de factura: #{@compra.num_factura} Usuario: #{@compra.admin_user.email}  Fecha de compra: #{@compra.fecha_compra} ", inline_format: true ,size: 14
+    
+     pdf.formatted_text [ {text: "Items",size: 25,styles: [:bold]} ]
+     pdf.stroke_horizontal_line 0,275
+     
+     #pdf.text "Cantidad: #{@compra_detalles.cantidad} Descripcion: #{@compra_detalles.producto_id} Costo unitario: #{@compra_detalles.precio_compra} ", inline_format: true ,size: 14
+     
+     pdf.draw_text "Generado el #{l(Time.now, :format => :short)}", :at => [0, 0]
+     pdf.render_file "#{compra.compra_location}"
+
+   end
+end
+# crear pdf fin
+
 ActiveAdmin.register Compra do
 menu parent: "Compras", label: " Compra"
 
@@ -24,8 +45,19 @@ menu parent: "Compras", label: " Compra"
      compra.update_attribute(:activo, false)
      redirect_to admin_compras_path
    end
-
  end
+ 
+ #boton para generar PDF
+action_item :only => :show do
+  link_to "Generar PDF", generate_pdf_admin_compra_path(compra)
+end
+member_action :generate_pdf do
+  @compra = Compra.find(params[:id])
+  generate_compra(@compra)
+  send_file @compra.compra_location
+end
+#boton para generar PDF FIN
+
 
 # Boton atras en vista show
  action_item :view, only: :show do

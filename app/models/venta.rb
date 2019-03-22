@@ -53,6 +53,10 @@ class << self
       Venta.where('activo != ?', true)
     end
 end
+    
+  def venta_location
+  "#{Rails.root}/app/pdfs/ventas/venta-#{self.id}.pdf"
+  end
 
   def venta_detalles_total
     venta_detalles_total = 0
@@ -65,6 +69,8 @@ end
   def total
     venta_detalles_total
   end
+
+
 
   # Funcion para listar segun este activo o no
     # Todos los inactivos
