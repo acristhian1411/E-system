@@ -4,10 +4,7 @@
     <%= f.input :venta_id %><br>
     <%= f.input :cliente_id %>
 
-
-<%=  f.inputs "Cuota" do %>
 <%=    f.template.render partial: 'cuotas/cuota' %>
 
-<%  end %>
 
 <% end %>

@@ -2,8 +2,8 @@ def generate_ciudad(ciudade)
   # Generate invoice
 
    Prawn::Document.generate ciudade.ciudad_location do |pdf|
-     pdf.text "Hello There"
-
+     pdf.text "Descripcion"
+     pdf.text ciudade.descripcion
      pdf.draw_text "Generated at #{l(Time.now, :format => :short)}", :at => [0, 0]
 
      pdf.render_file "#{ciudade.ciudad_location}"
@@ -11,13 +11,27 @@ def generate_ciudad(ciudade)
    end
 
 end
+def generate_all(ciudad)
+  # Generate invoice
+
+   Prawn::Document.generate ciudade.ciudad_pdf do |pdf|
+     @ciudad.each do ciu
+     pdf.text "Descripcion"
+     pdf.text ciu.descripcion
+     pdf.draw_text "Generated at #{l(Time.now, :format => :short)}", :at => [0, 0]
+
+     #pdf.render_file "#{ciudade.ciudad_location}"
+      end
+   end
+
+end
 ActiveAdmin.register Ciudade do
 # See permitted parameters documentation:
 # https://github.com/activeadmin/activeadmin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
+#index download_links: proc{ link_to generate_all_admin_ciudade_path }
 menu parent: "Ventas", label: "Ciudades"
 # Campos permitidos para formulario
 permit_params :descripcion,  :activo
-
 
 # Link para activar registro
 action_item :activado, only: :show do
@@ -50,6 +64,11 @@ member_action :generate_pdf do
   send_file @cuidade.ciudad_location
 end
 
+member_action :generate_all do
+  @ciudad = Ciudade.all
+	generate_all(@ciudad)
+  send_file @ciudad.ciudad_pdf
+end
 
 action_item :view, only: :show do
 	link_to 'Atras', admin_ciudades_path

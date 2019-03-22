@@ -26,7 +26,9 @@ class Ciudade < ApplicationRecord
 	def ciudad_location
     "#{Rails.root}/app/pdfs/ciudades/ciudad-#{self.id}.pdf"
   end
-
+	def ciudad_pdf
+    "#{Rails.root}/app/pdfs/ciudades/ciudad-#{self.id}.pdf"
+  end
 # Funcion para listar segun este activo o no
 # Todos los inactivos
 	scope :inactivo, -> {
