@@ -199,7 +199,7 @@ ActiveAdmin.setup do |config|
   #   config.register_stylesheet 'my_print_stylesheet.css', media: :print
   #
   # To load a javascript file:
-  #   config.register_javascript 'my_javascript.js'
+     #config.register_javascript 'active_admin.js'
 
   # == CSV options
   #
@@ -238,7 +238,7 @@ ActiveAdmin.setup do |config|
 
 
   #config.download_links = false
-  config.download_links = [:pdf]
+  #config.download_links = [:pdf]
 
 
 
@@ -263,7 +263,7 @@ ActiveAdmin.setup do |config|
   # Pagination is enabled by default for all resources.
   # You can control the default per page count for all resources here.
   #
-  # config.default_per_page = 30
+   config.default_per_page = [10, 50, 100]
   #
   # You can control the max per page count too.
   #

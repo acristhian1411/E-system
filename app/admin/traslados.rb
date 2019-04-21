@@ -76,7 +76,7 @@ end
 	label: 'Sucursal de origen'
 	filter :sucursal_destino,  :as => :select, :collection => Sucursal.all.map{|a|["#{a.suc_descrip}", a.id]},
 	label: 'Sucursal de destino'
-	filter :fecha, label: 'Sucursal de origen'
+	filter :fecha, label: 'Fecha'
 
 # INICIO
 index do

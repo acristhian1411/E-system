@@ -5,7 +5,7 @@ def generate_venta(venta)
      pdf.formatted_text [ {text: "Compra numero #{@venta.id}",size: 25,styles: [:bold]} ]
      pdf.stroke_horizontal_line 0,275
      pdf.move_down 20
-     pdf.text "Cliente: #{@venta.cliente.nombre} Usuario: #{@venta.admin_user.email} Numero de factura: #{@venta.num_factura}
+     pdf.text "Cliente: #{@venta.cliente.nombre} Usuario: #{@venta.admin_user.email} Numero de factura: #{@venta.num_factura} 
 
      Forma de pago: #{@venta.forma_pago}  Fecha de venta: #{@venta.fecha} ", inline_format: true ,size: 14
      pdf.move_down 20
@@ -17,7 +17,7 @@ def generate_venta(venta)
            # Descripcion: #{ data} Costo unitario: #{ data} , inline_format: true ,size: 14
 
      end
-
+     
      pdf.draw_text "Generado el #{l(Time.now, :format => :short)}", :at => [0, 0]
      pdf.render_file "#{venta.venta_location}"
 
@@ -98,10 +98,11 @@ form do |f|
    f.input :fecha, label: "Fecha de compra"
    f.input :forma_pago, label: "Forma de pago", :as => :radio, :collection => ["Contado", "Credito"]
 
+#   if params[:radio] == "Credito"
 
+#     f.template.render partial: 'credito/credito'
 
-render partial: 'credito/new'
-
+#   end
 
  f.inputs "Detalles" do
    f.has_many :venta_detalle do |i|
@@ -111,7 +112,9 @@ render partial: 'credito/new'
      i.input :monto_desc, label: "Descuento", :hint => "Ingrese el descuento"
      i.input :porcent_desc, label: "Descuento", :hint => "Ingrese el % de descuento"
    end
+
  end
+
  f.actions
 end
 
