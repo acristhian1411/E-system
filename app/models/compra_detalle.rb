@@ -25,7 +25,7 @@
 
 class CompraDetalle < ApplicationRecord
    has_paper_trail
-  
+
   belongs_to :compra
   belongs_to :producto
 
@@ -34,11 +34,7 @@ class CompraDetalle < ApplicationRecord
   validates :producto_id, :presence => true
   validates :descuento, :numericality => { :integer => true }
 
-<<<<<<< HEAD
-#  attr_accessor :cantidad, :descuento, :precio_compra, :producto_id, :compra_id
-=======
 
->>>>>>> 6b93a2dbe2081de6e25592b2a40dd08bff062c78
 
   def total
     por = ((self.precio_compra.to_f * self.porcent_desc.to_f) /  100)

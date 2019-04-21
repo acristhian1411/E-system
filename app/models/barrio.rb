@@ -15,7 +15,7 @@ class Barrio < ApplicationRecord
 
     has_paper_trail
 
-	has_versions
+	
 
 
 # Validaciones

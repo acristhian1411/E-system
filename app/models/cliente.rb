@@ -4,6 +4,7 @@
 #
 #  id             :bigint(8)        not null, primary key
 #  activo         :boolean
+#  apellido       :string
 #  cli_telefono   :string
 #  direccion      :string
 #  limite_credito :integer
@@ -28,6 +29,7 @@
 class Cliente < ApplicationRecord
  has_paper_trail
 has_many :credito_clientes
+has_many :comments
 
 # relacion con otras tablas
   belongs_to :ciudade

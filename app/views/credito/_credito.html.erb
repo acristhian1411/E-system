@@ -1,0 +1,13 @@
+
+<%= semantic_form_for(CreditoCliente.new, :url => { :action => "create" }) do |f| %>
+
+    <%= f.input :venta_id %><br>
+    <%= f.input :cliente_id %>
+
+
+<%=  f.inputs "Cuota" do %>
+<%=    f.template.render partial: 'cuotas/cuota' %>
+
+<%  end %>
+
+<% end %>

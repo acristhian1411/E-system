@@ -48,11 +48,25 @@ ActiveAdmin.register Provider do
 	end
  end
 
+ # Formulario personalizado
+ form title: 'Proveedores' do |f|
+     inputs 'Detalles' do
+       input :razon_social, label: "Razon Social"
+       input :ruc, label: "Num de Ruc"
+			 input :telefono, label: "Num de telefono"
+       input :prov_direccion, label: "Direccion"
+       input :email, label: "Correo electronico"
+     end
+       actions do
+         button 'Guardar'
+       end
+     end
+
   show title: "Proveedores" do
-    attributes_table do
+    attributes_table_for provider do
       row :razon_social
       row :ruc
-      row "direccion", :prov_direccion
+      row ("direccion") {provider.prov_direccion}
       row :telefono
       row :email
     end

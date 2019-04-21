@@ -11,7 +11,7 @@
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
 #
-<<<<<<< HEAD
+
 #  suc_active  :boolean
 
 #  direccion   :string
@@ -23,17 +23,10 @@
 #  updated_at  :datetime         not null
 #
 class Sucursal < ApplicationRecord
-=======
-
-class Sucursal < ApplicationRecord
-
-has_paper_trail
-
 
 # Relaciones con otras tablas
 belongs_to :traslados
 
->>>>>>> 6b93a2dbe2081de6e25592b2a40dd08bff062c78
 # Validaciones
 	validates :suc_descrip, presence: true
 

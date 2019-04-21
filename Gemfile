@@ -23,12 +23,10 @@ gem 'active_admin_theme'
 #gema para roles
 gem 'active_admin_role'
 #gema para descargar en archivos PDF
-<<<<<<< HEAD
 gem 'pdfkit'
 #gema para descargar en archivos PDF
 gem 'wkhtmltopdf-binary'
 #gema para descargar en archivos exel
-=======
 gem 'prawn_rails'
 gem 'responders'
 gem 'prawn-table'
@@ -41,7 +39,6 @@ gem 'ransack'
 gem 'paper_trail'
 gem 'activeadmin-audit'
 
->>>>>>> 6b93a2dbe2081de6e25592b2a40dd08bff062c78
 #gema para select con buscador
 gem 'select2-rails'
 gem 'activeadmin-select2', github: 'mfairburn/activeadmin-select2'

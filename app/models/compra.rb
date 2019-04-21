@@ -3,7 +3,7 @@
 # Table name: compras
 #
 #  id            :bigint(8)        not null, primary key
-#  activo        :boolean          default(TRUE)
+#  activo        :boolean
 #  fecha_compra  :date
 #  num_factura   :string
 #  created_at    :datetime         not null
@@ -25,7 +25,7 @@
 class Compra < ApplicationRecord
    has_paper_trail
 
-   
+
   belongs_to :provider
   belongs_to :admin_user
   has_many :compra_detalles
@@ -37,9 +37,7 @@ class Compra < ApplicationRecord
   validates :fecha_compra, :presence => true
   validates :num_factura, :presence => true
 
-<<<<<<< HEAD
-#  attr_accessor :compra_detalles_attributes
-=======
+
 
   class << self
     def usuario(usuario)
@@ -55,7 +53,6 @@ end
     "#{Rails.root}/app/pdfs/compras/Compra-#{self.id}.pdf"
     end
 
->>>>>>> 6b93a2dbe2081de6e25592b2a40dd08bff062c78
   def compra_detalles_total
     compra_detalles_total = 0
     self.compra_detalles.each do |i|
