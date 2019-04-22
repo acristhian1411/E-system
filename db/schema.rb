@@ -10,11 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-<<<<<<< HEAD
-ActiveRecord::Schema.define(version: 2018_11_11_213749) do
-=======
 ActiveRecord::Schema.define(version: 2019_02_07_233401) do
->>>>>>> 6b93a2dbe2081de6e25592b2a40dd08bff062c78
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -90,6 +86,7 @@ ActiveRecord::Schema.define(version: 2019_02_07_233401) do
 
   create_table "clientes", force: :cascade do |t|
     t.string "nombre"
+    t.string "apellido"
     t.string "n_cedula"
     t.string "cli_telefono"
     t.integer "limite_credito"
@@ -123,7 +120,7 @@ ActiveRecord::Schema.define(version: 2019_02_07_233401) do
     t.string "num_factura"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.boolean "activo", default: true
+    t.boolean "activo"
     t.index ["admin_user_id"], name: "index_compras_on_admin_user_id"
     t.index ["provider_id"], name: "index_compras_on_provider_id"
   end
@@ -241,8 +238,8 @@ ActiveRecord::Schema.define(version: 2019_02_07_233401) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "motivo"
-    t.integer "num_comprobante", null: false
-    t.boolean "activo", default: true
+    t.integer "num_comprobante"
+    t.boolean "activo"
     t.index ["admin_user_id"], name: "index_traslados_on_admin_user_id"
   end
 

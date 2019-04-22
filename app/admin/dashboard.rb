@@ -25,7 +25,7 @@
     #
 
 
-    
+
      columns do
        column do
          panel "Ventas recientes" do
@@ -66,12 +66,16 @@
        columns do
          column do
            panel "Vencimiento de cuotas" do
-             @cuota = CuotaCliente.where(:vencimiento => Date.today).order("created_at desc")
-             @credito = CreditoCliente.where(:ids => @cuota.ids)
-                   table_for @cuota do |cuotas|
-                          column :monto_cuota
-                          column :cantidad_cuota
+             @cred = CreditoCliente.all
+             @credito = CreditoCliente.joins(:cuota_clientes).where(cuota_clientes: {:credito_cliente_id => @cred.ids} && {:vencimiento => Date.today})
+             #@cuota = CuotaCliente.where(:vencimiento => Date.today).order("created_at desc")
+             #@credito = CreditoCliente.where(:ids => @cuota.ids)
+                   table_for @credito do |cuota|
+                       column :monto_cuota
+                       column :cantidad_cuota
                     end #table_fors
+#SELECT  credito_clientes.* FROM credito_clientes INNER JOIN cuota_clientes ON cuota_clientes.credito_cliente_id = credito_clientes.id WHERE cuota_clientes.credito_cliente_id = 1 LIMIT 2;
+
             end #panel
           end #column
         end #columns
