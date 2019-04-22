@@ -17,7 +17,7 @@ gem 'rake', '~> 12.3', '>= 12.3.1'
 #gema para manejo de usuario
 gem 'devise'
 #gema para administracion de contenido
-gem 'activeadmin', '~> 1.4.3'
+gem 'activeadmin'
 #gema para temas
 gem 'active_admin_theme'
 #gema para roles
