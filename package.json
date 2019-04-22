@@ -1,5 +1,7 @@
 {
   "name": "E-system",
   "private": true,
-  "dependencies": {}
+  "dependencies": {
+    "jspdf": "^1.5.3"
+  }
 }

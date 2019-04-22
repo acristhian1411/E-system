@@ -31,13 +31,15 @@ gem 'prawn_rails'
 gem 'responders'
 gem 'prawn-table'
 
-
 # gema para buscador
 gem 'ransack'
 
 #gema para vesiones
 gem 'paper_trail'
 gem 'activeadmin-audit'
+
+
+gem 'activeadmin_dynamic_fields'
 
 #gema para select con buscador
 gem 'select2-rails'

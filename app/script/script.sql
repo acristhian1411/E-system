@@ -86,3 +86,28 @@ CREATE TRIGGER tg_prod_sucursal AFTER INSERT
              ) i
              ON s.ID = i.ID;
   END;
+
+--filter ventas
+  SELECT venta.* FROM venta WHERE(venta.id = (
+  SELECT venta_detalles.venta_id FROM venta_detalles WHERE(venta_detalles.producto_id = 5) LIMIT 1));
+
+-- trigger
+DECLARE cursorData refcursor;
+    v_item_cd varchar;
+    v_quantity numeric;
+
+begin
+
+open cursorData FOR
+select A.item_cd, A.quantity from trx_medical_resep B
+inner join trx_resep_data A on A.medical_resep_seqno = B.medical_resep_seqno
+where B.medical_resep_seqno = noresep;
+fetch next from cursorData into v_item_cd,v_quantity;
+while (found)
+loop
+    update inv_pos_item set quantity = quantity - v_quantity
+    where item_cd = v_item_cd and pos_cd = p_post_cd;
+end loop;
+close cursorData;
+
+END

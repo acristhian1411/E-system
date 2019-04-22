@@ -119,7 +119,7 @@ ActiveAdmin.setup do |config|
   # This allows your users to comment on any resource registered with Active Admin.
   #
   # You can completely disable comments:
-  config.comments = false
+  config.comments = true
   #
   # You can change the name under which comments are registered:
   # config.comments_registration_name = 'AdminComment'
@@ -199,7 +199,7 @@ ActiveAdmin.setup do |config|
   #   config.register_stylesheet 'my_print_stylesheet.css', media: :print
   #
   # To load a javascript file:
-  #   config.register_javascript 'my_javascript.js'
+     #config.register_javascript 'active_admin.js'
 
   # == CSV options
   #
@@ -238,7 +238,11 @@ ActiveAdmin.setup do |config|
 
 
   #config.download_links = false
-  config.download_links = [:pdf]
+<<<<<<< HEAD
+   #config.download_links = [:pdf]
+=======
+  #config.download_links = [:pdf]
+>>>>>>> 5e452e4315cb21abe600dd12f0e72c402dffdd00
 
 
 
@@ -263,7 +267,7 @@ ActiveAdmin.setup do |config|
   # Pagination is enabled by default for all resources.
   # You can control the default per page count for all resources here.
   #
-  # config.default_per_page = 30
+   config.default_per_page = [10, 50, 100]
   #
   # You can control the max per page count too.
   #
