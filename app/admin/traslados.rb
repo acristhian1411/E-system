@@ -1,4 +1,5 @@
 # crear pdf inicio
+
 def generate_traslado(traslado)
   
    Prawn::Document.generate @traslado.traslado_location do |pdf|
@@ -14,14 +15,21 @@ def generate_traslado(traslado)
      pdf.move_down 20
      pdf.formatted_text [ {text: "Items",size: 25,styles: [:bold]} ]
      pdf.stroke_horizontal_line 0,275
-     
-     #pdf.text "Cantidad: #{@compra_detalles.cantidad} Descripcion: #{@compra_detalles.producto_id} Costo unitario: #{@compra_detalles.precio_compra} ", inline_format: true ,size: 14
+
+
+      table_data = [[Prawn::Table::Cell::Text.new( pdf, [0,0], :content => "Producto", :inline_format => true),  Traslado.traslado_detalles(@traslado_detalles.traslado_id)],
+                   [Prawn::Table::Cell::Text.new( pdf, [0,0], :content => "cantidad", :inline_format => true), "@traslado.traslado_detalles.contidad"]]
+
+    pdf.table(table_data,:width => 500)
+      
+  
      
      pdf.draw_text "Generado el #{l(Time.now, :format => :short)}", :at => [0, 0]
      pdf.render_file "#{traslado.traslado_location}"
-     pdf.text "Usuario: #{@traslado.traslado_detalles.producto_id}"
+    
    end
 end
+
 # crear pdf fin
 ActiveAdmin.register Traslado do
 

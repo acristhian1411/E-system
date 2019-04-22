@@ -91,6 +91,7 @@ end
 
 
 form do |f|
+  inputs 'Detalles' do
    f.input :cliente_id,  label: "Cliente", :as => :select, :collection => Cliente.activo.map{|a|["#{a.nombre || a.apellido}", a.id]}
    f.input :admin_user_id, label: "Usuario", :hint => "El usuario sugerido es #{Venta.usuario(current_admin_user)}", :as => :select, :collection => AdminUser.all.map{|a|["#{a.email}", a.id]}
    f.input :sucursal_id, label: "Sucursal", :as => :select, :collection => Sucursal.activo.map{|a|["#{a.suc_descrip}", a.id]}
@@ -99,9 +100,9 @@ form do |f|
    f.input :forma_pago, label: "Forma de pago", :as => :radio, :collection => ["Contado", "Credito"]
 
 
-f.inputs "Credito" do
-  f.template.render partial: 'credito/credito'
-end
+ render partial: 'credito/credito'
+
+
 
  f.inputs "Detalles" do
    f.has_many :venta_detalle do |i|
@@ -114,6 +115,7 @@ end
  end
  f.actions
 end
+end
 
 show  do
    panel "Invoice Details" do
@@ -124,6 +126,7 @@ show  do
        row("Forma de pago") { venta.forma_pago }
        row("Fecha de venta") { venta.fecha }
      end
+  
    end
 
    panel "Items" do

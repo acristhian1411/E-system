@@ -238,7 +238,7 @@ ActiveAdmin.setup do |config|
 
 
   #config.download_links = false
-  config.download_links = [:pdf]
+   #config.download_links = [:pdf]
 
 
 
