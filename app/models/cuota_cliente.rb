@@ -28,8 +28,13 @@ class CuotaCliente < ApplicationRecord
   belongs_to :credito_clientes
 
     def saldo_cuota
-          saldo = self.monto_cuota - self.monto_pagado
-           return saldo
+      saldo = self.monto_cuota - self.monto_pagado
+      if saldo = self.monto_cuota
+        return saldo
+      elsif saldo = 0
+        return 0
+      end
+
     end
 
 end

@@ -27,7 +27,15 @@ menu parent: "Ventas", label: "Barrios"
 
 
 
+<<<<<<< HEAD
  
+=======
+ # Link para descargar pdf
+ #action_item :pdf, only: :show do
+ #link_to "Descargar PDF", pdf_admin_barrio_path(format: 'pdf_file')
+ #end
+
+>>>>>>> 5e452e4315cb21abe600dd12f0e72c402dffdd00
 
  # Funcion para activar registro
  member_action :activado, method: :put do

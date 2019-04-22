@@ -4,6 +4,7 @@
 #
 #  id             :bigint(8)        not null, primary key
 #  activo         :boolean
+#  apellido       :string
 #  cli_telefono   :string
 #  direccion      :string
 #  limite_credito :integer

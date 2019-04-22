@@ -3,7 +3,7 @@
 # Table name: compras
 #
 #  id            :bigint(8)        not null, primary key
-#  activo        :boolean          default(TRUE)
+#  activo        :boolean
 #  fecha_compra  :date
 #  num_factura   :string
 #  created_at    :datetime         not null
@@ -25,7 +25,7 @@
 class Compra < ApplicationRecord
    has_paper_trail
 
-   
+
   belongs_to :provider
   belongs_to :admin_user
   has_many :compra_detalles
@@ -36,6 +36,7 @@ class Compra < ApplicationRecord
   validates :admin_user_id, :presence => true
   validates :fecha_compra, :presence => true
   validates :num_factura, :presence => true
+
 
 
   class << self

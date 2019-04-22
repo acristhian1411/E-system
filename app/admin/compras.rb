@@ -1,17 +1,17 @@
 # crear pdf inicio
 def generate_compra(compra)
-  
+
    Prawn::Document.generate @compra.compra_location do |pdf|
      pdf.formatted_text [ {text: "Compra numero #{@compra.id}",size: 25,styles: [:bold]} ]
      pdf.stroke_horizontal_line 0,275
      pdf.move_down 20
      pdf.text "Proveedor: #{@compra.provider.razon_social}  Numero de factura: #{@compra.num_factura} Usuario: #{@compra.admin_user.email}  Fecha de compra: #{@compra.fecha_compra} ", inline_format: true ,size: 14
-    
+
      pdf.formatted_text [ {text: "Items",size: 25,styles: [:bold]} ]
      pdf.stroke_horizontal_line 0,275
-     
+
      #pdf.text "Cantidad: #{@compra_detalles.cantidad} Descripcion: #{@compra_detalles.producto_id} Costo unitario: #{@compra_detalles.precio_compra} ", inline_format: true ,size: 14
-     
+
      pdf.draw_text "Generado el #{l(Time.now, :format => :short)}", :at => [0, 0]
      pdf.render_file "#{compra.compra_location}"
 
@@ -25,6 +25,9 @@ menu parent: "Compras", label: " Compra"
 # See permitted parameters documentation:
 # https://github.com/activeadmin/activeadmin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
 #
+
+ permit_params :provider_id, :admin_user_id, :num_factura, :fecha_compra, compra_detalles_attributes:[:id, :producto_id, :descuento, :cantidad, :precio_compra]
+
  permit_params :provider_id, :admin_user_id, :num_factura, :fecha_compra, compra_detalles_attributes:[:id, :producto_id, :descuento, :porcent_desc, :cantidad, :precio_compra]
 
  action_item :activado, only: :show do
@@ -46,7 +49,7 @@ menu parent: "Compras", label: " Compra"
      redirect_to admin_compras_path
    end
  end
- 
+
  #boton para generar PDF
 action_item :only => :show do
   link_to "Generar PDF", generate_pdf_admin_compra_path(compra)
@@ -69,15 +72,17 @@ end
  scope :todos
 
 
-index do
-  column(:proveedor) { |compra| compra.provider.razon_social }
 
+index title: "Compras" do
+  column(:provider) { |compra| compra.provider.razon_social }
   column("Fecha de compra") { |compra| compra.fecha_compra }
   column :total do |compra|
   number_to_currency compra.total
 end
 
-actions
+  column :fecha_compra
+  column :created_at
+  actions
 end
 
 
@@ -89,6 +94,8 @@ form do |f|
     f.input :fecha_compra, label: "Fecha de compra"
   f.inputs "Detalles" do
     f.has_many :compra_detalles do |i|
+      i.input :producto_id,  label: "Producto", :as => :select, :collection => Producto.all.map{|a|["#{a.prod_descrip}", a.id]}
+
       i.input :producto_id,  label: "Producto", :as => :select, :collection => Producto.activo.map{|a|["#{a.prod_descrip}", a.id]}
       i.input :cantidad
       i.input :precio_compra, label: "Precio de compra"

@@ -28,7 +28,7 @@
 
 class Venta < ApplicationRecord
   has_paper_trail
-  
+
   belongs_to :admin_user
   belongs_to :sucursal
   belongs_to :cliente
@@ -53,7 +53,7 @@ class << self
       Venta.where('activo != ?', true)
     end
 end
-    
+
   def venta_location
   "#{Rails.root}/app/pdfs/ventas/venta-#{self.id}.pdf"
   end
@@ -85,17 +85,17 @@ end
       scope :todos, -> {
       all
     }
-
 # buscador
-  ransacker :producto_id,
-             :formatter => -> (venta_id) {
-               detalle = VentaDetalle.where(:producto_id => Producto.ids).all
-                  ids = Venta.where(:id => VentaDetalle.venta_id)
-               (ids.empty?) ? ids << 0: ids #activeadmin translates the queries into IN operator, may get syntax error if empty
-                     # id = 0 is non-existent in Users as id >= 1
-               return ids #maybe is not needed
-               } do |parent|
-   parent.table[:id]
-   end
-
+#ransacker :producto_id,
+#  args: [:parent, :ransacker_args] do |parent, args|
+#    min = args
+#    query = <<-SQL
+#      (SELECT venta.id
+#FROM venta
+#INNER JOIN venta_detalles
+#ON venta_detalles.venta_id=venta.id AND venta_detalles.producto_id= #{min};
+#      )
+#    SQL
+#    Arel.sql(query)
+#  end
 end

@@ -70,8 +70,8 @@ label: 'Clientes'
 filter :forma_pago,  :as => :select, :collection => ["Credito", "Contado"],
 label: 'Forma de Pago'
 filter :fecha, label: 'Fecha de venta'
-filter :producto_id_in, :as => :select, collection: Producto.activo.map{|a|["#{a.prod_descrip}", a.id]},
-label: 'Productos'
+#filter :producto_id_in, :as => :select, collection: Producto.activo.map{|a|["#{a.prod_descrip}", a.id]},
+#label: 'Productos'
 
 
 index do
@@ -99,10 +99,17 @@ form do |f|
    f.input :fecha, label: "Fecha de compra"
    f.input :forma_pago, label: "Forma de pago", :as => :radio, :collection => ["Contado", "Credito"]
 
+#   if params[:radio] == "Credito"
 
+<<<<<<< HEAD
  render partial: 'credito/credito'
 
 
+=======
+#     f.template.render partial: 'credito/credito'
+
+#   end
+>>>>>>> 5e452e4315cb21abe600dd12f0e72c402dffdd00
 
  f.inputs "Detalles" do
    f.has_many :venta_detalle do |i|
@@ -112,7 +119,9 @@ form do |f|
      i.input :monto_desc, label: "Descuento", :hint => "Ingrese el descuento"
      i.input :porcent_desc, label: "Descuento", :hint => "Ingrese el % de descuento"
    end
+
  end
+
  f.actions
 end
 end

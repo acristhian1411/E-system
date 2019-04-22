@@ -1,6 +1,6 @@
 # crear pdf inicio
 def generate_cliente(cliente)
-  
+
    Prawn::Document.generate cliente.cliente_location do |pdf|
      pdf.formatted_text [ {text: 'Informacion De Cliente',size: 25,styles: [:bold]} ]
      pdf.stroke_horizontal_line 0,275
@@ -33,6 +33,8 @@ ActiveAdmin.register Cliente do
 # https://github.com/activeadmin/activeadmin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
 menu parent: "Ventas", label: "Clientes"
  permit_params :nombre, :n_cedula, :direccion, :cli_telefono, :limite_credito, :activo, :ciudade_id, :barrio_id
+
+#config.comments = true
 
 controller do
   def destroy

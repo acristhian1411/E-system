@@ -12,6 +12,7 @@
 //
 //= require rails-ujs
 //= require activestorage
+//= require_relative venta.js
 //= require turbolinks
 //= require_tree .
 

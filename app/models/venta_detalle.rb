@@ -25,7 +25,7 @@
 
 class VentaDetalle < ApplicationRecord
   has_paper_trail
-  
+
   belongs_to :venta
   belongs_to :producto
 
@@ -40,6 +40,10 @@ class VentaDetalle < ApplicationRecord
 
   def total_descuento
     total = (((self.precio_venta.to_f * self.porcent_desc.to_f) /  100) + self.monto_desc.to_f)
+  end
+
+  def self.has_producto(pr_id)
+    self.where(:producto_id => pr_id)
   end
 
 end
