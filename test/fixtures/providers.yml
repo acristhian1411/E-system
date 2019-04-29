@@ -4,7 +4,7 @@
 #
 #  id             :bigint(8)        not null, primary key
 #  email          :string
-#  prov_active    :boolean          default(TRUE)
+#  prov_active    :boolean
 #  prov_direccion :string
 #  razon_social   :string
 #  ruc            :string

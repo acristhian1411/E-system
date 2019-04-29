@@ -94,7 +94,7 @@ show  do
        t.column("Cantidad") { |venta_detalle| number_with_delimiter venta_detalle.cantidad }
        t.column("Descripcion") { |venta_detalle| venta_detalle.producto.prod_descrip }
        t.column("Costo unitario") { |venta_detalle| number_to_currency venta_detalle.precio_venta }
-#       t.column("Descuento") { |v| number_to_currency v.total_descuento}
+       t.column("Descuento") { |v| number_to_currency v.total_descuento}
 
        tr do
          2.times { td "" }

@@ -1,7 +1,7 @@
 ActiveAdmin.register Traslado do
 
 	menu parent: "Stock", label: "Traslado"
- 	permit_params :sucursal_origen, :sucursal_destino, :num_comprobante, :motivo, :fecha, :admin_user_id, traslado_detalles_attributes:[:id, :producto_id, :cantidad]
+# 	permit_params :sucursal_origen, :sucursal_destino, :num_comprobante, :motivo, :fecha, :admin_user_id, traslado_detalles_attributes:[:id, :producto_id, :cantidad]
 
 	action_item :activado, only: :show do
 		link_to "Activar", activado_admin_traslado_path(traslado), method: :put if !traslado.activo

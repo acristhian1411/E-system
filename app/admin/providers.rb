@@ -41,18 +41,26 @@ ActiveAdmin.register Provider do
  	column "Direccion", :prov_direccion
  	column :telefono
  	column :email
-	actions  do |client|
-		#link_to("Mostrar", admin_provider_path(client)) + " | " + \
-		#link_to("Editar", edit_admin_provider_path(client)) + " | " + \
-		#link_to("Eliminar", admin_provider_path(client), :method => :delete, :confirm => "Are you sure?")
-	end
+	actions
  end
 
-  show title: "Proveedores" do
+form title: 'Proveedor' do |f|
+inputs "Detalles" do
+	input :razon_social, label: "Razon social"
+	input :ruc
+	input :prov_direccion, label: "Direccion"
+	input :telefono
+	input :email
+end
+actions
+
+end
+
+  show :title => :razon_social do
     attributes_table do
       row :razon_social
       row :ruc
-      row "direccion", :prov_direccion
+      row ("Direccion") { |payment| payment.prov_direccion}
       row :telefono
       row :email
     end

@@ -28,7 +28,7 @@
 
 class Venta < ApplicationRecord
   has_paper_trail
-  
+
   belongs_to :admin_user
   belongs_to :sucursal
   belongs_to :cliente

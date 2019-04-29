@@ -4,7 +4,7 @@ menu parent: "Compras", label: " Compra"
 # See permitted parameters documentation:
 # https://github.com/activeadmin/activeadmin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
 #
- permit_params :provider_id, :admin_user_id, :num_factura, :fecha_compra, compra_detalles_attributes:[:id, :producto_id, :descuento, :porcent_desc, :cantidad, :precio_compra]
+# permit_params :provider_id, :admin_user_id, :num_factura, :fecha_compra, compra_detalles_attributes:[:id, :producto_id, :descuento, :porcent_desc, :cantidad, :precio_compra]
 
  action_item :activado, only: :show do
    link_to "Activar", activado_admin_compra_path(compra), method: :put if !compra.activo
@@ -79,7 +79,7 @@ show  do
 
     panel "Items" do
       table_for compra.compra_detalles do |t|
-        t.column("Cantidad") { |compra_detalles| number_with_delimiter compra_detalles.cantidad }
+       t.column("Cantidad") { |compra_detalles| number_with_delimiter compra_detalles.cantidad }
         t.column("Descripcion") { |compra_detalles| compra_detalles.producto.prod_descrip }
         t.column("Costo unitario") { |compra_detalles| number_to_currency compra_detalles.precio_compra }
         t.column("Descuento") { |compra_detalles| number_to_currency compra_detalles.total_descuento}
@@ -89,7 +89,7 @@ show  do
           td "Total:", :style => "text-align:right; font-weight: bold;"
           td "#{number_to_currency(compra.total)}", :style => "font-weight: bold;"
         end
-      end
+     end
     end
   end
 

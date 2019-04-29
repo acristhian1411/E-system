@@ -3,7 +3,7 @@
 # Table name: categories
 #
 #  id               :bigint(8)        not null, primary key
-#  category_active  :boolean          default(TRUE)
+#  category_active  :boolean
 #  category_descrip :string
 #  created_at       :datetime         not null
 #  updated_at       :datetime         not null
@@ -13,7 +13,7 @@ class Category < ApplicationRecord
 # relacion con otras tablas
 	has_many :sub_category
 	 has_paper_trail
-	
+
 #Validaciones
 validates :category_descrip, presence: true
 

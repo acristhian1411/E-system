@@ -14,11 +14,8 @@ class Barrio < ApplicationRecord
 	has_many :cliente
 
     has_paper_trail
-<<<<<<< HEAD
-	
-	has_versions
-=======
->>>>>>> e185d681569d6d65915e8cacdb6c5197a4aa80f5
+
+
 
 # Validaciones
 	validates :descripcion, presence: true

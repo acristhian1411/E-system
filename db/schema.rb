@@ -72,7 +72,7 @@ ActiveRecord::Schema.define(version: 2019_02_07_233401) do
 
   create_table "categories", force: :cascade do |t|
     t.string "category_descrip"
-    t.boolean "category_active", default: true
+    t.boolean "category_active"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -119,7 +119,7 @@ ActiveRecord::Schema.define(version: 2019_02_07_233401) do
     t.string "num_factura"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.boolean "activo", default: true
+    t.boolean "activo"
     t.index ["admin_user_id"], name: "index_compras_on_admin_user_id"
     t.index ["provider_id"], name: "index_compras_on_provider_id"
   end
@@ -148,7 +148,7 @@ ActiveRecord::Schema.define(version: 2019_02_07_233401) do
 
   create_table "marcas", force: :cascade do |t|
     t.string "marca_descrip"
-    t.boolean "marca_active", default: true
+    t.boolean "marca_active"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -161,7 +161,7 @@ ActiveRecord::Schema.define(version: 2019_02_07_233401) do
     t.string "prod_descrip"
     t.integer "iva"
     t.float "precio_venta"
-    t.boolean "prod_active", default: true
+    t.boolean "prod_active"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["category_id"], name: "index_productos_on_category_id"
@@ -176,7 +176,7 @@ ActiveRecord::Schema.define(version: 2019_02_07_233401) do
     t.string "prov_direccion"
     t.string "telefono"
     t.string "email"
-    t.boolean "prov_active", default: true
+    t.boolean "prov_active"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -188,14 +188,13 @@ ActiveRecord::Schema.define(version: 2019_02_07_233401) do
     t.integer "cant_minima"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["producto_id", "sucursal_id"], name: "index_unique", unique: true
     t.index ["producto_id"], name: "index_stocks_on_producto_id"
     t.index ["sucursal_id"], name: "index_stocks_on_sucursal_id"
   end
 
   create_table "sub_categories", force: :cascade do |t|
     t.string "subcat_descrip"
-    t.boolean "subcat_active", default: true
+    t.boolean "subcat_active"
     t.bigint "category_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -204,7 +203,7 @@ ActiveRecord::Schema.define(version: 2019_02_07_233401) do
 
   create_table "sucursals", force: :cascade do |t|
     t.string "suc_descrip"
-    t.boolean "suc_active", default: true
+    t.boolean "suc_active"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "direccion"
@@ -237,8 +236,8 @@ ActiveRecord::Schema.define(version: 2019_02_07_233401) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "motivo"
-    t.integer "num_comprobante", null: false
-    t.boolean "activo", default: true
+    t.integer "num_comprobante"
+    t.boolean "activo"
     t.index ["admin_user_id"], name: "index_traslados_on_admin_user_id"
   end
 
