@@ -26,4 +26,21 @@ class Stock < ApplicationRecord
 
   belongs_to :producto
   belongs_to :sucursal
+
+  scope :artigas, -> {
+  where(:sucursal_id => 2)
+}
+# Todos los activos
+	scope :ruta1, -> {
+  where(:sucursal_id => 3)
+}
+# Todos los registros
+	scope :matriz, -> {
+  where(:sucursal_id => 1)
+}
+
+scope :todos, -> {
+all
+}
+
 end
