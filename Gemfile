@@ -24,7 +24,8 @@ gem 'activeadmin'
 gem 'active_admin_theme'
 #gema para roles
 gem 'active_admin_role'
-
+#gema para formulario dinamicos
+gem 'activeadmin_dynamic_fields', '~> 0.1.5'
 #gema para descargar en archivos PDF
 gem 'prawn_rails'
 gem 'responders'

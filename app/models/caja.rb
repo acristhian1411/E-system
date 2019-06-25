@@ -11,7 +11,7 @@
 
 class Caja < ApplicationRecord
   has_paper_trail
-
+  belongs_to :cab_cajas
   validates :descripcion, :presence => true
 
   # Funcion para listar segun este activo o no

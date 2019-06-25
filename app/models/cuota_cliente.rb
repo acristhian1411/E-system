@@ -26,6 +26,7 @@ class CuotaCliente < ApplicationRecord
   has_paper_trail
 
   belongs_to :credito_clientes
+  has_many :venta, through: :credito_cliente
 
     def saldo_cuota
           saldo = self.monto_cuota - self.monto_pagado

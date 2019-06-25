@@ -3,7 +3,7 @@
 # Table name: marcas
 #
 #  id            :bigint(8)        not null, primary key
-#  marca_active  :boolean
+#  marca_active  :boolean          default(TRUE)
 #  marca_descrip :string
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null

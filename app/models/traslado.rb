@@ -3,7 +3,7 @@
 # Table name: traslados
 #
 #  id               :bigint(8)        not null, primary key
-#  activo           :boolean
+#  activo           :boolean          default(TRUE)
 #  fecha            :date
 #  motivo           :string
 #  num_comprobante  :integer

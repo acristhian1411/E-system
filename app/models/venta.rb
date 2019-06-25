@@ -3,7 +3,7 @@
 # Table name: venta
 #
 #  id            :bigint(8)        not null, primary key
-#  activo        :boolean
+#  activo        :boolean          default(TRUE)
 #  fecha         :date
 #  forma_pago    :string
 #  num_factura   :integer
@@ -34,6 +34,7 @@ class Venta < ApplicationRecord
   belongs_to :cliente
   has_many :venta_detalle
   has_many :credito_cliente
+  has_many :cuota_cliente, through: :credito_cliente
 
   accepts_nested_attributes_for :venta_detalle
 

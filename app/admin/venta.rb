@@ -54,17 +54,17 @@ end
 
 
 form do |f|
-   f.input :cliente_id,  label: "Cliente", :as => :select, :collection => Cliente.activo.map{|a|["#{a.nombre || a.apellido}", a.id]}
-   f.input :admin_user_id, label: "Usuario", :hint => "El usuario sugerido es #{Venta.usuario(current_admin_user)}", :as => :select, :collection => AdminUser.all.map{|a|["#{a.email}", a.id]}
-   f.input :sucursal_id, label: "Sucursal", :as => :select, :collection => Sucursal.activo.map{|a|["#{a.suc_descrip}", a.id]}
-   f.input :num_factura, label: "Numero de comprobante"
-   f.input :fecha, label: "Fecha de compra"
-   f.input :forma_pago, label: "Forma de pago", :as => :radio, :collection => ["Contado", "Credito"]
-
-
-f.inputs "Credito" do
-  f.template.render partial: 'credito/credito'
+  f.inputs 'Cabecera' do
+     f.input :cliente_id,  label: "Cliente", :as => :select, :collection => Cliente.activo.map{|a|["#{a.nombre || a.apellido}", a.id]}
+     f.input :admin_user_id, label: "Usuario", :hint => "El usuario sugerido es #{Venta.usuario(current_admin_user)}", :as => :select, :collection => AdminUser.all.map{|a|["#{a.email}", a.id]}
+     f.input :sucursal_id, label: "Sucursal", :as => :select, :collection => Sucursal.activo.map{|a|["#{a.suc_descrip}", a.id]}
+     f.input :num_factura, label: "Numero de comprobante"
+     f.input :fecha, label: "Fecha de compra"
+     f.input :forma_pago, :as => :check_boxes, :collection => ["Contado"], input_html: { data: { if: 'checked', action: 'hide', target: '.grp1' }}
+     f.input :forma_pago, label: "Forma de pago", :as => :radio, :collection => ["Credito"], wrapper_html: { class: 'grp1' }
+  render partial: 'cuotas/cuota'
 end
+
 
  f.inputs "Detalles" do
    f.has_many :venta_detalle do |i|

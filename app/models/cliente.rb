@@ -3,7 +3,7 @@
 # Table name: clientes
 #
 #  id             :bigint(8)        not null, primary key
-#  activo         :boolean
+#  activo         :boolean          default(TRUE)
 #  cli_telefono   :string
 #  direccion      :string
 #  limite_credito :integer
