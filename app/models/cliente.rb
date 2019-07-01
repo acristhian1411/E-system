@@ -30,7 +30,7 @@ class Cliente < ApplicationRecord
 has_many :credito_clientes
 
 # relacion con otras tablas
-  belongs_to :ciudade
+ belongs_to :ciudade
  belongs_to :barrio
 
 # Validaciones

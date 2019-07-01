@@ -23,19 +23,18 @@
 #  fk_rails_...  (cajas_id => cajas.id)
 #
 
-class CabCaja < ApplicationRecord
-  has_paper_trail
-  has_many :caja
-  has_many :det_caja
+class MovCaja < ActiveRecord::Base
+  self.table_name = "cab_cajas"
+  #validates : presence: true
+#accessible_by :admin_user
 
-#cajas cerradas
-  scope :cerrado, -> {
-    where(:estado => false, :tipo_mov => "Apertura")
-  }
+scope :cerrado, -> {
+  where(:tipo_mov => "Cobro")
+}
 
 #cajas abiertas
-    scope :abierto, -> {
-    where(:estado => true, :tipo_mov => "Apertura")
-  }
+  scope :abierto, -> {
+  where(:tipo_mov => "Cobro")
+}
 
 end

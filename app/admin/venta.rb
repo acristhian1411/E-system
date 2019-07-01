@@ -79,7 +79,7 @@ end
 end
 
 show  do
-   panel "Invoice Details" do
+   panel "Detalles de Factura" do
      attributes_table_for venta do
        row("Cliente") { |venta| venta.cliente.nombre }
        row("Usuario") { |venta| venta.admin_user.email }
@@ -89,7 +89,7 @@ show  do
      end
    end
 
-   panel "Items" do
+   panel "Productos" do
      table_for venta.venta_detalle do |t|
        t.column("Cantidad") { |venta_detalle| number_with_delimiter venta_detalle.cantidad }
        t.column("Descripcion") { |venta_detalle| venta_detalle.producto.prod_descrip }

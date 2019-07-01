@@ -3,7 +3,7 @@
 # Table name: cajas
 #
 #  id          :bigint(8)        not null, primary key
-#  activo      :boolean
+#  activo      :boolean          default(TRUE)
 #  descripcion :string
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null

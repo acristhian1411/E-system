@@ -3,12 +3,13 @@
 # Table name: cab_cajas
 #
 #  id                :bigint(8)        not null, primary key
-#  estado            :boolean
+#  estado            :boolean          default(TRUE)
 #  fecha_apertura    :date
 #  fecha_cierre      :date
 #  fecha_transaccion :date
 #  monto             :float
 #  num_comprobante   :string
+#  tipo_mov          :string
 #  created_at        :datetime         not null
 #  updated_at        :datetime         not null
 #  cajas_id          :bigint(8)

@@ -89,9 +89,6 @@ end
      row :descripcion
      row("Creado") {ciudade.created_at}
    end
-	 content do
-		 para "Hello World"
-	 end
  end
 
 end

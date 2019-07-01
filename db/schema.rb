@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_06_25_125006) do
+ActiveRecord::Schema.define(version: 2019_07_01_124745) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -72,13 +72,14 @@ ActiveRecord::Schema.define(version: 2019_06_25_125006) do
     t.datetime "updated_at", null: false
     t.bigint "cajas_id"
     t.float "monto"
-    t.boolean "estado"
+    t.boolean "estado", default: true
+    t.string "tipo_mov"
     t.index ["cajas_id"], name: "index_cab_cajas_on_cajas_id"
   end
 
   create_table "cajas", force: :cascade do |t|
     t.string "descripcion"
-    t.boolean "activo"
+    t.boolean "activo", default: true
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -157,6 +158,16 @@ ActiveRecord::Schema.define(version: 2019_06_25_125006) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["credito_cliente_id"], name: "index_cuota_clientes_on_credito_cliente_id"
+  end
+
+  create_table "det_cajas", force: :cascade do |t|
+    t.float "monto_cuota"
+    t.bigint "cuota_cliente_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "cab_caja_id"
+    t.index ["cab_caja_id"], name: "index_det_cajas_on_cab_caja_id"
+    t.index ["cuota_cliente_id"], name: "index_det_cajas_on_cuota_cliente_id"
   end
 
   create_table "marcas", force: :cascade do |t|
@@ -307,6 +318,8 @@ ActiveRecord::Schema.define(version: 2019_06_25_125006) do
   add_foreign_key "credito_clientes", "clientes"
   add_foreign_key "credito_clientes", "venta", column: "venta_id"
   add_foreign_key "cuota_clientes", "credito_clientes"
+  add_foreign_key "det_cajas", "cab_cajas"
+  add_foreign_key "det_cajas", "cuota_clientes"
   add_foreign_key "productos", "categories"
   add_foreign_key "productos", "marcas"
   add_foreign_key "productos", "providers"

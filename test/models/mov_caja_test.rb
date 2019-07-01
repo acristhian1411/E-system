@@ -23,19 +23,10 @@
 #  fk_rails_...  (cajas_id => cajas.id)
 #
 
-class CabCaja < ApplicationRecord
-  has_paper_trail
-  has_many :caja
-  has_many :det_caja
+require 'test_helper'
 
-#cajas cerradas
-  scope :cerrado, -> {
-    where(:estado => false, :tipo_mov => "Apertura")
-  }
-
-#cajas abiertas
-    scope :abierto, -> {
-    where(:estado => true, :tipo_mov => "Apertura")
-  }
-
+class MovCajaTest < ActiveSupport::TestCase
+  # test "the truth" do
+  #   assert true
+  # end
 end
