@@ -64,8 +64,8 @@ GEM
       xdan-datetimepicker-rails (~> 2.5.1)
     activeadmin_dynamic_fields (0.2.2)
       activeadmin (~> 1.0)
-    activejob (5.2.1)
-      activesupport (= 5.2.1)
+    activejob (5.2.2.1)
+      activesupport (= 5.2.2.1)
       globalid (>= 0.3.6)
     activemodel (5.2.2.1)
       activesupport (= 5.2.2.1)
@@ -121,7 +121,7 @@ GEM
       execjs
     coffee-script-source (1.12.2)
     concurrent-ruby (1.1.5)
-    crass (1.0.4)
+    crass (1.0.5)
     devise (4.6.1)
       bcrypt (~> 3.0)
       orm_adapter (~> 0.1)
@@ -140,7 +140,7 @@ GEM
     has_scope (0.7.2)
       actionpack (>= 4.1)
       activesupport (>= 4.1)
-    i18n (1.6.0)
+    i18n (1.7.0)
       concurrent-ruby (~> 1.0)
     inherited_resources (1.9.0)
       actionpack (>= 4.2, < 5.3)
@@ -171,7 +171,7 @@ GEM
       rb-fsevent (~> 0.9, >= 0.9.4)
       rb-inotify (~> 0.9, >= 0.9.7)
       ruby_dep (~> 1.2)
-    loofah (2.2.3)
+    loofah (2.3.1)
       crass (~> 1.0.2)
       nokogiri (>= 1.5.9)
     mail (2.7.1)
@@ -182,14 +182,14 @@ GEM
     mimemagic (0.3.3)
     mini_mime (1.0.1)
     mini_portile2 (2.4.0)
-    minitest (5.11.3)
+    minitest (5.13.0)
     msgpack (1.2.9)
     msgpack (1.2.9-x64-mingw32)
     multi_json (1.13.1)
     nio4r (2.3.1)
-    nokogiri (1.10.1)
+    nokogiri (1.10.5)
       mini_portile2 (~> 2.4.0)
-    nokogiri (1.10.1-x64-mingw32)
+    nokogiri (1.10.5-x64-mingw32)
       mini_portile2 (~> 2.4.0)
     orm_adapter (0.5.0)
     paper_trail (10.2.1)
@@ -319,7 +319,7 @@ PLATFORMS
 DEPENDENCIES
   active_admin_role
   active_admin_theme
-  activeadmin (~> 1.4.3)
+  activeadmin
   activeadmin-audit
   activeadmin-select2!
   activeadmin_addons
