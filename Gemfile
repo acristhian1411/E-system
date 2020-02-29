@@ -13,7 +13,7 @@ gem 'sass-rails', '~> 5.0'
 gem 'uglifier', '>= 1.3.0'
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'mini_racer', platforms: :ruby
-gem 'rake', '~> 12.3', '>= 12.3.1'
+gem 'rake', '~> 12.3'
 #gema para manejo de usuario
 gem 'devise'
 #gema para administracion de contenido
